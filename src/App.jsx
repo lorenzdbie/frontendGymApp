@@ -21,6 +21,7 @@ function App() {
           count is {count}
         </button>
         <p>This app will be for my fitness buddy Galdino</p>
+        <p>this is to check my commits</p>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
