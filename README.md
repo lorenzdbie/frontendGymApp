@@ -1,4 +1,4 @@
-# Examenopdracht Front-end Web Development / Web Services
+# Examenopdracht Front-end Web Development
 
 > Schrap hierboven wat niet past
 
