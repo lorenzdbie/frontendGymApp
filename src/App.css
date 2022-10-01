@@ -39,3 +39,23 @@
 .read-the-docs {
   color: #888;
 }
+
+h3 {
+  font-size: 1.3em;
+}
+
+.exercise-box {
+  border: black solid 1px;
+  margin: 10px;
+  border-radius: 10px;
+  max-width: 250px;
+}
+/* .exerciseList-box {
+  border: black solid 1px;
+  border-radius: 10px;
+} */
+
+.exercise-box > p {
+  padding-left: 20px;
+  text-align: left;
+}
