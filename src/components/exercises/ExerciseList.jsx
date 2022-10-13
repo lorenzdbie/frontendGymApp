@@ -21,8 +21,8 @@ export default function ExcerciseList() {
     <>
       <h1>Exercises</h1>
       <div className="exerciseList-box">
-        {EXERCISE_DATA.map((ex, index) => (
-          <Exercise {...ex} key={index} />
+        {EXERCISE_DATA.map((ex) => (
+          <Exercise {...ex} key={ex.id} />
         ))}
       </div>
     </>
