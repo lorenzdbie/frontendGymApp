@@ -7,24 +7,36 @@ export default function AppointmentList() {
   const [appointments, setAppointments] = useState(APPOINTMENTS);
 
   const createAppointment = (
-    user,
+    name,
     date,
-    training,
+    muscleGroup,
     startTime,
     endTime,
     intensity
   ) => {
     const newAppointments = [
       {
-        user,
+        id: Math.max(APPOINTMENTS.map((e) => e.id)) + 1,
         date: new Date(date),
-        training,
-        startTime: new Date(startTime),
-        endTime: new Date(endTime),
+        user: {
+          id: APPOINTMENTS.includes((a) => a.user.name === name)
+            ? appointments.filter((e) => (e.user.name = name)).map((e) => e.id)
+            : Math.max(APPOINTMENTS.map((e) => e.user.id)) + 1,
+          name: name,
+        },
+        training: {
+          id: APPOINTMENTS.filter(
+            (e) => (e.training.muscleGroup = muscleGroup)
+          ).map((e) => e.training.id),
+          muscleGroup,
+        },
+        startTime,
+        endTime,
         intensity,
       },
       ...appointments,
     ];
+
     setAppointments(newAppointments);
     console.log("appointments", JSON.stringify(appointments));
     console.log("newAppointments", JSON.stringify(newAppointments));
@@ -33,44 +45,9 @@ export default function AppointmentList() {
     <>
       <h1>Appointments</h1>
       <AppointmentForm onSaveAppointment={createAppointment} />
-      {appointments.map((appoint) => {
-        <Appointment {...appoint} key={appoint.id} />;
-      })}
+      {appointments.map((appoint) => (
+        <Appointment {...appoint} key={appoint.id} />
+      ))}
     </>
   );
 }
-
-// export default function TransactionList() {
-//   const [transactions, setTransactions] = useState(TRANSACTION_DATA);
-
-//   const createTransaction = (user, place, amount, date) => {
-//     const newTransactions = [
-//       {
-//         user,
-//         place,
-//         amount,
-//         date: new Date(date),
-//       },
-//       ...transactions,
-//     ];
-//     setTransactions(newTransactions);
-//     console.log("transactions", JSON.stringify(transactions));
-//     console.log("newTransactions", JSON.stringify(newTransactions));
-//   };
-
-//   return (
-//     <>
-//       <h1>Transactions</h1>
-//       <TransactionForm onSaveTransaction={createTransaction} />
-//       {transactions.map((trans, index) => (
-//         <Transaction
-//           {...trans}
-//           key={index}
-//           //user={trans.user}
-//           //amount={trans.amount}
-//           //place={trans.place}
-//         />
-//       ))}
-//     </>
-//   );
-// }

@@ -1,38 +1,61 @@
 import { useState } from "react";
 import { APPOINTMENTS, EXERCISE_DATA } from "../../api/mock-data";
 
-const toDateInputString = (date) => {
+export const toDateInputString = (date) => {
   if (!date) return null;
   if (typeof date !== Object) {
-    date = new Date();
+    date = new Date(date);
   }
   let aString = date.toISOString();
   return aString.substring(0, aString.indexOf("T"));
 };
 
-export default function AppointmentForm(onSaveAppointment) {
+export const toTimeInputString = (time) => {
+  if (!time) return null;
+  if (typeof time !== Object) {
+    time = new Date(time);
+  }
+  let aString = time.toISOString();
+  console.log(aString);
+  return aString.substring(aString.indexOf("T") + 1, aString.indexOf("Z") - 7);
+};
+
+const addTimeToDate = (date, time) => {
+  date = toDateInputString(date);
+  let tijd = date + "T" + time + ":00.000Z";
+  return tijd;
+};
+
+export default function AppointmentForm({ onSaveAppointment }) {
   const [user, setUser] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
   const [training, setTraining] = useState("");
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
-  const [intensity, setIntensity] = useState(0);
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [intensity, setIntensity] = useState(2.5);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSaveAppointment(user, date, training, startTime, endTime, intensity);
+    const start = addTimeToDate(date, startTime);
+    const end = addTimeToDate(date, endTime);
+    const sessie = training;
+    onSaveAppointment(user, date, sessie, start, end, intensity);
     setUser("");
-    setDate(new Date());
+    setDate("");
     setTraining("");
-    setStartTime(new Date());
-    setEndTime(new Date());
+    setStartTime("");
+    setEndTime("");
     setIntensity(3);
   };
 
   return (
     <>
       <h2>Add Appointment</h2>
-      <form onSubmit={handleSubmit} className="w-50 mb-3">
+      <form
+        onSubmit={handleSubmit}
+        className="w-50 mb-3"
+        style={{ minWidth: "200px" }}
+      >
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Who
@@ -52,20 +75,22 @@ export default function AppointmentForm(onSaveAppointment) {
             Date
           </label>
           <input
-            value={toDateInputString(date)}
+            value={date}
             onChange={(e) => setDate(e.target.value)}
             id="date"
             type="date"
             className="form-control"
-            placeholder="date"
           />
         </div>
+        <p>
+          {date} {typeof date}
+        </p>
         <div className="mb-3">
           <label htmlFor="trainings" className="form-label">
-            Place
+            Training
           </label>
           <select
-            value={training}
+            value={training.muscleGroup}
             onChange={(e) => setTraining(e.target.value)}
             id="trainings"
             className="form-select"
@@ -79,7 +104,7 @@ export default function AppointmentForm(onSaveAppointment) {
             ))}
           </select>
         </div>
-        {/* <div className="mb-3">
+        <div className="mb-3">
           <label htmlFor="startTime" className="form-label">
             Start Time
           </label>
@@ -88,8 +113,11 @@ export default function AppointmentForm(onSaveAppointment) {
             onChange={(e) => setStartTime(e.target.value)}
             id="time"
             type="time"
+            min="08:00"
+            max="18:30"
+            step="900"
             className="form-control"
-            placeholder="startTime"
+            required
           />
         </div>
         <div className="mb-3">
@@ -101,24 +129,45 @@ export default function AppointmentForm(onSaveAppointment) {
             onChange={(e) => setEndTime(e.target.value)}
             id="time"
             type="time"
+            min="08:30"
+            max="19:00"
+            step="900"
             className="form-control"
-            placeholder="startTime"
-          />Í
-        </div> */}
+            required
+          />
+        </div>
+        <p>
+          {endTime} {typeof endTime}{" "}
+        </p>
+
         <div className="mb-3">
           <label htmlFor="intensity" className="form-label">
             Intensity
           </label>
-          <input
-            type="range"
-            onChange={(e) => setIntensity(e.target.value)}
-            min="1"
-            max="5"
-            // onInput= intensitySlider.innerText = this.value
-            className="slider"
-            id="intensity"
-          />
-          <p id="intensitySlider">3</p>
+          <div>
+            <span>0 </span>
+
+            <input
+              type="range"
+              onChange={(e) => setIntensity(e.target.value)}
+              min={0}
+              max={5}
+              step="0.5"
+              value={intensity}
+              name="rangeInput"
+              className="slider"
+              id="intensity"
+            />
+            <span> 5</span>
+          </div>
+          <p id="intensitySlider"></p>
+        </div>
+        <div className="clearfix">
+          <div className="btn-group float-end">
+            <button type="submit" className="btn btn-primary">
+              Add Appointment
+            </button>
+          </div>
         </div>
       </form>
     </>
