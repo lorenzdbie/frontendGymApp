@@ -3,21 +3,23 @@ const EXERCISE_DATA = [
     id: 1,
     name: "Bench press",
     muscleGroup: "Chest",
-    intensity: 3,
   },
   {
     id: 2,
-    name: "Squat",
-    muscleGroup: "Glutus Maximus, hamstring, quads",
-    intensity: 4,
+    name: "legs",
+    muscleGroup: "Legs",
   },
   {
     id: 3,
-    name: "Pull-up",
-    muscleGroup: "lats",
-    intensity: 3,
+    name: "Squat",
+    muscleGroup: "Glutus Maximus, hamstring, quads",
   },
-  { id: 4, name: "Dumbell Curl", muscleGroup: "Biceps", intensity: 2 },
+  {
+    id: 4,
+    name: "Pull-up",
+    muscleGroup: "Back",
+  },
+  { id: 5, name: "Dumbell Curl", muscleGroup: "Biceps" },
 ];
 
 let APPOINTMENTS = [
@@ -30,7 +32,7 @@ let APPOINTMENTS = [
     },
     training: {
       id: 1,
-      muscleGroup: "chest",
+      muscleGroup: "Chest",
     },
     startTime: "2022-10-16T16:00:00.000Z",
     endTime: "2022-10-16T18:00:00.000Z",
@@ -45,7 +47,7 @@ let APPOINTMENTS = [
     },
     training: {
       id: 2,
-      muscleGroup: "legs",
+      muscleGroup: "Legs",
     },
     startTime: "2022-10-18T08:00:00.000Z",
     endTime: "2022-10-18T10:00:00.000Z",
@@ -59,8 +61,8 @@ let APPOINTMENTS = [
       name: "Galdino",
     },
     training: {
-      id: 3,
-      muscleGroup: "back",
+      id: 4,
+      muscleGroup: "Back",
     },
     startTime: "2022-10-12T10:00:00.000Z",
     endTime: "2022-10-12T14:00:00.000Z",
