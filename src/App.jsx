@@ -5,6 +5,7 @@ import { EXERCISE_DATA } from "./api/mock-data";
 import Exercise from "./components/exercises/Exercise";
 import ExcerciseList from "./components/exercises/ExerciseList";
 import AppointmentList from "./components/appointments/appointmentList";
+import LoginForm from "./components/loginForm";
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       {EXERCISE_DATA.map((ex) => (
         <Exercise {...ex} />
       ))} */}
-      <AppointmentList />
-      <ExcerciseList />
+      <LoginForm />
+      {/* <AppointmentList />
+      <ExcerciseList /> */}
     </div>
   );
 }
