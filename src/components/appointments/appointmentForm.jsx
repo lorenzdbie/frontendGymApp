@@ -33,6 +33,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [intensity, setIntensity] = useState(2.5);
+  const [specialRequest, setSpecialRequest] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
