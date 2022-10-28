@@ -121,7 +121,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
             type="time"
             min="08:00"
             max="18:30"
-            step="900"
+            // step="900"
             className="form-control"
             required
           />
@@ -137,7 +137,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
             type="time"
             min="08:30"
             max="19:00"
-            step="900"
+            // step="900"
             className="form-control"
             required
           />
