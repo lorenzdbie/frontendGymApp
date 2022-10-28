@@ -17,17 +17,17 @@ export default function AppointmentList() {
   ) => {
     const newAppointments = [
       {
-        id: Math.max(APPOINTMENTS.map((e) => e.id)) + 1,
+        id: Math.max(appointments.map((e) => e.id)) + 1,
         date: new Date(date),
         user: {
-          id: APPOINTMENTS.includes((a) => a.user.name === name)
+          id: appointments.includes((a) => a.user.name === name)
             ? appointments.filter((e) => (e.user.name = name)).map((e) => e.id)
-            : Math.max(APPOINTMENTS.map((e) => e.user.id)) + 1,
+            : Math.max(appointments.map((e) => e.user.id)) + 1,
           name: name,
         },
         training: {
-          id: APPOINTMENTS.filter(
-            (e) => (e.training.muscleGroup = muscleGroup)
+          id: appointments.filter(
+            (e) => (e.training.muscleGroup === muscleGroup)
           ).map((e) => e.training.id),
           muscleGroup,
         },
@@ -47,7 +47,7 @@ export default function AppointmentList() {
       <h1>Appointments</h1>
       <AppointmentForm onSaveAppointment={createAppointment} />
       {appointments.map((appoint) => (
-        <Appointment {...appoint} key={appoint.id} />
+        <Appointment {...appoint} key={appoint.id} index={appoint.id}/>
       ))}
     </>
   );
