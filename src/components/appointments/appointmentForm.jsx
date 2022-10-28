@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { APPOINTMENTS, EXERCISE_DATA } from "../../api/mock-data";
+import DumbbellIntensity from "./dumbellIntensity";
 
 export const toDateInputString = (date) => {
   if (!date) return null;
@@ -27,12 +28,13 @@ const addTimeToDate = (date, time) => {
 };
 
 export default function AppointmentForm({ onSaveAppointment }) {
+
   const [user, setUser] = useState("");
   const [date, setDate] = useState("");
   const [training, setTraining] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [intensity, setIntensity] = useState(2.5);
+  const [intensity, setIntensity] = useState();
   const [specialRequest, setSpecialRequest] = useState("");
 
   const handleSubmit = (e) => {
@@ -46,7 +48,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
     setTraining("");
     setStartTime("");
     setEndTime("");
-    setIntensity(3);
+    setIntensity();
   };
 
   return (
@@ -92,7 +94,10 @@ export default function AppointmentForm({ onSaveAppointment }) {
           </label>
           <select
             value={training.muscleGroup}
-            onChange={(e) => setTraining(e.target.value)}
+            onChange={(e) => {
+              e.stopPropagation();
+              setTraining(e.target.value);
+            }}
             id="trainings"
             className="form-select"
             required
@@ -137,9 +142,6 @@ export default function AppointmentForm({ onSaveAppointment }) {
             required
           />
         </div>
-        <p>
-          {endTime} {typeof endTime}{" "}
-        </p>
 
         <div className="mb-3">
           <label htmlFor="intensity" className="form-label">
@@ -147,7 +149,6 @@ export default function AppointmentForm({ onSaveAppointment }) {
           </label>
           <div>
             <span>0 </span>
-
             <input
               type="range"
               onChange={(e) => setIntensity(e.target.value)}
@@ -160,8 +161,30 @@ export default function AppointmentForm({ onSaveAppointment }) {
               id="intensity"
             />
             <span> 5</span>
+          </div> 
+           <p id="intensitySlider"></p>
+          <div>
+            <DumbbellIntensity
+              selectedDumbbells={intensity}
+              value={intensity}
+              onChange={(e) => setIntensity(e.target.value)}
+            />
           </div>
-          <p id="intensitySlider"></p>
+          <br />
+          <div className="mb-3">
+            <label htmlFor="specialRequest" className="form-label">
+              Special request:
+            </label>
+            <input
+              value={specialRequest}
+              onChange={(e) => setSpecialRequest(e.target.value)}
+              id="specialRequest"
+              type="textfield"
+              className="form-control"
+              placeholder="specialRequest"
+              style={{ width: "200px", height: "100px", textAlign: "start" }}
+            />
+          </div>
         </div>
         <div className="clearfix">
           <div className="btn-group float-end">

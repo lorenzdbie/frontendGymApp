@@ -15,10 +15,10 @@ function App() {
       {EXERCISE_DATA.map((ex) => (
         <Exercise {...ex} />
       ))} */}
-      <LoginForm />
+      {/* <LoginForm /> */}
       <AppointmentList />
       <ExcerciseList />
-      <RegistrationForm />
+      {/* <RegistrationForm /> */}
     </div>
   );
 }
