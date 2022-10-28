@@ -6,6 +6,7 @@ import AppointmentForm from "./appointmentForm";
 export default function AppointmentList() {
   const [appointments, setAppointments] = useState(APPOINTMENTS);
 
+
   const createAppointment = (
     name,
     date,

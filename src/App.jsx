@@ -6,6 +6,7 @@ import Exercise from "./components/exercises/Exercise";
 import ExcerciseList from "./components/exercises/ExerciseList";
 import AppointmentList from "./components/appointments/appointmentList";
 import LoginForm from "./components/loginForm";
+import RegistrationForm from "./components/registrationForm";
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
       {EXERCISE_DATA.map((ex) => (
         <Exercise {...ex} />
       ))} */}
-      <LoginForm />
-      {/* <AppointmentList />
-      <ExcerciseList /> */}
+      {/* <LoginForm /> */}
+      <AppointmentList />
+      <ExcerciseList />
+      {/* <RegistrationForm /> */}
     </div>
   );
 }
