@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TRAININGS } from "../../api/mock-data";
-import DumbbellIntensity from "./dumbellIntensity";
+import DumbbellIntensity  from "./dumbellIntensity";
 
 export const toDateInputString = (date) => {
   if (!date) return null;
@@ -27,15 +27,27 @@ const addTimeToDate = (date, time) => {
   return tijd;
 };
 
-export default function AppointmentForm({ onSaveAppointment }) {
+export default function AppointmentForm({
+  onSaveAppointment,
+  onSelect = (f) => f,
+}) {
+  const [dumbbellIntensity, setDumbbellIntensity] = useState(onSelect);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [date, setDate] = useState("");
   const [training, setTraining] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [intensity, setIntensity] = useState(0);
+  const [intensity, setIntensity] = useState(2);
   const [specialRequest, setSpecialRequest] = useState("");
+
+  const changeDumbbells = (newIntensity) => {
+    setDumbbellIntensity(newIntensity);
+  };
+  const changeIntensity = () => {
+    setIntensity(selectedDumbbells);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +79,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
       <form
         onSubmit={handleSubmit}
         className="w-50 mb-3"
-        style={{ minWidth: "200px" }}
+        style={{ minWidth: "250px" }}
       >
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
@@ -109,9 +121,6 @@ export default function AppointmentForm({ onSaveAppointment }) {
             className="form-control"
           />
         </div>
-        <p>
-          {date} {typeof date}
-        </p>
         <div className="mb-3">
           <label htmlFor="trainings" className="form-label">
             Training
@@ -186,30 +195,44 @@ export default function AppointmentForm({ onSaveAppointment }) {
             />
             <span> 5</span>
           </div>
-          <p id="intensitySlider"></p>
-          <div>
-            <DumbbellIntensity
-              selectedDumbbells={intensity}
-              value={intensity}
-              onChange={(e) => setIntensity(e.target.value)}
-            />
-          </div>
-          <br />
-          <div className="mb-3">
-            <label htmlFor="specialRequest" className="form-label">
-              Special request:
-            </label>
-            <input
+        </div>
+
+        {/* <div className="mb-3">
+          <label htmlFor="intensity" className="form-label">
+            Intensity
+          </label>
+          <DumbbellIntensity
+            selectedDumbbells={intensity}
+            id="intensity"
+            value={intensity}
+            onSelect={on}
+            onChange={changeIntensity}
+          />
+        </div> */}
+        <br />
+        <div className="mb-3">
+          <label htmlFor="specialRequest" className="form-label">
+            Special request:
+          </label>
+          <textarea
+            className="form-control"
+            id="specialRequest"
+            cols="1"
+            rows="5"
+            value={specialRequest}
+            onChange={(e) => setSpecialRequest(e.target.value)}
+          ></textarea>
+          {/* <input
               value={specialRequest}
               onChange={(e) => setSpecialRequest(e.target.value)}
               id="specialRequest"
               type="textfield"
               className="form-control"
-              placeholder="specialRequest"
-              style={{ width: "200px", height: "100px", textAlign: "start" }}
-            />
-          </div>
+              placeholder="special Request"
+              style={{ width: "200px", height: "100px", textAlign: "left" }}
+            /> */}
         </div>
+        {/* </div> */}
         <div className="clearfix">
           <div className="btn-group float-end">
             <button type="submit" className="btn btn-primary">

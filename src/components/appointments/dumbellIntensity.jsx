@@ -8,7 +8,7 @@ const Dumbbell = ({ selected, index, onSelect }) => (
   />
 );
 
-export default function DumbbellIntensity({ selectedDumbbells }) {
+export default function DumbbellIntensity({ selectedDumbbells , onSelect= f => f}) {
   const [dumbbells, setDumbbells] = useState(selectedDumbbells);
   const arrayOfFive = new Array(5).fill(0);
 
