@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { TRAININGS } from "../../api/mock-data";
-import DumbbellIntensity  from "./dumbellIntensity";
+import DumbbellIntensity from "./dumbellIntensity";
 
 export const toDateInputString = (date) => {
   if (!date) return null;
@@ -29,9 +29,8 @@ const addTimeToDate = (date, time) => {
 
 export default function AppointmentForm({
   onSaveAppointment,
-  onSelect = (f) => f,
+  onRate = (f) => f,
 }) {
-  const [dumbbellIntensity, setDumbbellIntensity] = useState(onSelect);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -39,14 +38,12 @@ export default function AppointmentForm({
   const [training, setTraining] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [intensity, setIntensity] = useState(2);
+  const [intensity, setIntensity] = useState(0);
   const [specialRequest, setSpecialRequest] = useState("");
 
-  const changeDumbbells = (newIntensity) => {
-    setDumbbellIntensity(newIntensity);
-  };
-  const changeIntensity = () => {
-    setIntensity(selectedDumbbells);
+ 
+  const handleIntensity = (newIntensity) => {
+    onRate(setIntensity(newIntensity));
   };
 
   const handleSubmit = (e) => {
@@ -111,7 +108,7 @@ export default function AppointmentForm({
         </div>
         <div className="mb-3">
           <label htmlFor="date" className="form-label">
-            Date
+            Date:
           </label>
           <input
             value={date}
@@ -123,7 +120,7 @@ export default function AppointmentForm({
         </div>
         <div className="mb-3">
           <label htmlFor="trainings" className="form-label">
-            Training
+            Training:
           </label>
           <select
             value={training.name}
@@ -145,7 +142,7 @@ export default function AppointmentForm({
         </div>
         <div className="mb-3">
           <label htmlFor="startTime" className="form-label">
-            Start Time
+            Start Time:
           </label>
           <input
             value={startTime}
@@ -161,7 +158,7 @@ export default function AppointmentForm({
         </div>
         <div className="mb-3">
           <label htmlFor="endTime" className="form-label">
-            End Time
+            End Time:
           </label>
           <input
             value={endTime}
@@ -176,7 +173,7 @@ export default function AppointmentForm({
           />
         </div>
 
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="intensity" className="form-label">
             Intensity
           </label>
@@ -195,20 +192,19 @@ export default function AppointmentForm({
             />
             <span> 5</span>
           </div>
-        </div>
+        </div> */}
 
-        {/* <div className="mb-3">
+        <div className="mb-3">
           <label htmlFor="intensity" className="form-label">
-            Intensity
+            Intensity:
           </label>
+          <br />
           <DumbbellIntensity
             selectedDumbbells={intensity}
             id="intensity"
-            value={intensity}
-            onSelect={on}
-            onChange={changeIntensity}
+            onRate={handleIntensity}
           />
-        </div> */}
+        </div>
         <br />
         <div className="mb-3">
           <label htmlFor="specialRequest" className="form-label">

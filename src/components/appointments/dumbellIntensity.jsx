@@ -1,33 +1,60 @@
 import { CiDumbbell } from "react-icons/ci";
+import { memo, useCallback, useMemo } from "react";
 import { useState } from "react";
 
-const Dumbbell = ({ selected, index, onSelect }) => (
-  <CiDumbbell
-    color={selected ? "red" : "grey"}
-    onClick={() => onSelect(index + 1)}
-  />
-);
+const Dumbbell = memo(({ index, selected = false, onSelect = (f) => f }) => {
+  const handleSelect = useCallback(() => {
+    onSelect(index + 1);
+  }, [index, onSelect]);
 
-export default function DumbbellIntensity({ selectedDumbbells , onSelect= f => f}) {
-  const [dumbbells, setDumbbells] = useState(selectedDumbbells);
-  const arrayOfFive = new Array(5).fill(0);
+  return (
+    <CiDumbbell size={30} color={selected ? "red" : "grey"} onClick={handleSelect} />
+  );
+});
 
-  const changeDumbbellIntensity = (newIntensity) => {
-    setDumbbells(newIntensity);
-  };
+export default function DumbbellIntensity({
+  totalDumbbells = 5,
+  selectedDumbbells = 0,
+  onRate}) {
+
+  const dumbbells = useMemo(() => [...Array(totalDumbbells)], [totalDumbbells]);
 
   return (
     <>
-      {arrayOfFive.map((_, index) => (
+      {dumbbells.map((_, index) => (
         <Dumbbell
           key={index}
           index={index}
-          selected={index < dumbbells}
-          onSelect={changeDumbbellIntensity}
+          selected={index < selectedDumbbells}
+          onSelect={onRate}
         />
       ))}
-      <br />
-      {dumbbells} out of 5 Dumbbells
+      <p>
+        {selectedDumbbells} of {totalDumbbells} dumbbells
+      </p>
     </>
   );
 }
+
+//   const [dumbbells, setDumbbells] = useState(selectedDumbbells);
+//   const arrayOfFive = new Array(5).fill(0);
+
+//   const changeDumbbellIntensity = (newIntensity) => {
+//     setDumbbells(newIntensity);
+//   };
+
+//   return (
+//     <>
+//       {arrayOfFive.map((_, index) => (
+//         <Dumbbell
+//           key={index}
+//           index={index}
+//           selected={index < dumbbells}
+//           onSelect={changeDumbbellIntensity}
+//         />
+//       ))}
+//       <br />
+//       {dumbbells} out of 5 Dumbbells
+//     </>
+//   );
+// }
