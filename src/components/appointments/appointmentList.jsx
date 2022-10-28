@@ -23,11 +23,13 @@ export default function AppointmentList() {
         user: {
           id: Number(
             USERS.includes((a) => {
-              a.firstName === firstName && a.lastName === lastName;
+              a.firstName.toLowerCase() === firstName.toLowerCase() &&
+                a.lastName.toLowerCase() === lastName.tolowerCase();
             })
               ? USERS.filter((a) => {
-                  a.firstName === firstName && a.lastName === lastName;
-                }).map((a) => a.id)
+                  a.firstName.toLowerCase() === firstName.tolowerCase() &&
+                    a.lastName.toLowerCase() === lastName.tolowerCase();
+                }).id
               : Math.max(...USERS.map((e) => e.id)) + 1
           ),
           firstName,

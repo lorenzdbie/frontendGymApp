@@ -18,6 +18,7 @@ export default function Appointment({
   startTime,
   endTime,
   intensity,
+  specialRequest,
 }) {
   return (
     <div
@@ -25,7 +26,7 @@ export default function Appointment({
       style={{ minwidth: "200 px" }}
     >
       <div style={{ display: "flex", marginLeft: "auto" }}>
-        <h4 style={{ margin: "auto" }}>Appointment {id}</h4>
+        <h4 style={{ margin: "auto" }}>Appointment # {id}</h4>
         <button
           type="button"
           className="close"
@@ -37,22 +38,25 @@ export default function Appointment({
       </div>
 
       <div style={{ margin: "10px 20px", textAlign: "left" }}>
-        Trainee: {user.firstName + " " + user.lastName} <br />
-        Date:{" "}
+        Trainee:&ensp;&ensp;&ensp;{user.firstName + " " + user.lastName} <br />
+        Date:&ensp;&ensp;&ensp;&ensp;&nbsp;&ensp;
         {new Date(date).toLocaleDateString("en-BE", {
           weekday: "long",
           year: "numeric",
           month: "long",
           day: "numeric",
-        })}{" "}
+        })}
         <br />
-        Training: {training.muscleGroup} <br />
-        Starts at: {toTimeInputString(startTime)} <br />
-        Duration: {toHoursInputString(
-          new Date(endTime) - new Date(startTime)
-        )}{" "}
-        hours <br />
-        intensity: {intensity}<br />
+        Training:&ensp;&ensp;&nbsp;{training.muscleGroup}
+        <br />
+        Starts at:&ensp;&ensp;{toTimeInputString(startTime)}
+        <br />
+        Duration:&ensp;&ensp;
+        {toHoursInputString(new Date(endTime) - new Date(startTime))} hours
+        <br />
+        Intensity:&ensp;&ensp;{intensity}
+        <br />
+        {specialRequest ? `Special request:&ensp;&ensp;${specialRequest}` : ""}
       </div>
     </div>
   );

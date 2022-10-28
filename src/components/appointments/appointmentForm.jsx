@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { TRAININGS } from "../../api/mock-data";
 import DumbbellIntensity from "./dumbellIntensity";
 
@@ -27,7 +27,11 @@ const addTimeToDate = (date, time) => {
   return tijd;
 };
 
-export default function AppointmentForm({ onSaveAppointment }) {
+export default function AppointmentForm({
+  onSaveAppointment,
+  onRate = (f) => f,
+}) {
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [date, setDate] = useState("");
@@ -36,6 +40,11 @@ export default function AppointmentForm({ onSaveAppointment }) {
   const [endTime, setEndTime] = useState("");
   const [intensity, setIntensity] = useState(0);
   const [specialRequest, setSpecialRequest] = useState("");
+
+ 
+  const handleIntensity = (newIntensity) => {
+    onRate(setIntensity(newIntensity));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +76,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
       <form
         onSubmit={handleSubmit}
         className="w-50 mb-3"
-        style={{ minWidth: "200px" }}
+        style={{ minWidth: "250px" }}
       >
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
@@ -99,7 +108,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
         </div>
         <div className="mb-3">
           <label htmlFor="date" className="form-label">
-            Date
+            Date:
           </label>
           <input
             value={date}
@@ -109,12 +118,9 @@ export default function AppointmentForm({ onSaveAppointment }) {
             className="form-control"
           />
         </div>
-        <p>
-          {date} {typeof date}
-        </p>
         <div className="mb-3">
           <label htmlFor="trainings" className="form-label">
-            Training
+            Training:
           </label>
           <select
             value={training.name}
@@ -136,7 +142,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
         </div>
         <div className="mb-3">
           <label htmlFor="startTime" className="form-label">
-            Start Time
+            Start Time:
           </label>
           <input
             value={startTime}
@@ -152,7 +158,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
         </div>
         <div className="mb-3">
           <label htmlFor="endTime" className="form-label">
-            End Time
+            End Time:
           </label>
           <input
             value={endTime}
@@ -167,7 +173,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
           />
         </div>
 
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="intensity" className="form-label">
             Intensity
           </label>
@@ -186,30 +192,43 @@ export default function AppointmentForm({ onSaveAppointment }) {
             />
             <span> 5</span>
           </div>
-          <p id="intensitySlider"></p>
-          <div>
-            <DumbbellIntensity
-              selectedDumbbells={intensity}
-              value={intensity}
-              onChange={(e) => setIntensity(e.target.value)}
-            />
-          </div>
+        </div> */}
+
+        <div className="mb-3">
+          <label htmlFor="intensity" className="form-label">
+            Intensity:
+          </label>
           <br />
-          <div className="mb-3">
-            <label htmlFor="specialRequest" className="form-label">
-              Special request:
-            </label>
-            <input
+          <DumbbellIntensity
+            selectedDumbbells={intensity}
+            id="intensity"
+            onRate={handleIntensity}
+          />
+        </div>
+        <br />
+        <div className="mb-3">
+          <label htmlFor="specialRequest" className="form-label">
+            Special request:
+          </label>
+          <textarea
+            className="form-control"
+            id="specialRequest"
+            cols="1"
+            rows="5"
+            value={specialRequest}
+            onChange={(e) => setSpecialRequest(e.target.value)}
+          ></textarea>
+          {/* <input
               value={specialRequest}
               onChange={(e) => setSpecialRequest(e.target.value)}
               id="specialRequest"
               type="textfield"
               className="form-control"
-              placeholder="specialRequest"
-              style={{ width: "200px", height: "100px", textAlign: "start" }}
-            />
-          </div>
+              placeholder="special Request"
+              style={{ width: "200px", height: "100px", textAlign: "left" }}
+            /> */}
         </div>
+        {/* </div> */}
         <div className="clearfix">
           <div className="btn-group float-end">
             <button type="submit" className="btn btn-primary">
