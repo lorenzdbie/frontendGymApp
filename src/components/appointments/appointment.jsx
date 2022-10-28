@@ -1,11 +1,21 @@
 import { toDateInputString, toTimeInputString } from "./appointmentForm";
 
-export default function Appointment(props) {
-  const { id, user, date, training, startTime, endTime, intensity } = props;
+
+export const toHoursInputString = (time) => {
+  if (!time) return null;
+  if (typeof time !== Object) {
+    time = new Date(time);
+  }
+  let aString = time.toISOString();
+  console.log(aString);
+  return aString.substring(aString.indexOf("T") + 2, aString.indexOf("Z") - 7);
+};
+
+export default function Appointment({id, user, date, training, startTime, endTime, intensity}) {
   return (
     <div
       className="text-bg-light rounded border border-dark my-1"
-      style={{ width: "50%" }}
+      style={{ minwidth: "200 px" }}
     >
       <div style={{ display: "flex", marginLeft: "auto" }}>
         <h4 style={{ margin: "auto" }}>Appointment {id}</h4>
@@ -20,10 +30,12 @@ export default function Appointment(props) {
       </div>
 
       <div style={{ margin: "10px 20px", textAlign: "left" }}>
-        {user.name} made an appointment on {toDateInputString(new Date(date))}{" "}
-        for a {training.muscleGroup} training from{" "}
-        {toTimeInputString(startTime)} to {toTimeInputString(endTime)} with an
-        intensity of {intensity}.<br />
+        Trainee: {user.name} <br />
+        Date: {new Date(date).toLocaleDateString('en-BE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} <br />
+        Training: {training.muscleGroup} <br />
+        Starts at: {toTimeInputString(startTime)} <br />
+        Duration: {toHoursInputString(new Date(endTime) - new Date(startTime))} hours <br />
+        intensity: {intensity}.<br />
       </div>
     </div>
   );
