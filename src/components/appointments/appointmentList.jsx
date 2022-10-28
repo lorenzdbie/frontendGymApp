@@ -1,4 +1,4 @@
-import { APPOINTMENTS } from "../../api/mock-data";
+import { APPOINTMENTS, TRAININGS, USERS } from "../../api/mock-data";
 import { useState } from "react";
 import Appointment from "./appointment";
 import AppointmentForm from "./appointmentForm";
@@ -6,34 +6,48 @@ import AppointmentForm from "./appointmentForm";
 export default function AppointmentList() {
   const [appointments, setAppointments] = useState(APPOINTMENTS);
 
-
   const createAppointment = (
-    name,
+    firstName,
+    lastName,
     date,
-    muscleGroup,
+    trainingName,
     startTime,
     endTime,
-    intensity
+    intensity,
+    specialRequest
   ) => {
     const newAppointments = [
       {
-        id: Math.max(appointments.map((e) => e.id)) + 1,
+        id: Number(Math.max(...appointments.map((e) => e.id)) + 1),
         date: new Date(date),
         user: {
-          id: appointments.includes((a) => a.user.name === name)
-            ? appointments.filter((e) => (e.user.name = name)).map((e) => e.id)
-            : Math.max(appointments.map((e) => e.user.id)) + 1,
-          name: name,
+          id: Number(
+            USERS.includes((a) => {
+              a.firstName === firstName && a.lastName === lastName;
+            })
+              ? USERS.filter((a) => {
+                  a.firstName === firstName && a.lastName === lastName;
+                }).map((a) => a.id)
+              : Math.max(...USERS.map((e) => e.id)) + 1
+          ),
+          firstName,
+          lastName,
         },
         training: {
-          id: appointments.filter(
-            (e) => (e.training.muscleGroup === muscleGroup)
-          ).map((e) => e.training.id),
-          muscleGroup,
+          id: Number(
+            TRAININGS.filter((e) => e.name === trainingName).map((e) => e.id)
+          ),
+          name: trainingName,
+          muscleGroup: String(
+            TRAININGS.filter((e) => e.name === trainingName).map(
+              (e) => e.muscleGroup
+            )
+          ),
         },
         startTime,
         endTime,
         intensity,
+        specialRequest,
       },
       ...appointments,
     ];
@@ -41,14 +55,20 @@ export default function AppointmentList() {
     setAppointments(newAppointments);
     console.log("appointments", JSON.stringify(appointments));
     console.log("newAppointments", JSON.stringify(newAppointments));
+    // const ragnar = appointments.filter(x => x.user.firstName === 'Ragnar')
+    //    console.log(ragnar);
   };
   return (
     <>
       <h1>Appointments</h1>
       <AppointmentForm onSaveAppointment={createAppointment} />
-      {appointments.map((appoint) => (
-        <Appointment {...appoint} key={appoint.id} index={appoint.id}/>
-      ))}
+      <br />
+      Sorted by date:
+      {appointments
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .map((appoint) => (
+          <Appointment {...appoint} key={appoint.id} index={appoint.id} />
+        ))}
     </>
   );
 }

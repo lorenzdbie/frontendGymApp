@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { APPOINTMENTS, EXERCISE_DATA } from "../../api/mock-data";
+import { TRAININGS } from "../../api/mock-data";
 import DumbbellIntensity from "./dumbellIntensity";
 
 export const toDateInputString = (date) => {
@@ -28,27 +28,37 @@ const addTimeToDate = (date, time) => {
 };
 
 export default function AppointmentForm({ onSaveAppointment }) {
-
-  const [user, setUser] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [date, setDate] = useState("");
   const [training, setTraining] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [intensity, setIntensity] = useState();
+  const [intensity, setIntensity] = useState(0);
   const [specialRequest, setSpecialRequest] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const start = addTimeToDate(date, startTime);
     const end = addTimeToDate(date, endTime);
-    const sessie = training;
-    onSaveAppointment(user, date, sessie, start, end, intensity);
-    setUser("");
+    onSaveAppointment(
+      firstName,
+      lastName,
+      date,
+      training,
+      start,
+      end,
+      intensity,
+      specialRequest
+    );
+    setFirstName("");
+    setLastName("");
     setDate("");
     setTraining("");
     setStartTime("");
     setEndTime("");
-    setIntensity();
+    setIntensity(0);
+    setSpecialRequest("");
   };
 
   return (
@@ -60,16 +70,30 @@ export default function AppointmentForm({ onSaveAppointment }) {
         style={{ minWidth: "200px" }}
       >
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Who
+          <label htmlFor="firstName" className="form-label">
+            First name:
           </label>
           <input
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-            id="user"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            id="firstName"
             type="text"
             className="form-control"
-            placeholder="user"
+            placeholder="first name"
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="lastName" className="form-label">
+            Last name:
+          </label>
+          <input
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            id="lastName"
+            type="text"
+            className="form-control"
+            placeholder="lastName"
             required
           />
         </div>
@@ -93,7 +117,7 @@ export default function AppointmentForm({ onSaveAppointment }) {
             Training
           </label>
           <select
-            value={training.muscleGroup}
+            value={training.name}
             onChange={(e) => {
               e.stopPropagation();
               setTraining(e.target.value);
@@ -103,9 +127,9 @@ export default function AppointmentForm({ onSaveAppointment }) {
             required
           >
             <option defaultChecked>--Select a training--</option>
-            {EXERCISE_DATA.map(({ id, muscleGroup }) => (
-              <option key={id} value={muscleGroup}>
-                {muscleGroup}
+            {TRAININGS.map(({ id, name }) => (
+              <option key={id} value={name}>
+                {name}
               </option>
             ))}
           </select>
@@ -161,8 +185,8 @@ export default function AppointmentForm({ onSaveAppointment }) {
               id="intensity"
             />
             <span> 5</span>
-          </div> 
-           <p id="intensitySlider"></p>
+          </div>
+          <p id="intensitySlider"></p>
           <div>
             <DumbbellIntensity
               selectedDumbbells={intensity}

@@ -1,7 +1,6 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { EXERCISE_DATA } from "./api/mock-data";
+import { TRAININGS } from "./api/mock-data";
 import Exercise from "./components/exercises/Exercise";
 import ExcerciseList from "./components/exercises/ExerciseList";
 import AppointmentList from "./components/appointments/appointmentList";

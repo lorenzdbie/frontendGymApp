@@ -1,5 +1,4 @@
-import { toDateInputString, toTimeInputString } from "./appointmentForm";
-
+import { toTimeInputString } from "./appointmentForm";
 
 export const toHoursInputString = (time) => {
   if (!time) return null;
@@ -11,7 +10,15 @@ export const toHoursInputString = (time) => {
   return aString.substring(aString.indexOf("T") + 2, aString.indexOf("Z") - 7);
 };
 
-export default function Appointment({id, user, date, training, startTime, endTime, intensity}) {
+export default function Appointment({
+  id,
+  user,
+  date,
+  training,
+  startTime,
+  endTime,
+  intensity,
+}) {
   return (
     <div
       className="text-bg-light rounded border border-dark my-1"
@@ -30,12 +37,22 @@ export default function Appointment({id, user, date, training, startTime, endTim
       </div>
 
       <div style={{ margin: "10px 20px", textAlign: "left" }}>
-        Trainee: {user.name} <br />
-        Date: {new Date(date).toLocaleDateString('en-BE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} <br />
+        Trainee: {user.firstName + " " + user.lastName} <br />
+        Date:{" "}
+        {new Date(date).toLocaleDateString("en-BE", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}{" "}
+        <br />
         Training: {training.muscleGroup} <br />
         Starts at: {toTimeInputString(startTime)} <br />
-        Duration: {toHoursInputString(new Date(endTime) - new Date(startTime))} hours <br />
-        intensity: {intensity}.<br />
+        Duration: {toHoursInputString(
+          new Date(endTime) - new Date(startTime)
+        )}{" "}
+        hours <br />
+        intensity: {intensity}<br />
       </div>
     </div>
   );
