@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Exercise from "./Exercise";
-import { EXERCISE_DATA } from "../../api/mock-data";
+import { TRAININGS } from "../../api/mock-data";
 
 export default function ExcerciseList() {
   // const [exercises, setExercises] = useState(EXERCISE_DATA);
@@ -21,7 +21,8 @@ export default function ExcerciseList() {
     <>
       <h1>Exercises</h1>
       <div className="exerciseList-box">
-        {EXERCISE_DATA.map((ex) => (
+        {TRAININGS
+        .map((ex) => (
           <Exercise {...ex} key={ex.id} />
         ))}
       </div>
