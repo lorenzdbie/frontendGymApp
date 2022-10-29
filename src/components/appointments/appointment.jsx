@@ -56,7 +56,8 @@ export default function Appointment({
         <br />
         Intensity:&ensp;&ensp;{intensity}
         <br />
-        {specialRequest ? `Special request:&ensp;&ensp;${specialRequest}` : ""}
+        {specialRequest ? (`Special request: &ensp;&ensp;${specialRequest}`) : ""}
+        
       </div>
     </div>
   );

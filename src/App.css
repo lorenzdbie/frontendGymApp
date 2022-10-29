@@ -61,6 +61,75 @@ h3 {
 }
 
 .appointment-box {
-padding-left: 50px; 
+  padding-left: 50px;
+}
 
-} 
+.divSpin {
+  background-position: center;
+  -webkit-animation: loadingSpin 2s infinite linear;
+  -moz-animation: loadingSpin 2s infinite linear;
+  -o-animation: loadingSpin 2s infinite linear;
+  -ms-animation: loadingSpin 2s infinite linear;
+  animation: loadingSpin 2s infinite linear;
+  transform-origin: 50% 50%;
+  display: block;
+  margin: 120px;
+ 
+}
+
+.loadingSpin {
+  -webkit-animation: loadingSpin 2s infinite linear;
+  -moz-animation: loadingSpin 2s infinite linear;
+  -o-animation: loadingSpin 2s infinite linear;
+  -ms-animation: loadingSpin 2s infinite linear;
+  animation: loadingSpin 2s infinite linear;
+  transform-origin: 50% 50%;
+  display: block;
+
+  width: 50%;
+  height: 50%;
+}
+
+@-keyframes loadingSpin {
+  0% {
+    transform-origin: 50% 50%;
+    transform: rotate(0deg);
+  }
+  100% {
+    transform-origin: 50% 50%;
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes loadingSpin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes loadingSpin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-o-keyframes loadingSpin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+  }
+}
+@-ms-keyframes loadingSpin {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+  }
+}
