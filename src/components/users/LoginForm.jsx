@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DinoLogo from "../assets/LogoDino.webp";
+import DinoLogo from "../../assets/Logodino.webp";
 
 export default function LoginForm({ onSaveLogin }) {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ export default function LoginForm({ onSaveLogin }) {
   return (
     <>
       <img src={DinoLogo} alt="logo loginScreen" width={500} />
-      <h2>Login / SingUp</h2>
+      <h2>Login / SignUp</h2>
       <form
         onSubmit={handleSubmit}
         className="w-50 mb-3"
@@ -33,7 +33,7 @@ export default function LoginForm({ onSaveLogin }) {
             type="email"
             className="form-control"
             placehoder="Enter e-mail"
-            rerquired
+            required
           />
         </div>
         <div className="mb-3" id="login">

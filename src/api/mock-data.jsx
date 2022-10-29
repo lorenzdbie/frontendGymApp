@@ -197,53 +197,53 @@ let APPOINTMENTS = [
   },
 ];
 
+let USERS = [
+  {
+    id: 1,
+    firstName: "Galdino",
+    lastName: "Noreillie",
+    birthdate: "1996-09-06T00:00:00.000Z",
+    email: "dino@hotmail.com",
+    weight: "90,0",
+    height: "1,87",
+    credits: "10",
+    rol: "admin",
+  },
+  {
+    id: 2,
+    firstName: "Lorenz",
+    lastName: "De Bie",
+    birthdate: "1988-12-12T00:00:00.000Z",
+    email: "lorenz.debie@hotmail.com",
+    weight: "83,0",
+    height: "1,87",
+    credits: "5",
+    role: "user",
+  },
+  {
+    id: 3,
+    firstName: "Grietje",
+    lastName: "VC",
+    birthdate: "1978-04-17T00:00:00.000Z",
+    email: "grietje@gmail.com",
+    weight: "83,0",
+    height: "1,87",
+    credits: "5",
+    rol: "user",
+  },
+  {
+    id: 4,
+    firstName: "Geoffrey",
+    lastName: "De Bie",
+    birthdate: "1990-10-31T00:00:00.000Z",
+    email: "geoffrey66@hotmail.com",
+    weight: "83,0",
+    height: "1,80",
+    credits: "10",
+    rol: "admin",
+  },
+];
 
-let USERS = [{
-  id: 1,
-  firstName: "Galdino",
-  lastName: "Noreillie",
-  birthdate: "1996-09-06T00:00:00.000Z",
-  email: "dino@hotmail.com",
-  weight: "90,0kg",
-  height: "1,87m",
-  credits: "10",
-  rol: "admin",
-}, 
-{
-  id: 2,
-  firstName: "Lorenz",
-  lastName: "De Bie",
-  birthdate: "1988-12-12T00:00:00.000Z",
-  email: "lorenz.debie@hotmail.com",
-  weight: "83,0kg",
-  height: "1,87m",
-  credits: "5",
-  role: "user",
-},
-{
-  id: 3,
-  firstName: "Grietje",
-  lastName: "VC",
-  birthdate: "1978-04-17T00:00:00.000Z",
-  email: "grietje@gmail.com",
-  weight: "83,0kg",
-  height: "1,87m",
-  credits: "5",
-  rol: "user",
-},
-{
-  id: 4,
-  firstName: "Geoffrey",
-  lastName: "De Bie",
-  birthdate: "1990-10-31T00:00:00.000Z",
-  email: "geoffrey66@hotmail.com",
-  weight: "83,0kg",
-  height: "1,80m",
-  credits: "10",
-  rol: "admin",
-},
-]
-
-export { TRAININGS, APPOINTMENTS, USERS};
+export { TRAININGS, APPOINTMENTS, USERS };
 
 // export { EXERCISE_DATA, APPOINTMENTS };

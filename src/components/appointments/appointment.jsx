@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { toTimeInputString } from "./appointmentForm";
 
 export const toHoursInputString = (time) => {
@@ -19,11 +20,20 @@ export default function Appointment({
   endTime,
   intensity,
   specialRequest,
+  onDelete
 }) {
+
+
+const handleDelete = useCallback((event) => {
+  event.preventDefault();
+  onDelete(id);
+}, [id, onDelete]);
+
+
   return (
     <div
       className="text-bg-light rounded border border-dark my-1"
-      style={{ minwidth: "200 px" }}
+      style={{ maxWidth: "150 px" }}
     >
       <div style={{ display: "flex", marginLeft: "auto" }}>
         <h4 style={{ margin: "auto" }}>Appointment # {id}</h4>
@@ -32,6 +42,7 @@ export default function Appointment({
           className="close"
           aria-label="Close"
           style={{ marginLeft: "auto", backgroundColor: "gray" }}
+          onClick={handleDelete}
         >
           <span aria-hidden="true">&times;</span>
         </button>

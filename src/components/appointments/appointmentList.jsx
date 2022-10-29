@@ -6,6 +6,12 @@ import AppointmentForm from "./appointmentForm";
 export default function AppointmentList() {
   const [appointments, setAppointments] = useState(APPOINTMENTS);
 
+  const onDeleteConfirm = (id) => {
+    console.log("onDeleteConfirm", id);
+    const newAppointments = appointments.filter((e) => e.id !== id);
+    setAppointments(newAppointments);
+  };
+
   const createAppointment = (
     firstName,
     lastName,
@@ -60,17 +66,30 @@ export default function AppointmentList() {
     // const ragnar = appointments.filter(x => x.user.firstName === 'Ragnar')
     //    console.log(ragnar);
   };
+
   return (
     <>
-      <h1>Appointments</h1>
-      <AppointmentForm onSaveAppointment={createAppointment} />
-      <br />
-      Sorted by date:
-      {appointments
-        .sort((a, b) => new Date(a.date) - new Date(b.date))
-        .map((appoint) => (
-          <Appointment {...appoint} key={appoint.id} index={appoint.id} />
-        ))}
+      <div className="col-sm-11 ">
+        <h1>Appointments</h1>
+        <br />
+        <AppointmentForm onSaveAppointment={createAppointment} />
+      </div>
+      <div>
+        Sorted by date:
+        <div style={{ width: "350px" }}>
+          {appointments
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .map((appoint) => (
+              <Appointment
+                className="appointment_box"
+                {...appoint}
+                key={appoint.id}
+                index={appoint.id}
+                onDelete={onDeleteConfirm}
+              />
+            ))}
+        </div>
+      </div>
     </>
   );
 }
