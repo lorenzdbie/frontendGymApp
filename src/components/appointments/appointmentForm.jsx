@@ -73,136 +73,111 @@ export default function AppointmentForm({
   };
 
   return (
-    <>
+    <div className="d-flex flex-column col-12">
       <h2>Add Appointment</h2>
       <form
         onSubmit={handleSubmit}
-        className="w-60 mb-3"
-        style={{ maxWidth: "90%", minWidth: "500px" }}
+        className="mb-3 justify-content-md-center"
+        style={{ maxWidth: "90%", Width: "500px" }}
       >
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="firstName"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
-            Enter first name:
+        <div className="d-flex flex-row my-1">
+          <label htmlFor="firstName" className="form-label col-5 my-auto ">
+            First name:
           </label>
-          <div className="col-sm-6 mb-3">
-            <input
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              id="firstName"
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="first name"
-              required
-            />
-          </div>
+          <input
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            id="firstName"
+            type="text"
+            className="form-control col"
+            placeholder="first name"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="lastName"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
+        <div className="d-flex flex-row my-1">
+          <label htmlFor="lastName" className="form-label col-5 my-auto">
             Last name:
           </label>
-          <div className="col-sm-6 mb-3">
-            <input
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              id="lastName"
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="lastName"
-              required
-            />
-          </div>
+
+          <input
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            id="lastName"
+            type="text"
+            className="form-control col"
+            placeholder="lastName"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="date"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
+        <div className="d-flex flex-row my-1">
+          <label htmlFor="date" className="form-label col-5 my-auto">
             Date:
           </label>
-          <div className="col-sm-5 mb-3">
-            <input
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              id="date"
-              type="date"
-              className="form-control form-control-lg"
-            />
-          </div>
+
+          <input
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            id="date"
+            type="date"
+            className="form-control col"
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="trainings"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
+        <div className="d-flex flex-row my-1">
+          <label htmlFor="trainings" className="form-label col-5 my-auto">
             Training:
           </label>
-          <div className="col-sm-6 mb-3">
-            <select
-              value={training.name}
-              onChange={(e) => {
-                e.stopPropagation();
-                setTraining(e.target.value);
-              }}
-              id="trainings"
-              className="form-select form-select-lg"
-              required
-            >
-              <option defaultChecked>--Select a training--</option>
-              {TRAININGS.map(({ id, name }) => (
-                <option key={id} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="startTime"
-            className="col-sm-5 col-form-label-lg form-label"
+
+          <select
+            value={training.name}
+            onChange={(e) => {
+              e.stopPropagation();
+              setTraining(e.target.value);
+            }}
+            id="trainings"
+            className="form-select col smallOption"
+            required
           >
+            <option defaultChecked>--Select a training--</option>
+            {TRAININGS.map(({ id, name }) => (
+              <option key={id} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="d-flex flex-row my-1">
+          <label htmlFor="startTime" className="form-label col-5 my-auto">
             Start Time:
           </label>
-          <div className="col-sm-4 mb-3">
-            <input
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              id="time"
-              type="time"
-              min="08:00"
-              max="18:30"
-              // step="900"
-              className="form-control form-control-lg"
-              required
-            />
-          </div>
+
+          <input
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+            id="time"
+            type="time"
+            min="08:00"
+            max="18:30"
+            // step="900"
+            className="form-control col"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="endTime"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
+        <div className="d-flex flex-row my-1">
+          <label htmlFor="endTime" className="form-label col-5 my-auto">
             End Time:
           </label>
-          <div className="col-sm-4 mb-3">
-            <input
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              id="time"
-              type="time"
-              min="08:30"
-              max="19:00"
-              // step="900"
-              className="form-control form-control-lg"
-              required
-            />
-          </div>
+
+          <input
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
+            id="time"
+            type="time"
+            min="08:30"
+            max="19:00"
+            step="900"
+            className="form-control col"
+            required
+          />
         </div>
 
         {/* <div className="mb-3">
@@ -226,41 +201,35 @@ export default function AppointmentForm({
           </div>
         </div> */}
 
-        <div className="form-group row">
-          <label
-            htmlFor="intensity"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
+        <div className="form-group row my-1">
+          <label htmlFor="intensity" className="form-label col-5 my-auto">
             Intensity:
           </label>
-          <div className="col-sm-4">
+          <div className="col-6">
             <DumbbellIntensity
               selectedDumbbells={intensity}
               id="intensity"
               onRate={handleIntensity}
+              className=""
             />
           </div>
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="specialRequest"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
+        <div className="d-flex flex-row my-1">
+          <label htmlFor="specialRequest" className="form-label col-4 mt-2">
             Special request:
           </label>
-          <div className="col-sm-6 mt-3 mb-3 clear-fix">
-            <div className="col-sm-12 float-end">
-              <textarea
-                className="form-control form-control"
-                id="specialRequest"
-                cols="1"
-                rows="6"
-                type="text"
-                value={specialRequest}
-                onChange={(e) => setSpecialRequest(e.target.value)}
-                placeholder="If you have any special requests, please enter them here"
-              ></textarea>
-              {/* <input
+
+          <textarea
+            className="form-control col"
+            id="specialRequest"
+            cols="1"
+            rows="6"
+            type="text"
+            value={specialRequest}
+            onChange={(e) => setSpecialRequest(e.target.value)}
+            placeholder="If you have any special requests, please enter them here..."
+          ></textarea>
+          {/* <input
               value={specialRequest}
               onChange={(e) => setSpecialRequest(e.target.value)}
               id="specialRequest"
@@ -269,11 +238,9 @@ export default function AppointmentForm({
               placeholder="special Request"
               style={{ width: "200px", height: "100px", textAlign: "left" }}
             /> */}
-            </div>
-          </div>
         </div>
         {/* </div> */}
-        <div className="clearfix">
+        <div className="clearfix  my-4">
           <div className="btn-group float-center">
             <button type="submit" className="btn btn-primary">
               Add Appointment
@@ -281,6 +248,6 @@ export default function AppointmentForm({
           </div>
         </div>
       </form>
-    </>
+    </div>
   );
 }

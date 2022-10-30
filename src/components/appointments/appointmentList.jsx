@@ -69,14 +69,13 @@ export default function AppointmentList() {
 
   return (
     <>
-      <div className="col-sm-11 ">
-        <h1>Appointments</h1>
+      <div>
+        <h1 className="text-start my-3">Appointments</h1>
         <br />
         <AppointmentForm onSaveAppointment={createAppointment} />
-      </div>
-      <div>
+     
         Sorted by date:
-        <div style={{ width: "350px" }}>
+        <div >
           {appointments
             .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map((appoint) => (

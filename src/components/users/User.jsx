@@ -7,6 +7,7 @@ export default function User({
   weight,
   height,
 }) {
+  console.log("rendering user...");
   return (
     <tr>
       <th scope="row">{id}</th>

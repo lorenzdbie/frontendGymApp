@@ -23,6 +23,8 @@ export default function Appointment({
   onDelete
 }) {
 
+  console.log("rendering appointment...");
+
 
 const handleDelete = useCallback((event) => {
   event.preventDefault();

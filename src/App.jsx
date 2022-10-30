@@ -8,12 +8,12 @@ import Register from "./components/users/Register";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App d-flex flex-rom">
       {/* <LoginForm /> */}
       {/* <Loader loading={true} /> */}
-      <AppointmentList />
+      <AppointmentList className="col"/>
       {/* <ExcerciseList /> */}
-      {/* <Register /> */}
+      <Register />
       {/* <RegistrationForm /> */}
     </div>
   );

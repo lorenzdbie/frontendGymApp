@@ -8,7 +8,7 @@ const Dumbbell = memo(({ index, selected = false, onSelect = (f) => f }) => {
   }, [index, onSelect]);
 
   return (
-    <CiDumbbell size={30} color={selected ? "red" : "grey"} onClick={handleSelect} />
+    <CiDumbbell size={28} color={selected ? "red" : "grey"} onClick={handleSelect} />
   );
 });
 
@@ -29,9 +29,8 @@ export default function DumbbellIntensity({
           onSelect={onRate}
         />
       ))}
-      <p>
-        {selectedDumbbells} of {totalDumbbells} dumbbells
-      </p>
+      <small>{selectedDumbbells} of {totalDumbbells} dumbbells</small>
+        
     </>
   );
 }

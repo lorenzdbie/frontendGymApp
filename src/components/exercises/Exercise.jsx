@@ -1,5 +1,6 @@
 export default function Exercise({ id, name, muscleGroup}) {
   
+  console.log("rendering exercise...");
 
   return (
     <div className="exercise-box">
