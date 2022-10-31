@@ -15,8 +15,10 @@ export default function Login(){
   };
   
   return (
+    <div className="loginContainer">
     <div className="formContainer">
       <LoginForm onSaveLogin={handleLogin}/>
+    </div>
     </div>
   );
 }                                

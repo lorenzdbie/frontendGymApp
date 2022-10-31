@@ -12,13 +12,11 @@
   align-self: start;
 }
 
-#body{
-
-
+#body {
   /* display: flex;
   flex-direction: column;
   align-items: flex-start; */
-  
+
   width: 100%;
   height: 100%;
 }
@@ -26,33 +24,30 @@
 #App {
   width: 100%;
 }
-.nav{
-margin-left: auto;
-padding:0;
-width: 100%;
-height: auto;
-background-color: #f5f5f5;
-
-}
-
-.nav ol{
+.nav {
+  margin-left: auto;
+  padding: 0;
   width: 100%;
-display: flex;
-flex-direction: row;
-justify-content: flex-end;
-align-items: center;
-list-style: none;
-margin: 0;
-padding: 0.5em;
-
+  height: auto;
+  background-color: #f5f5f5;
 }
 
-.nav ol li{
+.nav ol {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0.5em;
+}
+
+.nav ol li {
   width: auto;
   padding: 0 1em;
   align-self: start;
   justify-self: center;
-
 }
 
 .logo {
@@ -90,6 +85,10 @@ padding: 0.5em;
   color: #888;
 }
 
+h2 {
+  font-size: 1.5em;
+}
+
 h3 {
   font-size: 1.3em;
 }
@@ -100,10 +99,6 @@ h3 {
   border-radius: 10px;
   max-width: 250px;
 }
-/* .exerciseList-box {
-  border: black solid 1px;
-  border-radius: 10px;
-} */
 
 .exercise-box > p {
   padding-left: 20px;
@@ -140,17 +135,9 @@ h3 {
 } */
 
 img.resize {
-  width: 50%; /* you can use % */
+  min-width: 15em; /* you can use % */
   height: auto;
 }
-/* 
-form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
- */
-
 
 .appointment_box {
   border: black solid 1px;
@@ -247,7 +234,7 @@ form{
 }
 
 .loading {
-  font-size: 5vw;
+  font-size: 2em;
   letter-spacing: 10px;
   animation: flip 3.5s infinite linear;
   transform-origin: 50% 50%;
@@ -310,6 +297,104 @@ img.resize {
   max-height: 600px;
 }
 
+input {
+  padding: auto;
+  text-align: center;
+  font-size: 1em;
+  max-height: 1.8em;
+}
+
+select > option {
+  text-align: center;
+  
+}
+
+/* textarea,
+button,
+select,
+input {
+  box-shadow: 0px 0px 16px -9px rgba(0, 0, 0, 0.1);
+} */
+/* 
+.userInput:hover{
+  box-shadow: 0px 0px 50px -4px #103954;
+} */
+
+/* textarea:hover,
+button:hover,
+select:hover,
+input:hover {
+  box-shadow: 0px 0px 50px -4px #103954;
+}  */
+
+/* textarea:active,
+button:active,
+select:active,
+input:active {
+  box-shadow: 0px 0px 21px -4px #103954;
+} */
+
+input::placeholder {
+  font: 1em sans-serif;
+  padding: auto;
+  text-align: center;
+}
+
+input[type="checkbox"]:checked:before {
+  background-color: white;
+}
+
+label {
+  font-size: 1em;
+  text-align: left;
+}
+
+input[type="time"] {
+  max-width: 35%;
+  font-size: 1em;
+  padding: 3px 0 3px 10px;
+  max-height: 1.8em;
+}
+
+input[type="date"] {
+  font-size: 1em;
+  padding: 3px 0 3px 10px;
+  max-height: 1.8em;
+}
+
+input[type="number"] {
+  max-width: 35%;
+  padding: auto;
+  max-height: 1.8em;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  font-size: 1em;
+  text-align: left;
+}
+
+.smallOption {
+  font-size: 1em;
+  padding: 0 0 0 10px;
+  min-height: 1.8em;
+}
+
+.loginContainer {
+  margin-top: 10em;
+  margin-bottom: 10%;
+}
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12em;
+}
+
 @media screen and (max-width: 580px) {
   #root {
     width: 100%;
@@ -339,7 +424,7 @@ img.resize {
     width: 320px;
     margin: auto;
   }
-  .nav{
+  .nav {
     width: 100%;
   }
 
@@ -414,9 +499,7 @@ img.resize {
     justify-content: space-between;
     align-items: flex-start;
     padding: 2em;
-    ;
   }
-
 
   .exercise-box {
     width: 200px;
@@ -427,16 +510,16 @@ img.resize {
   }
 
   .exercise-box > div:first-child {
-     display: flex;
+    display: flex;
     text-align: left;
     border-radius: 9px 9px 0 0;
-  
+
     background-color: #888;
   }
 
   .exercise-box > div:first-child > div {
     flex: 0 0 auto;
-    margin:0.2em 1.0em 0.2em 1.0em;
+    margin: 0.2em 1em 0.2em 1em;
     color: white;
   }
   .exercise-box > div:last-child {
@@ -445,12 +528,10 @@ img.resize {
     text-align: left;
   }
   .exercise-box > div:last-child > div:first-child {
- 
-    margin:0.5em 1.0em 0 1.0em;
+    margin: 0.5em 1em 0 1em;
   }
   .exercise-box > div:last-child > div:last-child {
-    
-    margin:0 0.8em 0.5em 1.0em;
+    margin: 0 0.8em 0.5em 1em;
   }
 
   .exbox {
@@ -460,7 +541,7 @@ img.resize {
     max-width: 680px;
     margin: 0 auto;
   }
-  .apbox{
+  .apbox {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -469,7 +550,7 @@ img.resize {
   }
 
   .appointment-box {
-    width: 190px;
+    width: 195px;
     height: auto;
     font-size: 0.6em;
     display: flex;
@@ -491,89 +572,14 @@ img.resize {
     background-color: #888;
   }
 
-
-
   .appointment-box > div:first-child > div:first-child {
     flex: 0 0 auto;
     margin: auto;
     color: white;
   }
- }
- input {
-  border: none;
-  font-size: 1em;
-  max-height: 1.8em;
-}
 
-textarea,
-button,
-select,
-input {
-  box-shadow: 0px 0px 16px -9px rgba(0, 0, 0, 0.1);
-}
-textarea:hover,
-button:hover,
-select:hover,
-input:hover {
-  box-shadow: 0px 0px 31px -4px #103954;
-}
-
-textarea:focus,
-button:focus,
-select:focus,
-input:focus {
-  box-shadow: 0px 0px 21px -4px #103954;
-}
-
-input,
-input::placeholder {
-  font: 1em sans-serif;
-  padding: auto;
-  text-align: center;
-}
-
-input[type="checkbox"]:checked:before {
-  background-color: white;
-}
-
-label {
-  font-size: 1em;
-  /* display: block; */
-  /* width: 200px; */
-  /* height: y; */
-  text-align: left;
-}
-
-input[type="time"] {
-  max-width: 35%;
-  font-size: 1em;
-  padding: 3px 0 3px 10px;
-  max-height: 1.8em;
-}
-
-input[type="date"] {
-  font-size: 1em;
-  padding: 3px 0 3px 10px;
-  max-height: 1.8em;
-}
-
-input[type="number"] {
-  max-width: 35%;
-  padding: auto;
-  max-height: 1.8em;
-}
-input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  font-size: 1em;
-  text-align: left;
-}
-
-.smallOption {
-  font-size: 1em;
-  padding: 0 0 0 10px;
-  min-height: 1.8em;
+  tr > td:first-child {
+    width: 28%;
+    padding-left: 0.5em;
+  }
 }

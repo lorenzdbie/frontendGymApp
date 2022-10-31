@@ -33,9 +33,10 @@ export default function Register() {
   };
   return (
     <>
-      <div>
-      <h1 className="text-start my-3">Registration</h1>
-      <br />
+      
+      <h1 className="mt-5 py-3">Registration</h1>
+      
+      <div className="formContainer">
         <RegistrationForm onSaveRegistration={createAccount} />
       </div>
 

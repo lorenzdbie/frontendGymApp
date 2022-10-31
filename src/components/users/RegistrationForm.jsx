@@ -44,14 +44,14 @@ export default function RegistrationForm({ onSaveRegistration }) {
   };
 
   return (
-    <div className="d-flex flex-column ">
+    <div className="d-flex flex-column col-12">
       <h2>Register account:</h2>
       <form
         onSubmit={handleSubmit}
         className="mb-3 justify-content-md-center formContainer"
         // style={{ maxWidth: "90%", minWidth: "500px" }}
       >
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="firstName" className="form-label col-5 my-auto ">
             First name:
           </label>
@@ -65,7 +65,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
             required
           />
         </div>
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="lastName" className=" form-label col-5 my-auto ">
             Last name:
           </label>
@@ -81,7 +81,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           />
         </div>
 
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="date" className="form-label col-5 my-auto ">
             Birthdate:
           </label>
@@ -95,7 +95,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           />
         </div>
 
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="e-mail" className="form-label col-5 my-auto ">
             Enter e-mail:
           </label>
@@ -111,7 +111,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           />
         </div>
 
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="password" className="form-label col-5 my-auto ">
           password:
           </label>
@@ -127,7 +127,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           />
         </div>
 
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="password2" className="form-label col-5 my-0 ">
             Repeat password:
           </label>
@@ -143,7 +143,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           />
         </div>
 
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="weight" className="form-label col-5 my-auto ">
             Body weight:
           </label>
@@ -157,9 +157,9 @@ export default function RegistrationForm({ onSaveRegistration }) {
             className="form-control col bodyHW rounded-5"
             placeholder="weight"
           />
-          <span className="col-sm-1 col-form-label-lg"> kg</span>
+          <span className="my-auto form-label"> &nbsp;kg</span>
         </div>
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="weight" className="form-label col-5 my-auto ">
             Body height:
           </label>
@@ -170,12 +170,12 @@ export default function RegistrationForm({ onSaveRegistration }) {
               id="height"
               type="number"
               step="0.1"
-              className="form-control col bodyHW rounded-5"
+              className="form-control col rounded-5"
               placeholder="height"
             />
-          <span className="col-sm-1 col-form-label-lg"> m</span>
+          <span className="my-auto form-label"> &nbsp;m</span>
         </div>
-        <div className="d-flex flex-row my-3">
+        <div className="d-flex flex-row my-2">
           <input type="checkbox" className="form-check-label col-3 my-auto rounded-2" required />
           &ensp;&nbsp;I have read and agree to the terms and conditions
         </div>

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { TRAININGS } from "../../api/mock-data";
 import DumbbellIntensity from "./dumbellIntensity";
 
@@ -27,7 +27,7 @@ const addTimeToDate = (date, time) => {
   return tijd;
 };
 
-export default function AppointmentForm({
+export default memo( function AppointmentForm({
   onSaveAppointment,
   onRate = (f) => f,
 }) {
@@ -64,8 +64,8 @@ export default function AppointmentForm({
     );
     setFirstName("");
     setLastName("");
-    setDate("");
-    setTraining("");
+    setDate(new Date().toISOString().slice(0, 10));
+    setTraining("--Select training--");
     setStartTime("");
     setEndTime("");
     setIntensity(0);
@@ -80,7 +80,7 @@ export default function AppointmentForm({
         className="mb-3 justify-content-md-center formContainer"
         // style={{ maxWidth: "90%", Width: "500px" }}
       >
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row my-2">
           <label htmlFor="firstName" className="form-label col-5 my-auto ">
             First name:
           </label>
@@ -94,7 +94,7 @@ export default function AppointmentForm({
             required
           />
         </div>
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row  my-2">
           <label htmlFor="lastName" className="form-label col-5 my-auto">
             Last name:
           </label>
@@ -109,7 +109,7 @@ export default function AppointmentForm({
             required
           />
         </div>
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row  my-2">
           <label htmlFor="date" className="form-label col-5 my-auto">
             Date:
           </label>
@@ -123,7 +123,7 @@ export default function AppointmentForm({
             required
           />
         </div>
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row  my-2">
           <label htmlFor="trainings" className="form-label col-5 my-auto">
             Training:
           </label>
@@ -131,14 +131,13 @@ export default function AppointmentForm({
           <select
             value={training.name}
             onChange={(e) => {
-              e.stopPropagation();
               setTraining(e.target.value);
             }}
             id="trainings"
             className="form-select col smallOption rounded-5"
             required
           >
-            <option defaultChecked>--Select a training--</option>
+            <option defaultChecked>--Select training--&nbsp;&nbsp;</option>
             {TRAININGS.map(({ id, name }) => (
               <option key={id} value={name}>
                 {name}
@@ -146,11 +145,10 @@ export default function AppointmentForm({
             ))}
           </select>
         </div>
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row  my-2">
           <label htmlFor="startTime" className="form-label col-5 my-auto">
             Start Time:
           </label>
-
           <input
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
@@ -162,11 +160,10 @@ export default function AppointmentForm({
             required
           />
         </div>
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row  my-2">
           <label htmlFor="endTime" className="form-label col-5 my-auto">
             End Time:
           </label>
-
           <input
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
@@ -174,33 +171,11 @@ export default function AppointmentForm({
             type="time"
             min="08:30"
             max="19:00"
-            step="900"
+            // step="900"
             className="form-control col rounded-5"
             required
           />
         </div>
-
-        {/* <div className="mb-3">
-          <label htmlFor="intensity" className="form-label">
-            Intensity
-          </label>
-          <div>
-            <span>0 </span>
-            <input
-              type="range"
-              onChange={(e) => setIntensity(e.target.value)}
-              min={0}
-              max={5}
-              step="0.5"
-              value={intensity}
-              name="rangeInput"
-              className="slider"
-              id="intensity"
-            />
-            <span> 5</span>
-          </div>
-        </div> */}
-
         <div className="d-flex flex-row mb-0">
           <label htmlFor="intensity" className="form-label mt-1 col-5">
             Intensity:
@@ -218,7 +193,6 @@ export default function AppointmentForm({
           <label htmlFor="specialRequest" className="form-label col-7">
             Special request:
           </label>
-
           <textarea
             className="form-control col rounded-5"
             id="specialRequest"
@@ -229,20 +203,13 @@ export default function AppointmentForm({
             onChange={(e) => setSpecialRequest(e.target.value)}
             placeholder="If you have any special requests, please enter them here..."
           ></textarea>
-          {/* <input
-              value={specialRequest}
-              onChange={(e) => setSpecialRequest(e.target.value)}
-              id="specialRequest"
-              type="textfield"
-              className="form-control"
-              placeholder="special Request"
-              style={{ width: "200px", height: "100px", textAlign: "left" }}
-            /> */}
         </div>
-        {/* </div> */}
         <div className="clearfix  my-4">
           <div className="btn-group float-center">
-            <button type="submit" className="btn btn-primary rounded-5">
+            <button
+              type="submit"
+              className="btn btn-primary rounded-5"
+            >
               Add Appointment
             </button>
           </div>
@@ -250,4 +217,4 @@ export default function AppointmentForm({
       </form>
     </div>
   );
-}
+});

@@ -17,16 +17,15 @@ export default function LoginForm({ onSaveLogin }) {
 
   return (
     <>
-    
     <picture>
-        <source
+        {/* <source
           srcSet="/src/assets/LogoLarge.webp"
           media="(min-width: 1200px)"
-        />
-        <source
+        /> */}
+        {/* <source
           srcSet="/src/assets/LogoMedium.webp"
           media="(min-width: 768px)"
-        />
+        /> */}
         <img src="/src/assets/LogoSmall.webp" alt="logo loginScreen" />
       </picture>                                                                                                                                                                                                                               
       <h2>Login / SignUp</h2>
