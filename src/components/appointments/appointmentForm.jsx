@@ -73,14 +73,14 @@ export default function AppointmentForm({
   };
 
   return (
-    <div className="d-flex flex-column col-12">
-      <h2>Add Appointment</h2>
+    <div className="d-flex flex-column col-12 ">
+      <h2>Add Appointment:</h2>
       <form
         onSubmit={handleSubmit}
-        className="mb-3 justify-content-md-center"
-        style={{ maxWidth: "90%", Width: "500px" }}
+        className="mb-3 justify-content-md-center formContainer"
+        // style={{ maxWidth: "90%", Width: "500px" }}
       >
-        <div className="d-flex flex-row my-1">
+        <div className="d-flex flex-row">
           <label htmlFor="firstName" className="form-label col-5 my-auto ">
             First name:
           </label>
@@ -89,12 +89,12 @@ export default function AppointmentForm({
             onChange={(e) => setFirstName(e.target.value)}
             id="firstName"
             type="text"
-            className="form-control col"
+            className="form-control col rounded-5"
             placeholder="first name"
             required
           />
         </div>
-        <div className="d-flex flex-row my-1">
+        <div className="d-flex flex-row">
           <label htmlFor="lastName" className="form-label col-5 my-auto">
             Last name:
           </label>
@@ -104,12 +104,12 @@ export default function AppointmentForm({
             onChange={(e) => setLastName(e.target.value)}
             id="lastName"
             type="text"
-            className="form-control col"
-            placeholder="lastName"
+            className="form-control col rounded-5"
+            placeholder="last name"
             required
           />
         </div>
-        <div className="d-flex flex-row my-1">
+        <div className="d-flex flex-row">
           <label htmlFor="date" className="form-label col-5 my-auto">
             Date:
           </label>
@@ -119,10 +119,11 @@ export default function AppointmentForm({
             onChange={(e) => setDate(e.target.value)}
             id="date"
             type="date"
-            className="form-control col"
+            className="form-control col rounded-5"
+            required
           />
         </div>
-        <div className="d-flex flex-row my-1">
+        <div className="d-flex flex-row">
           <label htmlFor="trainings" className="form-label col-5 my-auto">
             Training:
           </label>
@@ -134,7 +135,7 @@ export default function AppointmentForm({
               setTraining(e.target.value);
             }}
             id="trainings"
-            className="form-select col smallOption"
+            className="form-select col smallOption rounded-5"
             required
           >
             <option defaultChecked>--Select a training--</option>
@@ -145,7 +146,7 @@ export default function AppointmentForm({
             ))}
           </select>
         </div>
-        <div className="d-flex flex-row my-1">
+        <div className="d-flex flex-row">
           <label htmlFor="startTime" className="form-label col-5 my-auto">
             Start Time:
           </label>
@@ -157,12 +158,11 @@ export default function AppointmentForm({
             type="time"
             min="08:00"
             max="18:30"
-            // step="900"
-            className="form-control col"
+            className="form-control col rounded-5"
             required
           />
         </div>
-        <div className="d-flex flex-row my-1">
+        <div className="d-flex flex-row">
           <label htmlFor="endTime" className="form-label col-5 my-auto">
             End Time:
           </label>
@@ -175,7 +175,7 @@ export default function AppointmentForm({
             min="08:30"
             max="19:00"
             step="900"
-            className="form-control col"
+            className="form-control col rounded-5"
             required
           />
         </div>
@@ -201,11 +201,11 @@ export default function AppointmentForm({
           </div>
         </div> */}
 
-        <div className="form-group row my-1">
-          <label htmlFor="intensity" className="form-label col-5 my-auto">
+        <div className="d-flex flex-row mb-0">
+          <label htmlFor="intensity" className="form-label mt-1 col-5">
             Intensity:
           </label>
-          <div className="col-6">
+          <div className="col">
             <DumbbellIntensity
               selectedDumbbells={intensity}
               id="intensity"
@@ -214,13 +214,13 @@ export default function AppointmentForm({
             />
           </div>
         </div>
-        <div className="d-flex flex-row my-1">
-          <label htmlFor="specialRequest" className="form-label col-4 mt-2">
+        <div className="d-flex flex-column mt-0">
+          <label htmlFor="specialRequest" className="form-label col-7">
             Special request:
           </label>
 
           <textarea
-            className="form-control col"
+            className="form-control col rounded-5"
             id="specialRequest"
             cols="1"
             rows="6"
@@ -242,7 +242,7 @@ export default function AppointmentForm({
         {/* </div> */}
         <div className="clearfix  my-4">
           <div className="btn-group float-center">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary rounded-5">
               Add Appointment
             </button>
           </div>

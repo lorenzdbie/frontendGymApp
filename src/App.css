@@ -2,16 +2,58 @@
 
 #root {
   max-width: 1280px;
-  
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  background-color: white;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: start;
 }
 
-#App{
-  min-width: 420px;
+#body{
+
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start; */
+  
+  width: 100%;
+  height: 100%;
+}
+
+#App {
   width: 100%;
 }
+.nav{
+margin-left: auto;
+padding:0;
+width: 100%;
+height: auto;
+background-color: #f5f5f5;
 
+}
+
+.nav ol{
+  width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: center;
+list-style: none;
+margin: 0;
+padding: 0.5em;
+
+}
+
+.nav ol li{
+  width: auto;
+  padding: 0 1em;
+  align-self: start;
+  justify-self: center;
+
+}
 
 .logo {
   height: 6em;
@@ -70,7 +112,6 @@ h3 {
 
 .appointment-box {
   padding-left: 50px;
-
 }
 
 .divSpin {
@@ -108,33 +149,10 @@ form{
   flex-direction: column;
   align-items: center;
 }
- 
-input{
-  font-size: 24px;
-} */
+ */
 
 
-label {
-  font-size: 1em;
-  /* display: block; */
-  /* width: 200px; */
-  /* height: y; */
-  text-align: left;
-  
-}
-
-input[type=time] {
-  max-width: 35%;
-}
-input[type="time"]::-webkit-calendar-picker-indicator{
- filter: invert(1);
-}
-
-.smallOption{
-  font-size: 13.5px;
-}
-
-.appointment_box{
+.appointment_box {
   border: black solid 1px;
   border-radius: 10px;
   padding: 10px;
@@ -208,6 +226,20 @@ input[type="time"]::-webkit-calendar-picker-indicator{
   }
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+}
+
+.responsive {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -248,7 +280,7 @@ input[type="time"]::-webkit-calendar-picker-indicator{
 }
 
 .container > .loading:nth-child(6) {
-  animation-delay: 1.0s;
+  animation-delay: 1s;
 }
 
 .container > .loading:nth-child(7) {
@@ -269,4 +301,279 @@ input[type="time"]::-webkit-calendar-picker-indicator{
   height: 30px;
   animation: letter_spin 1s infinite linear;
   margin: 5px;
+}
+
+img.resize {
+  width: auto;
+  height: auto;
+  max-width: 600px;
+  max-height: 600px;
+}
+
+@media screen and (max-width: 580px) {
+  #root {
+    width: 100%;
+    display: block;
+    margin: 0;
+  }
+
+  #body {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: auto;
+  }
+
+  #App {
+    background-color: white;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .formContainer {
+    max-width: 400px;
+    width: 320px;
+    margin: auto;
+  }
+  .nav{
+    width: 100%;
+  }
+
+  .formContainer > div {
+    width: 100%;
+    margin: auto;
+  }
+
+  img.resize {
+    width: 100px;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+  }
+
+  textarea {
+    max-height: 8em;
+  }
+  .mobilehide {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 580px) {
+  #root {
+    min-width: 100%;
+    display: block;
+    margin: 0;
+  }
+
+  #body {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: auto;
+  }
+
+  #App {
+    background-color: white;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .formContainer {
+    max-width: 400px;
+    width: 320px;
+    margin: 0 auto;
+  }
+
+  .formContainer > div {
+    width: 100%;
+    margin: auto;
+  }
+
+  img.resize {
+    width: 100px;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+  }
+
+  textarea {
+    max-height: 8em;
+  }
+
+  .landscape {
+    display: flex;
+    flex-direction: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2em;
+    ;
+  }
+
+
+  .exercise-box {
+    width: 200px;
+    height: auto;
+    font-size: smaller;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .exercise-box > div:first-child {
+     display: flex;
+    text-align: left;
+    border-radius: 9px 9px 0 0;
+  
+    background-color: #888;
+  }
+
+  .exercise-box > div:first-child > div {
+    flex: 0 0 auto;
+    margin:0.2em 1.0em 0.2em 1.0em;
+    color: white;
+  }
+  .exercise-box > div:last-child {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  .exercise-box > div:last-child > div:first-child {
+ 
+    margin:0.5em 1.0em 0 1.0em;
+  }
+  .exercise-box > div:last-child > div:last-child {
+    
+    margin:0 0.8em 0.5em 1.0em;
+  }
+
+  .exbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .apbox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .appointment-box {
+    width: 190px;
+    height: auto;
+    font-size: 0.6em;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 10px;
+    padding: 0;
+    border: black solid 1px;
+    border-top: none;
+    border-radius: 9px;
+  }
+
+  .appointment-box > div:first-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    border-radius: 9px;
+    background-color: #888;
+  }
+
+
+
+  .appointment-box > div:first-child > div:first-child {
+    flex: 0 0 auto;
+    margin: auto;
+    color: white;
+  }
+ }
+ input {
+  border: none;
+  font-size: 1em;
+  max-height: 1.8em;
+}
+
+textarea,
+button,
+select,
+input {
+  box-shadow: 0px 0px 16px -9px rgba(0, 0, 0, 0.1);
+}
+textarea:hover,
+button:hover,
+select:hover,
+input:hover {
+  box-shadow: 0px 0px 31px -4px #103954;
+}
+
+textarea:focus,
+button:focus,
+select:focus,
+input:focus {
+  box-shadow: 0px 0px 21px -4px #103954;
+}
+
+input,
+input::placeholder {
+  font: 1em sans-serif;
+  padding: auto;
+  text-align: center;
+}
+
+input[type="checkbox"]:checked:before {
+  background-color: white;
+}
+
+label {
+  font-size: 1em;
+  /* display: block; */
+  /* width: 200px; */
+  /* height: y; */
+  text-align: left;
+}
+
+input[type="time"] {
+  max-width: 35%;
+  font-size: 1em;
+  padding: 3px 0 3px 10px;
+  max-height: 1.8em;
+}
+
+input[type="date"] {
+  font-size: 1em;
+  padding: 3px 0 3px 10px;
+  max-height: 1.8em;
+}
+
+input[type="number"] {
+  max-width: 35%;
+  padding: auto;
+  max-height: 1.8em;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  font-size: 1em;
+  text-align: left;
+}
+
+.smallOption {
+  font-size: 1em;
+  padding: 0 0 0 10px;
+  min-height: 1.8em;
 }

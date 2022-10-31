@@ -44,174 +44,145 @@ export default function RegistrationForm({ onSaveRegistration }) {
   };
 
   return (
-    <>
+    <div className="d-flex flex-column ">
       <h2>Register account:</h2>
-      <br />
       <form
         onSubmit={handleSubmit}
-        className="w-60 mb-3"
-        style={{ maxWidth: "90%", minWidth: "500px" }}
+        className="mb-3 justify-content-md-center formContainer"
+        // style={{ maxWidth: "90%", minWidth: "500px" }}
       >
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="firstName"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
-            Enter first name:
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="firstName" className="form-label col-5 my-auto ">
+            First name:
           </label>
-          <div className="col-sm-6 mb-3">
-            <input
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              id="firstName"
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="first name"
-              required
-            />
-          </div>
+          <input
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            id="firstName"
+            type="text"
+            className="form-control col rounded-5"
+            placeholder="first name"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="lastName"
-            className=" col-sm-5 col-form-label-lg form-label"
-          >
-            Enter last name:
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="lastName" className=" form-label col-5 my-auto ">
+            Last name:
           </label>
-          <div className="col-sm-6 mb-3">
-            <input
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              id="lastName"
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="last name"
-              required
-            />
-          </div>
+
+          <input
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            id="lastName"
+            type="text"
+            className="form-control col rounded-5 "
+            placeholder="last name"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="date"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
-            Enter birthdate:
+
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="date" className="form-label col-5 my-auto ">
+            Birthdate:
           </label>
-          <div className="col-sm-5 mb-3">
-            <input
-              value={birthdate}
-              onChange={(e) => setBirthdate(e.target.value)}
-              id="birthdate"
-              type="date"
-              className="form-control form-control-lg"
-            />
-          </div>
+
+          <input
+            value={birthdate}
+            onChange={(e) => setBirthdate(e.target.value)}
+            id="birthdate"
+            type="date"
+            className="form-control col rounded-5"
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="e-mail"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
+
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="e-mail" className="form-label col-5 my-auto ">
             Enter e-mail:
           </label>
-          <div className="col-sm-6 mb-3">
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id="email"
-              type="email"
-              className="form-control form-control-lg"
-              placeholder="abc@123.com"
-              required
-            />
-          </div>
+
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            id="email"
+            type="email"
+            className="form-control col rounded-5"
+            placeholder="abc@123.com"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="password"
-            className="col-sm-5 col-form-label-lg form-Label"
-          >
-            Enter password:
+
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="password" className="form-label col-5 my-auto ">
+          password:
           </label>
-          <div className="col-sm-6 mb-3">
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              id="password"
-              type="password"
-              className="form-control form-control-lg"
-              placeholder="password"
-              required
-            />
-          </div>
+
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            id="password"
+            type="password"
+            className="form-control col rounded-5"
+            placeholder="password"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="password2"
-            className="col-sm-5 col-form-label-lg form-Label"
-          >
+
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="password2" className="form-label col-5 my-0 ">
             Repeat password:
           </label>
-          <div className="col-sm-6 mb-3">
-            <input
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-              id="password2"
-              type="password"
-              className="form-control form-control-lg"
-              placeholder="password"
-              required
-            />
-          </div>
+
+          <input
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
+            id="password2"
+            type="password"
+            className="form-control col rounded-5 my-auto"
+            placeholder="password"
+            required
+          />
         </div>
-        <div className="mb-3 form-group row">
-          <label
-            htmlFor="weight"
-            className="col-sm-5 col-form-label-lg form-Label"
-          >
-            Enter Body weight:
+
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="weight" className="form-label col-5 my-auto ">
+            Body weight:
           </label>
-          <div className="col-sm-4 mb-3">
-            <input
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-              id="weight"
-              type="number"
-              step="0.1"
-              className="form-control form-control-lg"
-              placeholder="body weight"
-            />
-          </div>
+
+          <input
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            id="weight"
+            type="number"
+            step="0.1"
+            className="form-control col bodyHW rounded-5"
+            placeholder="weight"
+          />
           <span className="col-sm-1 col-form-label-lg"> kg</span>
         </div>
-        <div className="mb-3 form-inline form-group row">
-          <label
-            htmlFor="weight"
-            className="col-sm-5 col-form-label-lg form-Label"
-          >
-            Enter body height:
+        <div className="d-flex flex-row my-3">
+          <label htmlFor="weight" className="form-label col-5 my-auto ">
+            Body height:
           </label>
-          <div className="col-sm-4 mb-3">
+        
             <input
               value={height}
               onChange={(e) => setHeight(e.target.value)}
               id="height"
               type="number"
               step="0.1"
-              className="form-control form-control-lg"
-              placeholder="body height"
+              className="form-control col bodyHW rounded-5"
+              placeholder="height"
             />
-          </div>
           <span className="col-sm-1 col-form-label-lg"> m</span>
         </div>
-        <div className="mb-3 col-sm-10 form-check-label">
-          <input type="checkbox" className="form-check-label" required/>
+        <div className="d-flex flex-row my-3">
+          <input type="checkbox" className="form-check-label col-3 my-auto rounded-2" required />
           &ensp;&nbsp;I have read and agree to the terms and conditions
         </div>
         <div className="clearfix">
-        <div className="btn-group float-end">
+          <div className="btn-group float-end">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary rounded-5"
               style={{ margin: "0 20px", backgroundColor: "gray" }}
             >
               Cancel
@@ -220,7 +191,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           <div className="btn-group float-end">
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary rounded-5"
               style={{ margin: "0 20px", backgroundColor: "blue" }}
             >
               Sign-up
@@ -228,6 +199,6 @@ export default function RegistrationForm({ onSaveRegistration }) {
           </div>
         </div>
       </form>
-    </>
+    </div>
   );
 }

@@ -68,19 +68,22 @@ export default function AppointmentList() {
   };
 
   return (
-    <>
-      <div>
+    <div className="landscape">
+      <div className="formContainer">
         <h1 className="text-start my-3">Appointments</h1>
         <br />
         <AppointmentForm onSaveAppointment={createAppointment} />
-     
-        Sorted by date:
-        <div >
+      </div>
+      
+      <div className="mobilehide">
+        <h2>Appointment List</h2>
+        <br />
+        <h6> Sorted by ID:</h6>
+        <div className="apbox">
           {appointments
             .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map((appoint) => (
               <Appointment
-                className="appointment_box"
                 {...appoint}
                 key={appoint.id}
                 index={appoint.id}
@@ -89,6 +92,6 @@ export default function AppointmentList() {
             ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

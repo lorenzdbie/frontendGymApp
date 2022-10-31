@@ -33,11 +33,17 @@ export default function Register() {
   };
   return (
     <>
-      <div className="col-sm-11">
+      <div>
+      <h1 className="text-start my-3">Registration</h1>
+      <br />
         <RegistrationForm onSaveRegistration={createAccount} />
       </div>
+
+
+{/* 
+      sorted by ID:
       <div className="container">
-        sorted by ID:
+        
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
@@ -57,7 +63,7 @@ export default function Register() {
               ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </>
   );
 }

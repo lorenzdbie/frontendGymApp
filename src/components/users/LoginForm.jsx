@@ -1,5 +1,8 @@
 import { useState } from "react";
-import DinoLogo from "../../assets/Logodino.webp";
+// import DinoLogo from "../../assets/Logodino.webp";
+import LogoLarge from "../../assets/LogoLarge.webp";
+import LogoMedium from "../../assets/LogoMedium.webp";
+import LogoSmall from "../../assets/LogoSmall.webp";
 
 export default function LoginForm({ onSaveLogin }) {
   const [email, setEmail] = useState("");
@@ -14,7 +17,18 @@ export default function LoginForm({ onSaveLogin }) {
 
   return (
     <>
-      <img src={DinoLogo} alt="logo loginScreen" width={500} />
+    
+    <picture>
+        <source
+          srcSet="/src/assets/LogoLarge.webp"
+          media="(min-width: 1200px)"
+        />
+        <source
+          srcSet="/src/assets/LogoMedium.webp"
+          media="(min-width: 768px)"
+        />
+        <img src="/src/assets/LogoSmall.webp" alt="logo loginScreen" />
+      </picture>                                                                                                                                                                                                                               
       <h2>Login / SignUp</h2>
       <form
         onSubmit={handleSubmit}

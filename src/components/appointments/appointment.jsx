@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { toTimeInputString } from "./appointmentForm";
 
 export const toHoursInputString = (time) => {
@@ -11,7 +11,7 @@ export const toHoursInputString = (time) => {
   return aString.substring(aString.indexOf("T") + 2, aString.indexOf("Z") - 7);
 };
 
-export default function Appointment({
+export default memo(function Appointment({
   id,
   user,
   date,
@@ -20,58 +20,85 @@ export default function Appointment({
   endTime,
   intensity,
   specialRequest,
-  onDelete
+  onDelete,
 }) {
-
   console.log("rendering appointment...");
 
-
-const handleDelete = useCallback((event) => {
-  event.preventDefault();
-  onDelete(id);
-}, [id, onDelete]);
-
+  const handleDelete = useCallback(
+    (event) => {
+      event.preventDefault();
+      onDelete(id);
+    },
+    [id, onDelete]
+  );
 
   return (
-    <div
-      className="text-bg-light rounded border border-dark my-1"
-      style={{ maxWidth: "150 px" }}
-    >
-      <div style={{ display: "flex", marginLeft: "auto" }}>
-        <h4 style={{ margin: "auto" }}>Appointment # {id}</h4>
-        <button
-          type="button"
-          className="close"
-          aria-label="Close"
-          style={{ marginLeft: "auto", backgroundColor: "gray" }}
-          onClick={handleDelete}
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <div className="appointment-box">
+      <div className="appoitment-boxHead">
+        <div>
+          <span>Appointment # {id}</span>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="close"
+            aria-label="Close"
+            onClick={handleDelete}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
 
-      <div style={{ margin: "10px 20px", textAlign: "left" }}>
-        Trainee:&ensp;&ensp;&ensp;{user.firstName + " " + user.lastName} <br />
-        Date:&ensp;&ensp;&ensp;&ensp;&nbsp;&ensp;
-        {new Date(date).toLocaleDateString("en-BE", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-        <br />
-        Training:&ensp;&ensp;&nbsp;{training.muscleGroup}
-        <br />
-        Starts at:&ensp;&ensp;{toTimeInputString(startTime)}
-        <br />
-        Duration:&ensp;&ensp;
-        {toHoursInputString(new Date(endTime) - new Date(startTime))} hours
-        <br />
-        Intensity:&ensp;&ensp;{intensity}
-        <br />
-        {specialRequest ? (`Special request: &ensp;&ensp;${specialRequest}`) : ""}
-        
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td>Trainee:</td>
+              <td>{user.firstName + " " + user.lastName}</td>
+            </tr>
+            <tr>
+              <td>Date:</td>
+              <td>
+                {" "}
+                {new Date(date).toLocaleDateString("en-BE", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </td>
+            </tr>
+            <tr>
+              <td>Training</td>
+              <td>{training.muscleGroup}</td>
+            </tr>
+            <tr>
+              <td>Starts at:</td>
+              <td>{toTimeInputString(startTime)}</td>
+            </tr>
+            <tr>
+              <td>Duration:</td>
+              <td>
+                {toHoursInputString(new Date(endTime) - new Date(startTime))}{" "}
+                hours
+              </td>
+            </tr>
+            <tr>
+              <td>intensity</td>
+              <td>{intensity}</td>
+            </tr>
+            {specialRequest ? (
+              <tr>
+                <td>Special request:</td>
+                <td>{specialRequest}</td>
+              </tr>
+            ) : (
+              ""
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
-}
+});

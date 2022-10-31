@@ -1,14 +1,22 @@
-export default function Exercise({ id, name, muscleGroup}) {
-  
+import { memo } from "react";
+
+export default memo(function Exercise({ id, name, muscleGroup }) {
   console.log("rendering exercise...");
 
   return (
     <div className="exercise-box">
-  
-      <p>id : {id}</p>
-      <h3>{name}</h3>
-      <p>Active muscle groups: {muscleGroup}</p>
-  
+      <div>
+        <div>{id}</div>
+        <div>{name}</div>
+      </div>
+
+      <div>
+        <div>
+          {" "}
+          <u> Active muscle groups:</u>
+        </div>
+        <div> {muscleGroup} </div>
+      </div>
     </div>
   );
-}
+});

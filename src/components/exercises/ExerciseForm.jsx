@@ -12,41 +12,38 @@ export default function ExerciseForm({ onSaveExercise }) {
   };
 
   return (
-    <>
+    <div className="d-flex flex-column col-12 ">
       <h2>Add exercise</h2>
       <br />
       <form
         onSubmit={handleSubmit}
-        className="w-60 mb-3"
-        style={{ maxWidth: "90%", minWidth: "500px" }}
+        className="mb-3 justify-content-md-center formContainer"
       >
-        <div className="mb-3 form-group row">
+        <div className="d-flex flex-row">
           <label
             htmlFor="name"
-            className="col-sm-5 col-form-label-lg form-label"
-          >
-            Enter exercise name:
+            className="form-label col-5 my-auto "
+          >Exercise name:
           </label>
-          <div className="col-sm-6 mb-3">
+         
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               id="name"
               type="text"
-              className="form-control form-control-lg"
+              className="form-control col rounded-5"
               placeholder="exercise name"
               required
             />
           </div>
-        </div>
-        <div className="mb-3 form-group row">
+        <div className="d-flex flex-column mt-2">
           <label
             htmlFor="muscleGroup"
-            className="col-sm-5 col-form-label-lg form-label"
+            className="form-label col-7"
           >
-            Enter muscle groups:
+            Muscle groups:
           </label>
-          <div className="col-sm-6 mb-3">
+         
             <textarea
               value={muscleGroup}
               onChange={(e) => setMuscleGroup(e.target.value)}
@@ -54,20 +51,20 @@ export default function ExerciseForm({ onSaveExercise }) {
               type="text"
               cols="1"
               rows="6"
-              className="form-control form-control-lg"
+              className="form-control col rounded-5"
               placeholder="muscle groups"
               required
             />
           </div>
-        </div>
-        <div className="clearfix">
+        
+        <div className="clearfix my-4">
           <div className="btn-group float-center">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary rounded-5">
               Add Exercise
             </button>
           </div>
         </div>
       </form>
-    </>
+      </div>
   );
 }

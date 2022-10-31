@@ -5,17 +5,32 @@ import LoginForm from "./components/users/loginForm";
 import RegistrationForm from "./components/users/RegistrationForm";
 import Loader from "./components/Loader";
 import Register from "./components/users/Register";
+import Login from "./components/users/Login";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App d-flex flex-rom">
+    <>
+    <div> <Navbar/></div>
+      {/* <div>
+        <Login />
+      </div> */}
+
+      {/* <div>
+        <Register />
+      </div> */}
+
       {/* <LoginForm /> */}
       {/* <Loader loading={true} /> */}
-      <AppointmentList className="col"/>
-      {/* <ExcerciseList /> */}
-      <Register />
-      {/* <RegistrationForm /> */}
-    </div>
+
+    <div>
+        <AppointmentList />
+      </div>
+
+      {/* <div>
+        <ExcerciseList/>
+      </div>  */}
+    </>
   );
 }
 

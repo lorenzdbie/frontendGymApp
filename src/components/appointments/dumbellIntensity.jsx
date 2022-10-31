@@ -8,15 +8,20 @@ const Dumbbell = memo(({ index, selected = false, onSelect = (f) => f }) => {
   }, [index, onSelect]);
 
   return (
-    <CiDumbbell size={28} color={selected ? "red" : "grey"} onClick={handleSelect} />
+    <CiDumbbell
+      size={36}
+      color={selected ? "red" : "grey"}
+      onClick={handleSelect}
+      className="dumbell"
+    />
   );
 });
 
 export default function DumbbellIntensity({
   totalDumbbells = 5,
   selectedDumbbells = 0,
-  onRate}) {
-
+  onRate,
+}) {
   const dumbbells = useMemo(() => [...Array(totalDumbbells)], [totalDumbbells]);
 
   return (
@@ -29,31 +34,10 @@ export default function DumbbellIntensity({
           onSelect={onRate}
         />
       ))}
-      <small>{selectedDumbbells} of {totalDumbbells} dumbbells</small>
-        
+      <br />
+      <small>
+        {selectedDumbbells} of {totalDumbbells} dumbbells
+      </small>
     </>
   );
 }
-
-//   const [dumbbells, setDumbbells] = useState(selectedDumbbells);
-//   const arrayOfFive = new Array(5).fill(0);
-
-//   const changeDumbbellIntensity = (newIntensity) => {
-//     setDumbbells(newIntensity);
-//   };
-
-//   return (
-//     <>
-//       {arrayOfFive.map((_, index) => (
-//         <Dumbbell
-//           key={index}
-//           index={index}
-//           selected={index < dumbbells}
-//           onSelect={changeDumbbellIntensity}
-//         />
-//       ))}
-//       <br />
-//       {dumbbells} out of 5 Dumbbells
-//     </>
-//   );
-// }

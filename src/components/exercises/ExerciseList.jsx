@@ -20,20 +20,27 @@ export default function ExcerciseList() {
 
   return (
     <>
-      <div className="col-sm-11">
-        <h1>Exercises</h1>
-        <br/>
+      <h1 className="mt-5">Exercises</h1>
+    <div className="landscape">
+      <div className="formContainer">
         <ExerciseForm onSaveExercise={createExercise} />
       </div>
 
-      <div className="exerciseList-box">
+      {/* <div className="spacer">
+        <div></div>
+      </div> */}
+
+      <div className="mobilehide">
         <h2>Exercise List</h2>
         <br />
         <h6> Sorted by ID:</h6>
-        {exercises.map((ex) => (
-          <Exercise {...ex} key={ex.id} />
-        ))}
+        <div className="exbox">
+          {exercises.map((ex) => (
+            <Exercise {...ex} key={ex.id} />
+          ))}
+        </div>
       </div>
+    </div>
     </>
   );
 }
