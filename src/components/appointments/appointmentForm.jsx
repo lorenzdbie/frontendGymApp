@@ -215,8 +215,8 @@ export default memo(function AppointmentForm({
             placeholder="If you have any special requests, please enter them here..."
           ></textarea>
         </div>
-        <div className="clearfix  my-4">
-          <div className="btn-group float-center">
+        <div className="clearfix  my-4 d-flex flex-row justify-content-center">
+          <div className="btn-group">
             <button type="submit" className="btn btn-primary rounded-5">
               Add Appointment
             </button>

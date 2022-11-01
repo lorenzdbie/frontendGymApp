@@ -3,8 +3,7 @@ import Exercise from "./Exercise";
 import { TRAININGS } from "../../api/mock-data";
 import ExerciseForm from "./ExerciseForm";
 
-
-export default function ExcerciseList() {
+export default function ExerciseList() {
   const [exercises, setExercises] = useState(TRAININGS);
   const [text, setText] = useState("");
   const [search, setSearch] = useState("");
@@ -41,9 +40,6 @@ export default function ExcerciseList() {
     [exercises]
   );
 
-
-
-
   function CreateExerciseList({ exercises }) {
     const handleDelete = (id) => {
       console.log("onDeleteConfirm", id);
@@ -56,7 +52,7 @@ export default function ExcerciseList() {
     }
     return (
       <>
-        <h6> Sorted by ID:</h6>
+        <h6 className="text-center"> Sorted by ID:</h6>
         <div className={`exbox`}>
           {exercises.map((ex) => (
             <Exercise
@@ -72,27 +68,27 @@ export default function ExcerciseList() {
   }
 
   return (
-    <div className={`fullscreen`}>
+    <div className="fullscreen">
       <div className="d-flex flex-row justify-content-end">
         <div className="mx-5 mt-2 d-flex flex-row justify-content-between">
           <input
             type="search"
             id="search"
-            className={`form-control rounded-5`}
+            className="form-control rounded-5"
             placeholder="Search exercises"
             value={text}
             onChange={handleSearch}
           />
         </div>
       </div>
-      <h1 className="mt-5">Exercises</h1>
+      <h1 className="mt-5 text-center">Exercises</h1>
       <div className="landscape">
         <div className="formContainer">
           <ExerciseForm onSaveExercise={createExercise} />
         </div>
 
         <div className="mobilehide">
-          <h2>Exercise List</h2>
+          <h2 className="pl-5">Exercise List</h2>
           <br />
 
           <CreateExerciseList exercises={filteredExercises} />

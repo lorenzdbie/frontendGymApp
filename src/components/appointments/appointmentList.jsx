@@ -98,7 +98,7 @@ export default function AppointmentList() {
 
   return (
     <>
-      <h1 className="mt-5">Appointments</h1>
+      <h1 className="mt-5 text-center">Appointments</h1>
       <div className="landscape">
         <div className="formContainer">
           <AppointmentForm onSaveAppointment={createAppointment} />
