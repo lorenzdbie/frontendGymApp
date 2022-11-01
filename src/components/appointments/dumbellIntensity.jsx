@@ -1,6 +1,5 @@
 import { CiDumbbell } from "react-icons/ci";
 import { memo, useCallback, useMemo } from "react";
-import { useState } from "react";
 
 const Dumbbell = memo(({ index, selected = false, onSelect = (f) => f }) => {
   const handleSelect = useCallback(() => {
@@ -17,7 +16,7 @@ const Dumbbell = memo(({ index, selected = false, onSelect = (f) => f }) => {
   );
 });
 
-export default function DumbbellIntensity({
+export default memo(function DumbbellIntensity({
   totalDumbbells = 5,
   selectedDumbbells = 0,
   onRate,
@@ -40,4 +39,4 @@ export default function DumbbellIntensity({
       </small>
     </>
   );
-}
+});

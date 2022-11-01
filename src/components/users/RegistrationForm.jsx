@@ -1,68 +1,65 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { validationRules } from "../ValidationRules";
 
 export default function RegistrationForm({ onSaveRegistration }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [birthdate, setBirthdate] = useState(
-    new Date().toISOString().slice(0, 10)
-  );
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const checkPassword = (pass, pass2) => {
-    if (pass === pass2) {
-      return true;
-    } else {
-      return false;
+  const showErrors = () => {
+    const userProps = [
+      "firstName",
+      "lastName",
+      "birthdate",
+      "email",
+      "password",
+      "passwordConfirmation",
+      "weight",
+      "height",
+    ];
+
+    for (const prop in userProps) {
+      if (errors[prop]) {
+        return <p>{errors[prop].message}</p>;
+      }
     }
   };
 
-  const handleSubmit = (e) => {
-    if (checkPassword(password, password2)) {
-      e.preventDefault();
-      onSaveRegistration(
-        firstName,
-        lastName,
-        birthdate,
-        email,
-        password,
-        weight,
-        height
-      );
-      setFirstName("");
-      setLastName("");
-      setBirthdate("");
-      setEmail("");
-      setPassword("");
-      setPassword2("");
-      setWeight("");
-      setHeight("");
-    }
+  const onSubmit = (data) => {
+    console.log(JSON.stringify(data));
+    onSaveRegistration(
+      data.firstName,
+      data.lastName,
+      data.birthdate,
+      data.email,
+      data.password,
+      data.weight,
+      data.height
+    );
+    reset();
   };
 
   return (
     <div className="d-flex flex-column col-12">
       <h2>Register account:</h2>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="mb-3 justify-content-md-center formContainer"
-        // style={{ maxWidth: "90%", minWidth: "500px" }}
       >
         <div className="d-flex flex-row my-2">
           <label htmlFor="firstName" className="form-label col-5 my-auto ">
             First name:
           </label>
           <input
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            {...register("firstName", validationRules.firstName)}
             id="firstName"
             type="text"
             className="form-control col rounded-5"
             placeholder="first name"
-            required
           />
         </div>
         <div className="d-flex flex-row my-2">
@@ -71,13 +68,11 @@ export default function RegistrationForm({ onSaveRegistration }) {
           </label>
 
           <input
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            {...register("lastName", validationRules.lastName)}
             id="lastName"
             type="text"
             className="form-control col rounded-5 "
             placeholder="last name"
-            required
           />
         </div>
 
@@ -87,8 +82,8 @@ export default function RegistrationForm({ onSaveRegistration }) {
           </label>
 
           <input
-            value={birthdate}
-            onChange={(e) => setBirthdate(e.target.value)}
+            {...register("birthdate", validationRules.birthdate)}
+            defaultValue={new Date().toISOString().slice(0, 10)}
             id="birthdate"
             type="date"
             className="form-control col rounded-5"
@@ -101,45 +96,41 @@ export default function RegistrationForm({ onSaveRegistration }) {
           </label>
 
           <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            {...register("email", validationRules.email)}
             id="email"
             type="email"
             className="form-control col rounded-5"
             placeholder="abc@123.com"
-            required
           />
         </div>
 
         <div className="d-flex flex-row my-2">
           <label htmlFor="password" className="form-label col-5 my-auto ">
-          password:
+            password:
           </label>
 
           <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            {...register("password", validationRules.password)}
             id="password"
             type="password"
             className="form-control col rounded-5"
             placeholder="password"
-            required
           />
         </div>
 
         <div className="d-flex flex-row my-2">
-          <label htmlFor="password2" className="form-label col-5 my-0 ">
+          <label htmlFor="confirmPassword" className="form-label col-5 my-0 ">
             Repeat password:
           </label>
 
           <input
-            value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
-            id="password2"
+            {...register(
+              "confirmPassword", validationRules.confirmPassword
+            )}
+            id="confirmPassword"
             type="password"
             className="form-control col rounded-5 my-auto"
             placeholder="password"
-            required
           />
         </div>
 
@@ -149,8 +140,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           </label>
 
           <input
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
+            {...register("weight", validationRules.weight)}
             id="weight"
             type="number"
             step="0.1"
@@ -163,22 +153,27 @@ export default function RegistrationForm({ onSaveRegistration }) {
           <label htmlFor="weight" className="form-label col-5 my-auto ">
             Body height:
           </label>
-        
-            <input
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-              id="height"
-              type="number"
-              step="0.1"
-              className="form-control col rounded-5"
-              placeholder="height"
-            />
-          <span className="my-auto form-label"> &nbsp;m</span>
+
+          <input
+            {...register("height", validationRules.height)}
+            id="height"
+            type="number"
+            step="0.1"
+            className="form-control col rounded-5"
+            placeholder="height"
+          />
+          <span className="my-auto form-label"> &nbsp;cm</span>
         </div>
         <div className="d-flex flex-row my-2">
-          <input type="checkbox" className="form-check-label col-3 my-auto rounded-2" required />
+          <input
+            {...register("registerCheckBox", validationRules.registerCheckBox)}
+            type="checkbox"
+            className="form-check-label col-3 my-auto rounded-2"
+            required
+          />
           &ensp;&nbsp;I have read and agree to the terms and conditions
         </div>
+
         <div className="clearfix">
           <div className="btn-group float-end">
             <button
@@ -198,6 +193,16 @@ export default function RegistrationForm({ onSaveRegistration }) {
             </button>
           </div>
         </div>
+        {errors.firstName && <p className="form-text text-danger">{errors.firstName.message}</p>}
+        {errors.lastName && <p className="form-text text-danger">{errors.lastName.message}</p>}
+        {errors.birthdate && <p className="form-text text-danger">{errors.birthdate.message}</p>}
+        {errors.email && <p className="form-text text-danger">{errors.email.message}</p>}
+        {errors.password && <p className="form-text text-danger">{errors.password.message}</p>}
+        {errors.confirmPassword && <p className="form-text text-danger">{errors.confirmPassword.message}</p>}
+        {errors.weight && <p className="form-text text-danger">{errors.weight.message}</p>}
+        {errors.height && <p className="form-text text-danger">{errors.height.message}</p>}
+        {errors.registerCheckBox && <p className="form-text text-danger">{errors.registerCheckBox.message}</p>}
+        
       </form>
     </div>
   );

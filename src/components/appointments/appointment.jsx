@@ -62,7 +62,7 @@ export default memo(function Appointment({
               <td>
                 {" "}
                 {new Date(date).toLocaleDateString("en-BE", {
-                  weekday: "long",
+                  weekday: "short",
                   year: "numeric",
                   month: "long",
                   day: "numeric",

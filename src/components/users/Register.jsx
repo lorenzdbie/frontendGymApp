@@ -2,9 +2,13 @@ import { USERS } from "../../api/mock-data";
 import { useState } from "react";
 import User from "./User";
 import RegistrationForm from "./RegistrationForm";
+import { updateToDateObject } from "../appointments/appointmentList";
 
 export default function Register() {
   const [users, setUsers] = useState(USERS);
+  console.log(...users);
+
+  updateToDateObject(users, "birthdate");
 
   const createAccount = (
     firstName,
@@ -23,25 +27,27 @@ export default function Register() {
         lastName,
         birthdate: new Date(birthdate),
         email,
-        password,
         weight,
         height,
+        credits:0,
+        role: "user",
       },
     ];
 
     setUsers(newUsers);
+    console.log(...newUsers);
+    // console.log("newUsers", JSON.stringify(users));
+    // console.log("newUsers", JSON.stringify(newUsers));
   };
   return (
     <>
-      
       <h1 className="mt-5 py-3">Registration</h1>
-      
-      <div className="formContainer">
+
+      <div className="formContainer2">
         <RegistrationForm onSaveRegistration={createAccount} />
       </div>
 
-
-{/* 
+      {/* 
       sorted by ID:
       <div className="container">
         

@@ -1,14 +1,28 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { validationRules } from "../ValidationRules";
+
 
 export default function ExerciseForm({ onSaveExercise }) {
-  const [name, setName] = useState("");
-  const [muscleGroup, setMuscleGroup] = useState("");
+  // const [name, setName] = useState("");
+  // const [muscleGroup, setMuscleGroup] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSaveExercise(name, muscleGroup);
-    setName("");
-    setMuscleGroup("");
+
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    onSaveExercise(data.name, data.muscleGroup);
+    reset();
+    // e.preventDefault();
+    // onSaveExercise(name, muscleGroup);
+    // setName("");
+    // setMuscleGroup("");
   };
 
   return (
@@ -16,47 +30,40 @@ export default function ExerciseForm({ onSaveExercise }) {
       <h2>Add exercise</h2>
       <br />
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="mb-3 justify-content-md-center formContainer"
       >
         <div className="d-flex flex-row">
-          <label
-            htmlFor="name"
-            className="form-label col-5 my-auto "
-          >Exercise name:
+          <label htmlFor="name" className="form-label col-5 my-auto">
+            Exercise name:
           </label>
-         
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              id="name"
-              type="text"
-              className="form-control col rounded-5"
-              placeholder="exercise name"
-              required
-            />
-          </div>
+          <input
+            {...register("name", validationRules.name)}
+            id="name"
+            type="text"
+            className={`form-control col rounded-5 `}
+            placeholder="exercise name"
+          />
+        </div>
         <div className="d-flex flex-column mt-2">
-          <label
-            htmlFor="muscleGroup"
-            className="form-label col-7"
-          >
+          <label htmlFor="muscleGroup" className="form-label col-7">
             Muscle groups:
           </label>
-         
-            <textarea
-              value={muscleGroup}
-              onChange={(e) => setMuscleGroup(e.target.value)}
-              id="muscleGroup"
-              type="text"
-              cols="1"
-              rows="6"
-              className="form-control col rounded-5"
-              placeholder="muscle groups"
-              required
-            />
-          </div>
-        
+
+          <textarea
+            {...register("muscleGroup", validationRules.muscleGroup)}
+            id="muscleGroup"
+            type="text"
+            cols="1"
+            rows="6"
+            className={`form-control col rounded-5 `}
+            placeholder="muscle groups"
+          />
+        </div>
+        {errors.user && (
+          <div className="text-danger"> {errors.user.message}</div>
+        )}
+
         <div className="clearfix my-4">
           <div className="btn-group float-center">
             <button type="submit" className="btn btn-primary rounded-5">
@@ -65,6 +72,6 @@ export default function ExerciseForm({ onSaveExercise }) {
           </div>
         </div>
       </form>
-      </div>
+    </div>
   );
 }

@@ -1,6 +1,9 @@
 import { memo, useCallback, useState } from "react";
 import { TRAININGS } from "../../api/mock-data";
 import DumbbellIntensity from "./dumbellIntensity";
+import { useForm } from "react-hook-form";
+import { validationRules } from "../ValidationRules";
+
 
 export const toDateInputString = (date) => {
   if (!date) return null;
@@ -27,117 +30,128 @@ const addTimeToDate = (date, time) => {
   return tijd;
 };
 
-export default memo( function AppointmentForm({
+export default memo(function AppointmentForm({
   onSaveAppointment,
   onRate = (f) => f,
 }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-  const [training, setTraining] = useState("");
-  const [startTime, setStartTime] = useState(
-    new Date().toISOString().slice(11, 16)
-  );
-  const [endTime, setEndTime] = useState(
-    new Date().toISOString().slice(11, 16)
-  );
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  // const [training, setTraining] = useState("");
+  // const [startTime, setStartTime] = useState(
+  //   new Date().toISOString().slice(11, 16)
+  // );
+  // const [endTime, setEndTime] = useState(
+  //   new Date().toISOString().slice(11, 16)
+  // );
   const [intensity, setIntensity] = useState(0);
-  const [specialRequest, setSpecialRequest] = useState("");
+  // const [specialRequest, setSpecialRequest] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const handleIntensity = (newIntensity) => {
     onRate(setIntensity(newIntensity));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const start = addTimeToDate(date, startTime);
-    const end = addTimeToDate(date, endTime);
+  const onSubmit = (data) => {
+    console.log(JSON.stringify(errors));
     onSaveAppointment(
-      firstName,
-      lastName,
-      date,
-      training,
-      start,
-      end,
+      data.firstName,
+      data.lastName,
+      data.date,
+      data.training,
+      addTimeToDate(data.date, data.startTime),
+      addTimeToDate(data.date, data.endTime),
       intensity,
-      specialRequest
+      data.specialRequest
     );
-    setFirstName("");
-    setLastName("");
-    setDate(new Date().toISOString().slice(0, 10));
-    setTraining("--Select training--");
-    setStartTime("");
-    setEndTime("");
-    setIntensity(0);
-    setSpecialRequest("");
+    reset();
+    // e.preventDefault();
+    // const start = addTimeToDate(date, startTime);
+    // const end = addTimeToDate(date, endTime);
+    // onSaveAppointment(
+    //   firstName,
+    //   lastName,
+    //   date,
+    //   training,
+    //   start,
+    //   end,
+    //   intensity,
+    //   specialRequest
+    // );
+    // setFirstName("");
+    // setLastName("");
+    // setDate(new Date().toISOString().slice(0, 10));
+    // setTraining("--Select training--");
+    // setStartTime("");
+    // setEndTime("");
+    // setIntensity(0);
+    // setSpecialRequest("");
   };
+
+
+
 
   return (
     <div className="d-flex flex-column col-12 ">
       <h2>Add Appointment:</h2>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="mb-3 justify-content-md-center formContainer"
-        // style={{ maxWidth: "90%", Width: "500px" }}
       >
         <div className="d-flex flex-row my-2">
           <label htmlFor="firstName" className="form-label col-5 my-auto ">
             First name:
           </label>
           <input
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            {...register("firstName", validationRules.firstName)}
             id="firstName"
             type="text"
             className="form-control col rounded-5"
             placeholder="first name"
-            required
           />
         </div>
         <div className="d-flex flex-row  my-2">
           <label htmlFor="lastName" className="form-label col-5 my-auto">
             Last name:
           </label>
-
           <input
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            {...register("lastName", validationRules.lastName)}
             id="lastName"
             type="text"
             className="form-control col rounded-5"
             placeholder="last name"
-            required
           />
         </div>
         <div className="d-flex flex-row  my-2">
           <label htmlFor="date" className="form-label col-5 my-auto">
             Date:
           </label>
-
           <input
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            {...register("date", validationRules.date)}
+            defaultValue={new Date().toISOString().slice(0, 10)}
             id="date"
             type="date"
             className="form-control col rounded-5"
-            required
           />
         </div>
         <div className="d-flex flex-row  my-2">
-          <label htmlFor="trainings" className="form-label col-5 my-auto">
+          <label htmlFor="training" className="form-label col-5 my-auto">
             Training:
           </label>
-
           <select
-            value={training.name}
-            onChange={(e) => {
-              setTraining(e.target.value);
-            }}
-            id="trainings"
+            {...register("training", validationRules.training.name)}
+            id="training"
             className="form-select col smallOption rounded-5"
-            required
           >
-            <option defaultChecked>--Select training--&nbsp;&nbsp;</option>
+            <option defaultChecked value="">
+              --Select training--&nbsp;&nbsp;
+            </option>
             {TRAININGS.map(({ id, name }) => (
               <option key={id} value={name}>
                 {name}
@@ -150,14 +164,13 @@ export default memo( function AppointmentForm({
             Start Time:
           </label>
           <input
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
+            {...register("startTime", validationRules.startTime)}
+            defaultValue={new Date().toISOString().slice(11, 16)}
             id="time"
             type="time"
             min="08:00"
             max="18:30"
             className="form-control col rounded-5"
-            required
           />
         </div>
         <div className="d-flex flex-row  my-2">
@@ -165,15 +178,14 @@ export default memo( function AppointmentForm({
             End Time:
           </label>
           <input
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
+            {...register("endTime", validationRules.endTime)}
+            defaultValue={new Date().toISOString().slice(11, 16)}
             id="time"
             type="time"
             min="08:30"
             max="19:00"
-            // step="900"
+            step="900"
             className="form-control col rounded-5"
-            required
           />
         </div>
         <div className="d-flex flex-row mb-0">
@@ -199,17 +211,13 @@ export default memo( function AppointmentForm({
             cols="1"
             rows="6"
             type="text"
-            value={specialRequest}
-            onChange={(e) => setSpecialRequest(e.target.value)}
+            {...register("specialRequest", validationRules.specialRequest)}
             placeholder="If you have any special requests, please enter them here..."
           ></textarea>
         </div>
         <div className="clearfix  my-4">
           <div className="btn-group float-center">
-            <button
-              type="submit"
-              className="btn btn-primary rounded-5"
-            >
+            <button type="submit" className="btn btn-primary rounded-5">
               Add Appointment
             </button>
           </div>
