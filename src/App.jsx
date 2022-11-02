@@ -5,31 +5,49 @@ import Loader from "./components/Loader";
 import Register from "./components/users/Register";
 import Login from "./components/users/Login";
 import Navbar from "./components/Navbar";
-
-import { useTheme, themes } from "./contexts/Themecontext";
-import { ThemeProvider } from "./contexts/Themecontext";
-
+import React from "react";
+import { useTheme, themes } from "./contexts/Theme.context";
 import { IoMoonSharp, IoSunny } from "react-icons/io5";
 
 function App() {
-  // const { theme, oppositeTheme, toggleTheme } = useTheme();
+  const { theme, oppositeTheme, toggleTheme } = useTheme();
 
   return (
     <>
+    <div className={`bg-${theme} text-${oppositeTheme}`}>
+      <button type="button" onClick={toggleTheme} className={`bg-${theme} text-${oppositeTheme}`}>
+         {theme === themes.dark ? <IoMoonSharp /> : <IoSunny />}
+      </button>
       <Navbar />
-      {/* <Login/> */}
-     {/* <Loader loading={true}/> */}
+    </div>
+
+    <Loader loading={true}/>
+    {/* <Login/> */}
+     {/* <ExerciseList/> */}
+     {/* <AppointmentList /> */}
       {/* <Register/> */}
-      {/* <ExerciseList/> */}
-      <AppointmentList/>
-    
     </>
   );
 }
 
 export default App;
 
-// <div className={`container-xl bg-${theme} text-${oppositeTheme}`}>
+{
+  
+}
+{
+  /* <Loader loading={true}/> */
+}
+{
+ 
+}
+{
+  
+}
+{
+  
+}
+//
 // <div className="d-flex flex-row">
 //   <button type="button" onClick={toggleTheme}>
 //     {theme === themes.dark ? <IoMoonSharp /> : <IoSunny />}

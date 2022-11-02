@@ -1,8 +1,5 @@
 import { useState } from "react";
-// import DinoLogo from "../../assets/Logodino.webp";
-import LogoLarge from "../../assets/LogoLarge.webp";
-import LogoMedium from "../../assets/LogoMedium.webp";
-import LogoSmall from "../../assets/LogoSmall.webp";
+
 
 export default function LoginForm({ onSaveLogin }) {
   const [email, setEmail] = useState("");
@@ -17,16 +14,15 @@ export default function LoginForm({ onSaveLogin }) {
 
   return (
     <>
-      <div className="d-flex flex-row justify-content-center">
+      <div className="d-flex flex-row justify-content-center mb-3">
         <picture>
           <img src="/src/assets/LogoSmall.webp" alt="logo loginScreen" />
         </picture>
       </div>
-      <h2>Login / SignUp</h2>
-      <div className="d-flex flex-row justify-content-center">
+      <h2 className="text-center">Login / SignUp</h2>
+      <div className="d-flex flex-row justify-content-center align-items-start">
         <form onSubmit={handleSubmit} className="w-50 mb-3 mx-auto">
-          <br />
-          <div className="mb-3" id="login">
+          <div className="mb-" id="login">
             <label htmlFor="e-mail" className="form-label ">
               E-mail:
             </label>
@@ -35,7 +31,7 @@ export default function LoginForm({ onSaveLogin }) {
               onChange={(e) => setEmail(e.target.value)}
               id="email"
               type="email"
-              className="form-control"
+              className="form-control rounded-5"
               placehoder="Enter e-mail"
               required
             />
@@ -49,7 +45,7 @@ export default function LoginForm({ onSaveLogin }) {
               onChange={(e) => setPassword(e.target.value)}
               id="password"
               type="password"
-              className="form-control"
+              className="form-control rounded-5"
               placeholder="Enter password"
               required
             />
@@ -58,7 +54,7 @@ export default function LoginForm({ onSaveLogin }) {
             <div className="btn-group float-start">
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn-primary rounded-5"
                 style={{ margin: "0 auto", backgroundColor: "blue" }}
               >
                 Login
@@ -68,7 +64,7 @@ export default function LoginForm({ onSaveLogin }) {
               <button
                 type="button"
                 onClick=""
-                className="btn btn-primary"
+                className="btn btn-primary rounded-5"
                 style={{ margin: "0 auto", backgroundColor: "red" }}
               >
                 SignUp

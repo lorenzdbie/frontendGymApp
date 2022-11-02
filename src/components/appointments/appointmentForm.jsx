@@ -99,7 +99,7 @@ export default memo(function AppointmentForm({
 
   return (
     <div className="d-flex flex-column col-12 ">
-      <h2>Add Appointment:</h2>
+      <h2 className="text-center">Add Appointment:</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mb-3 justify-content-md-center formContainer"

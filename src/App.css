@@ -94,7 +94,6 @@
 
 h2 {
   font-size: 1.5em;
-  text-align: center;
 }
 
 h3 {
@@ -305,30 +304,6 @@ select > option {
   text-align: center;
 }
 
-/* textarea,
-button,
-select,
-input {
-  box-shadow: 0px 0px 16px -9px rgba(0, 0, 0, 0.1);
-} */
-/* 
-.userInput:hover{
-  box-shadow: 0px 0px 50px -4px #103954;
-} */
-
-/* textarea:hover,
-button:hover,
-select:hover,
-input:hover {
-  box-shadow: 0px 0px 50px -4px #103954;
-}  */
-
-/* textarea:active,
-button:active,
-select:active,
-input:active {
-  box-shadow: 0px 0px 21px -4px #103954;
-} */
 
 input::placeholder {
   font: 1.3em sans-serif;
@@ -380,17 +355,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .loginContainer {
-  margin-top: 10em;
-  margin-bottom: 10%;
-  margin: 10em auto 10% auto;
+  padding-top: 10em;
+  padding-bottom: 10%;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 400px;
 }
 .loaderContainer {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-top: 12em;
+  padding: 11em;
+  /* padding: 13em 0 20em 0; */
 }
 
 @media screen and (max-width: 625px) {

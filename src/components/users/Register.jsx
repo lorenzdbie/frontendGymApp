@@ -3,8 +3,11 @@ import { useState } from "react";
 import User from "./User";
 import RegistrationForm from "./RegistrationForm";
 import { updateToDateObject } from "../appointments/appointmentList";
+import { useThemeColors } from "../../contexts/Theme.context";
 
 export default function Register() {
+
+  const { theme, oppositeTheme } = useThemeColors();
   const [users, setUsers] = useState(USERS);
   console.log(...users);
 
@@ -29,7 +32,7 @@ export default function Register() {
         email,
         weight,
         height,
-        credits:0,
+        credits: 0,
         role: "user",
       },
     ];
@@ -40,14 +43,15 @@ export default function Register() {
     // console.log("newUsers", JSON.stringify(newUsers));
   };
   return (
-    <>
-      <h1 className="text-center pt-5">Registration</h1>
+    
+      <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
+        <h1 className="text-center pt-5">Registration</h1>
 
-      <div className="formContainer2">
-        <RegistrationForm onSaveRegistration={createAccount} />
-      </div>
+        <div className="formContainer2">
+          <RegistrationForm onSaveRegistration={createAccount} />
+        </div>
 
-      {/* 
+        {/* 
       sorted by ID:
       <div className="container">
         
@@ -71,6 +75,6 @@ export default function Register() {
           </tbody>
         </table>
       </div> */}
-    </>
+      </div>
   );
 }

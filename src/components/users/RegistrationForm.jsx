@@ -45,7 +45,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
 
   return (
     <div className="d-flex flex-column col-12">
-      <h2>Register account:</h2>
+      <h2 className="text-center">Register account:</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mb-3 justify-content-md-center formContainer"
@@ -171,7 +171,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
             className="form-check-label col-3 my-auto rounded-2"
             required
           />
-          &ensp;&nbsp;I have read and agree to the terms and conditions
+          I have read and agree to the terms and conditions
         </div>
 
         <div className="clearfix">

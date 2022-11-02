@@ -1,9 +1,11 @@
 import dumbbellLoader from "../assets/loader.png";
+import { useThemeColors } from "../contexts/Theme.context";
 
 export default function Loader({ loading }) {
+  const { theme, oppositeTheme } = useThemeColors();
   if (loading) {
     return (
-      <>
+      <div className={`loaderContainer bg-${theme} text-${oppositeTheme}`}>
         <div className="d-flex flex-column justify-content-center h-100">
           <div className="divSpin">
             <img
@@ -25,7 +27,7 @@ export default function Loader({ loading }) {
             <span className="loading">.</span>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 

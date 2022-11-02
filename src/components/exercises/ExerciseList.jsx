@@ -2,8 +2,11 @@ import { useCallback, useState, useMemo } from "react";
 import Exercise from "./Exercise";
 import { TRAININGS } from "../../api/mock-data";
 import ExerciseForm from "./ExerciseForm";
+import { useThemeColors } from "../../contexts/Theme.context";
 
 export default function ExerciseList() {
+  const { theme, oppositeTheme } = useThemeColors();
+
   const [exercises, setExercises] = useState(TRAININGS);
   const [text, setText] = useState("");
   const [search, setSearch] = useState("");
@@ -68,7 +71,7 @@ export default function ExerciseList() {
   }
 
   return (
-    <div className="fullscreen">
+    <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
       <div className="d-flex flex-row justify-content-end">
         <div className="mx-5 mt-2 d-flex flex-row justify-content-between">
           <input
@@ -88,7 +91,7 @@ export default function ExerciseList() {
         </div>
 
         <div className="mobilehide">
-          <h2 className="pl-5">Exercise List</h2>
+          <h2 className="text-center">Exercise List</h2>
           <br />
 
           <CreateExerciseList exercises={filteredExercises} />

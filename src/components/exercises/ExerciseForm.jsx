@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
 
+
 export default function ExerciseForm({ onSaveExercise }) {
   // const [name, setName] = useState("");
   // const [muscleGroup, setMuscleGroup] = useState("");
@@ -24,7 +25,7 @@ export default function ExerciseForm({ onSaveExercise }) {
 
   return (
     <div className="d-flex flex-column col-12 ">
-      <h2>Add exercise</h2>
+      <h2 className="text-center">Add exercise</h2>
       <br />
       <form
         onSubmit={handleSubmit(onSubmit)}

@@ -1,20 +1,21 @@
 import { APPOINTMENTS, TRAININGS, USERS } from "../../api/mock-data";
 import { useCallback, useState } from "react";
 import Appointment from "./appointment";
-import AppointmentForm from "./appointmentForm"; 
-
-
-
+import AppointmentForm from "./appointmentForm";
+import { useThemeColors } from "../../contexts/Theme.context";
 
 export const updateToDateObject = (list, ...dateProps) => {
   return list.map((entry) => {
-    for(const prop of dateProps) {
+    for (const prop of dateProps) {
       entry[prop] = new Date(entry[prop]);
-    }return entry;
+    }
+    return entry;
   });
 };
 
 export default function AppointmentList() {
+  const { theme, oppositeTheme } = useThemeColors();
+
   const [appointments, setAppointments] = useState(
     updateToDateObject(APPOINTMENTS, "date")
   );
@@ -97,17 +98,17 @@ export default function AppointmentList() {
   };
 
   return (
-    <>
-      <h1 className="mt-5 text-center">Appointments</h1>
+    <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
+      <h1 className="pt-5 text-center">Appointments</h1>
       <div className="landscape">
         <div className="formContainer">
           <AppointmentForm onSaveAppointment={createAppointment} />
         </div>
 
         <div className="mobilehide">
-          <h2>Appointment List</h2>
+          <h2 className="text-center">Appointment List</h2>
           <br />
-          <h6> Sorted by ID:</h6>
+          <h6 className="text-center"> Sorted by ID:</h6>
           <div className="apbox">
             {appointments
               .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -122,6 +123,6 @@ export default function AppointmentList() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
