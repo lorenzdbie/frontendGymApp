@@ -6,18 +6,14 @@ import Register from "./components/users/Register";
 import Login from "./components/users/Login";
 import Navbar from "./components/Navbar";
 import React from "react";
-import { useTheme, themes } from "./contexts/Theme.context";
-import { IoMoonSharp, IoSunny } from "react-icons/io5";
+import {useThemeColors } from "./contexts/Theme.context";
 
 function App() {
-  const { theme, oppositeTheme, toggleTheme } = useTheme();
+  const { theme, oppositeTheme} = useThemeColors();
 
   return (
     <>
     <div className={`bg-${theme} text-${oppositeTheme}`}>
-      <button type="button" onClick={toggleTheme} className={`bg-${theme} text-${oppositeTheme}`}>
-         {theme === themes.dark ? <IoMoonSharp /> : <IoSunny />}
-      </button>
       <Navbar />
     </div>
 
@@ -31,38 +27,3 @@ function App() {
 }
 
 export default App;
-
-{
-  
-}
-{
-  /* <Loader loading={true}/> */
-}
-{
- 
-}
-{
-  
-}
-{
-  
-}
-//
-// <div className="d-flex flex-row">
-//   <button type="button" onClick={toggleTheme}>
-//     {theme === themes.dark ? <IoMoonSharp /> : <IoSunny />}
-//   </button>
-//   <Navbar />
-// </div>
-// </div>
-{
-  /* <div  className="fullscreen">
-        <Login />
-      </div> */
-}
-
-{
-  /* <div className="loaderContainer className="fullscreen"">
-        <Loader loading={true} />
-      </div> */
-}

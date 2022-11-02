@@ -30,22 +30,14 @@ const addTimeToDate = (date, time) => {
   return tijd;
 };
 
+
+
 export default memo(function AppointmentForm({
   onSaveAppointment,
   onRate = (f) => f,
 }) {
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-  // const [training, setTraining] = useState("");
-  // const [startTime, setStartTime] = useState(
-  //   new Date().toISOString().slice(11, 16)
-  // );
-  // const [endTime, setEndTime] = useState(
-  //   new Date().toISOString().slice(11, 16)
-  // );
+  
   const [intensity, setIntensity] = useState(0);
-  // const [specialRequest, setSpecialRequest] = useState("");
 
   const {
     register,
@@ -71,27 +63,6 @@ export default memo(function AppointmentForm({
       data.specialRequest
     );
     reset();
-    // e.preventDefault();
-    // const start = addTimeToDate(date, startTime);
-    // const end = addTimeToDate(date, endTime);
-    // onSaveAppointment(
-    //   firstName,
-    //   lastName,
-    //   date,
-    //   training,
-    //   start,
-    //   end,
-    //   intensity,
-    //   specialRequest
-    // );
-    // setFirstName("");
-    // setLastName("");
-    // setDate(new Date().toISOString().slice(0, 10));
-    // setTraining("--Select training--");
-    // setStartTime("");
-    // setEndTime("");
-    // setIntensity(0);
-    // setSpecialRequest("");
   };
 
 

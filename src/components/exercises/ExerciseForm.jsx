@@ -17,10 +17,6 @@ export default function ExerciseForm({ onSaveExercise }) {
   const onSubmit = (data) => {
     onSaveExercise(data.name, data.muscleGroup);
     reset();
-    // e.preventDefault();
-    // onSaveExercise(name, muscleGroup);
-    // setName("");
-    // setMuscleGroup("");
   };
 
   return (
