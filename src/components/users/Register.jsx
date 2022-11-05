@@ -47,7 +47,7 @@ export default function Register() {
       <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
         <h1 className="text-center pt-5">Registration</h1>
 
-        <div className="formContainer2">
+        <div className="d-flex flex-row justify-content-center">
           <RegistrationForm onSaveRegistration={createAccount} />
         </div>
 

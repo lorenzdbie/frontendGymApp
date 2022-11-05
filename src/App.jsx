@@ -14,14 +14,14 @@ function App() {
   return (
     <>
     <div className={`bg-${theme} text-${oppositeTheme}`}>
-      <Navbar />
+      <Navbar/>
     </div>
 
-    <Loader loading={true}/>
+    {/* <Loader loading={true}/> */}
     {/* <Login/> */}
      {/* <ExerciseList/> */}
-     {/* <AppointmentList /> */}
-      {/* <Register/> */}
+     {/* <AppointmentList/> */}
+      <Register/>
     </>
   );
 }

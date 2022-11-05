@@ -29,9 +29,11 @@
 .fullscreen {
   width: 100%;
   min-height: 100vh;
+  min-width: 100%;
+  position: absolute;
 }
 
-.nav {
+/* .nav {
   margin-left: auto;
   padding: 8px;
   width: 100%;
@@ -39,7 +41,7 @@
   background-color: #f5f5f5;
 }
 
-#navbar ol {
+#navbar ul {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -50,12 +52,12 @@
   padding: 0.5em;
 }
 
-#navbar ol li {
+#navbar ul li {
   width: auto;
   padding: 0 1em;
   align-self: start;
   justify-self: center;
-}
+} */
 
 .logo {
   height: 6em;
@@ -68,6 +70,19 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+
+ .passwordButton{
+  background:transparent;
+  position: relative;
+  left: -20px;
+  border:0;
+  cursor:pointer;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: auto 0 auto auto;
+}
+
 
 @keyframes logo-spin {
   from {
@@ -404,7 +419,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   .nav {
     width: 100%;
+    position: rel;
+    z-index: 2;
   }
+
+
 
   .formContainer > div {
     width: 100%;

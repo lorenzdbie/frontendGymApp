@@ -1,9 +1,7 @@
 import { memo, useCallback, useState } from "react";
-import { TRAININGS } from "../../api/mock-data";
 import DumbbellIntensity from "./dumbellIntensity";
-import { useForm } from "react-hook-form";
-import { validationRules } from "../ValidationRules";
-
+import { useForm, FormProvider } from "react-hook-form";
+import { LabelInput, LabelTextArea, ExerciseSelect } from "../FormCreator";
 
 export const toDateInputString = (date) => {
   if (!date) return null;
@@ -30,13 +28,10 @@ const addTimeToDate = (date, time) => {
   return tijd;
 };
 
-
-
 export default memo(function AppointmentForm({
   onSaveAppointment,
   onRate = (f) => f,
 }) {
-  
   const [intensity, setIntensity] = useState(0);
 
   const {
@@ -65,135 +60,84 @@ export default memo(function AppointmentForm({
     reset();
   };
 
-
-
-
   return (
     <div className="d-flex flex-column col-12 ">
       <h2 className="text-center">Add Appointment:</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="mb-3 justify-content-md-center formContainer"
+      <FormProvider
+        handleSubmit={handleSubmit}
+        errors={errors}
+        register={register}
       >
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="firstName" className="form-label col-5 my-auto ">
-            First name:
-          </label>
-          <input
-            {...register("firstName", validationRules.firstName)}
-            id="firstName"
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mb-3 justify-content-md-center formContainer"
+        >
+          <LabelInput
+            label="firstName"
+            name="firstName"
             type="text"
-            className="form-control col rounded-5"
             placeholder="first name"
           />
-        </div>
-        <div className="d-flex flex-row  my-2">
-          <label htmlFor="lastName" className="form-label col-5 my-auto">
-            Last name:
-          </label>
-          <input
-            {...register("lastName", validationRules.lastName)}
-            id="lastName"
+          <LabelInput
+            label="lastName"
+            name="lastName"
             type="text"
-            className="form-control col rounded-5"
             placeholder="last name"
           />
-        </div>
-        <div className="d-flex flex-row  my-2">
-          <label htmlFor="date" className="form-label col-5 my-auto">
-            Date:
-          </label>
-          <input
-            {...register("date", validationRules.date)}
-            defaultValue={new Date().toISOString().slice(0, 10)}
-            id="date"
+          <LabelInput
+            label="date"
+            name="date"
             type="date"
-            className="form-control col rounded-5"
+            defaultValue={new Date().toISOString().slice(0, 10)}
           />
-        </div>
-        <div className="d-flex flex-row  my-2">
-          <label htmlFor="training" className="form-label col-5 my-auto">
-            Training:
-          </label>
-          <select
-            {...register("training", validationRules.training.name)}
-            id="training"
-            className="form-select col smallOption rounded-5"
-          >
-            <option defaultChecked value="">
-              --Select training--&nbsp;&nbsp;
-            </option>
-            {TRAININGS.map(({ id, name }) => (
-              <option key={id} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="d-flex flex-row  my-2">
-          <label htmlFor="startTime" className="form-label col-5 my-auto">
-            Start Time:
-          </label>
-          <input
-            {...register("startTime", validationRules.startTime)}
-            defaultValue={new Date().toISOString().slice(11, 16)}
-            id="time"
+          <LabelInput
+            label="startTime"
+            name="startTime"
             type="time"
+            defaultValue={new Date().toISOString().slice(11, 16)}
             min="08:00"
             max="18:30"
-            className="form-control col rounded-5"
           />
-        </div>
-        <div className="d-flex flex-row  my-2">
-          <label htmlFor="endTime" className="form-label col-5 my-auto">
-            End Time:
-          </label>
-          <input
-            {...register("endTime", validationRules.endTime)}
-            defaultValue={new Date().toISOString().slice(11, 16)}
-            id="time"
+          <LabelInput
+            label="endTime"
+            name="endTime"
             type="time"
+            defaultValue={new Date().toISOString().slice(11, 16)}
             min="08:30"
             max="19:00"
-            step="900"
-            className="form-control col rounded-5"
           />
-        </div>
-        <div className="d-flex flex-row mb-0">
-          <label htmlFor="intensity" className="form-label mt-1 col-5">
-            Intensity:
-          </label>
-          <div className="col">
-            <DumbbellIntensity
-              selectedDumbbells={intensity}
-              id="intensity"
-              onRate={handleIntensity}
-              className=""
-            />
+          <ExerciseSelect />
+
+          <div className="d-flex flex-row mb-0 ">
+            <label htmlFor="intensity" className="form-label mt-1 col-5">
+              Intensity:
+            </label>
+            <div className="col text-center">
+              <DumbbellIntensity
+                selectedDumbbells={intensity}
+                id="intensity"
+                onRate={handleIntensity}
+                className=""
+              />
+            </div>
           </div>
-        </div>
-        <div className="d-flex flex-column mt-0">
-          <label htmlFor="specialRequest" className="form-label col-7">
-            Special request:
-          </label>
-          <textarea
-            className="form-control col rounded-5"
-            id="specialRequest"
+          <LabelTextArea
+            label="specialRequest"
+            name="specialRequest"
+            type="text"
             cols="1"
             rows="6"
-            type="text"
-            {...register("specialRequest", validationRules.specialRequest)}
-            placeholder="If you have any special requests, please enter them here..."
-          ></textarea>
-        </div>
-        <div className="clearfix  my-4 d-flex flex-row justify-content-center">
-          <div className="btn-group">
-            <button type="submit" className="btn btn-primary rounded-5">
-              Add Appointment
-            </button>
+            placeholder="special request"
+          />
+          <div className="clearfix  my-4 d-flex flex-row justify-content-center">
+            <div className="btn-group">
+              <button type="submit" className="btn btn-primary rounded-5">
+                Add Appointment
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </FormProvider>
     </div>
   );
 });

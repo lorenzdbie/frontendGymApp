@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
+import { LabelInput } from "../FormCreator";
 import { validationRules } from "../ValidationRules";
 
 export default function RegistrationForm({ onSaveRegistration }) {
@@ -9,25 +9,6 @@ export default function RegistrationForm({ onSaveRegistration }) {
     reset,
     formState: { errors },
   } = useForm();
-
-  const showErrors = () => {
-    const userProps = [
-      "firstName",
-      "lastName",
-      "birthdate",
-      "email",
-      "password",
-      "passwordConfirmation",
-      "weight",
-      "height",
-    ];
-
-    for (const prop in userProps) {
-      if (errors[prop]) {
-        return <p>{errors[prop].message}</p>;
-      }
-    }
-  };
 
   const onSubmit = (data) => {
     console.log(JSON.stringify(data));
@@ -46,164 +27,249 @@ export default function RegistrationForm({ onSaveRegistration }) {
   return (
     <div className="d-flex flex-column col-12">
       <h2 className="text-center">Register account:</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="mb-3 justify-content-md-center formContainer"
+      <FormProvider
+        handleSubmit={handleSubmit}
+        errors={errors}
+        register={register}
       >
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="firstName" className="form-label col-5 my-auto ">
-            First name:
-          </label>
-          <input
-            {...register("firstName", validationRules.firstName)}
-            id="firstName"
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mb-3 mx-auto formContainer"
+        >
+          <LabelInput
+            label="firstName"
+            name="firstName"
             type="text"
-            className="form-control col rounded-5"
             placeholder="first name"
           />
-        </div>
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="lastName" className=" form-label col-5 my-auto ">
-            Last name:
-          </label>
-
-          <input
-            {...register("lastName", validationRules.lastName)}
-            id="lastName"
+          <LabelInput
+            label="lastName"
+            name="lastName"
             type="text"
-            className="form-control col rounded-5 "
             placeholder="last name"
           />
-        </div>
-
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="date" className="form-label col-5 my-auto ">
-            Birthdate:
-          </label>
-
-          <input
-            {...register("birthdate", validationRules.birthdate)}
-            defaultValue={new Date().toISOString().slice(0, 10)}
-            id="birthdate"
+          <LabelInput
+            label="birthdate"
+            name="birthdate"
             type="date"
-            className="form-control col rounded-5"
+            defaultValue={new Date().toISOString().slice(0, 10)}
           />
-        </div>
-
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="e-mail" className="form-label col-5 my-auto ">
-            Enter e-mail:
-          </label>
-
-          <input
-            {...register("email", validationRules.email)}
-            id="email"
+          <LabelInput
+            label="email"
+            name="email"
             type="email"
-            className="form-control col rounded-5"
-            placeholder="abc@123.com"
+            placeholder="e-mail"
           />
-        </div>
-
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="password" className="form-label col-5 my-auto ">
-            password:
-          </label>
-
-          <input
-            {...register("password", validationRules.password)}
-            id="password"
+          <LabelInput
+            label="password"
+            name="password"
             type="password"
-            className="form-control col rounded-5"
             placeholder="password"
           />
-        </div>
-
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="confirmPassword" className="form-label col-5 my-0 ">
-            Repeat password:
-          </label>
-
-          <input
-            {...register(
-              "confirmPassword", validationRules.confirmPassword
-            )}
-            id="confirmPassword"
+          <LabelInput
+            label="confirmPassword"
+            name="confirmPassword"
             type="password"
-            className="form-control col rounded-5 my-auto"
-            placeholder="password"
+            placeholder="Password"
           />
-        </div>
-
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="weight" className="form-label col-5 my-auto ">
-            Body weight:
-          </label>
-
-          <input
-            {...register("weight", validationRules.weight)}
-            id="weight"
+          <LabelInput
+            label="weight"
+            name="weight"
             type="number"
-            step="0.1"
-            className="form-control col bodyHW rounded-5"
             placeholder="weight"
-          />
-          <span className="my-auto form-label"> &nbsp;kg</span>
-        </div>
-        <div className="d-flex flex-row my-2">
-          <label htmlFor="weight" className="form-label col-5 my-auto ">
-            Body height:
-          </label>
-
-          <input
-            {...register("height", validationRules.height)}
-            id="height"
-            type="number"
             step="0.1"
-            className="form-control col rounded-5"
+          />
+          <LabelInput
+            label="height"
+            name="height"
+            type="number"
             placeholder="height"
+            step="0.1"
           />
-          <span className="my-auto form-label"> &nbsp;cm</span>
-        </div>
-        <div className="d-flex flex-row my-2">
-          <input
-            {...register("registerCheckBox", validationRules.registerCheckBox)}
+          <LabelInput
+            label="registerCheckBox"
+            name="registerCheckBox"
             type="checkbox"
-            className="form-check-label col-3 my-auto rounded-2"
-            required
           />
-          I have read and agree to the terms and conditions
-        </div>
 
-        <div className="clearfix">
-          <div className="btn-group float-end">
-            <button
-              className="btn btn-primary rounded-5"
-              style={{ margin: "0 20px", backgroundColor: "gray" }}
-            >
-              Cancel
-            </button>
+          <div className="mt-3 clearfix">
+            <div className="btn-group float-end">
+              <button
+                className="btn btn-primary rounded-5"
+                style={{ margin: "0 20px", backgroundColor: "gray" }}
+              >
+                Cancel
+              </button>
+            </div>
+            <div className="btn-group float-end">
+              <button
+                type="submit"
+                className="btn btn-primary rounded-5"
+                style={{ margin: "0 20px", backgroundColor: "blue" }}
+              >
+                Sign-up
+              </button>
+            </div>
           </div>
-          <div className="btn-group float-end">
-            <button
-              type="submit"
-              className="btn btn-primary rounded-5"
-              style={{ margin: "0 20px", backgroundColor: "blue" }}
-            >
-              Sign-up
-            </button>
-          </div>
-        </div>
-        {errors.firstName && <p className="form-text text-danger">{errors.firstName.message}</p>}
-        {errors.lastName && <p className="form-text text-danger">{errors.lastName.message}</p>}
-        {errors.birthdate && <p className="form-text text-danger">{errors.birthdate.message}</p>}
-        {errors.email && <p className="form-text text-danger">{errors.email.message}</p>}
-        {errors.password && <p className="form-text text-danger">{errors.password.message}</p>}
-        {errors.confirmPassword && <p className="form-text text-danger">{errors.confirmPassword.message}</p>}
-        {errors.weight && <p className="form-text text-danger">{errors.weight.message}</p>}
-        {errors.height && <p className="form-text text-danger">{errors.height.message}</p>}
-        {errors.registerCheckBox && <p className="form-text text-danger">{errors.registerCheckBox.message}</p>}
-        
-      </form>
+        </form>
+      </FormProvider>
     </div>
   );
 }
+
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="firstName" className="form-label col-5 my-auto ">
+//             First name:
+//           </label>
+//           <input
+//             {...register("firstName", validationRules.firstName)}
+//             id="firstName"
+//             type="text"
+//             className="form-control col rounded-5"
+//             placeholder="first name"
+//           />
+//         </div>
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="lastName" className=" form-label col-5 my-auto ">
+//             Last name:
+//           </label>
+
+//           <input
+//             {...register("lastName", validationRules.lastName)}
+//             id="lastName"
+//             type="text"
+//             className="form-control col rounded-5 "
+//             placeholder="last name"
+//           />
+//         </div>
+
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="date" className="form-label col-5 my-auto ">
+//             Birthdate:
+//           </label>
+
+//           <input
+//             {...register("birthdate", validationRules.birthdate)}
+//             defaultValue={new Date().toISOString().slice(0, 10)}
+//             id="birthdate"
+//             type="date"
+//             className="form-control col rounded-5"
+//           />
+//         </div>
+
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="e-mail" className="form-label col-5 my-auto ">
+//             Enter e-mail:
+//           </label>
+
+//           <input
+//             {...register("email", validationRules.email)}
+//             id="email"
+//             type="email"
+//             className="form-control col rounded-5"
+//             placeholder="abc@123.com"
+//           />
+//         </div>
+
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="password" className="form-label col-5 my-auto ">
+//             password:
+//           </label>
+
+//           <input
+//             {...register("password", validationRules.password)}
+//             id="password"
+//             type="password"
+//             className="form-control col rounded-5"
+//             placeholder="password"
+//           />
+//         </div>
+
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="confirmPassword" className="form-label col-5 my-0 ">
+//             Repeat password:
+//           </label>
+
+//           <input
+//             {...register(
+//               "confirmPassword", validationRules.confirmPassword
+//             )}
+//             id="confirmPassword"
+//             type="password"
+//             className="form-control col rounded-5 my-auto"
+//             placeholder="password"
+//           />
+//         </div>
+
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="weight" className="form-label col-5 my-auto ">
+//             Body weight:
+//           </label>
+
+//           <input
+//             {...register("weight", validationRules.weight)}
+//             id="weight"
+//             type="number"
+//             step="0.1"
+//             className="form-control col bodyHW rounded-5"
+//             placeholder="weight"
+//           />
+//           <span className="my-auto form-label"> &nbsp;kg</span>
+//         </div>
+//         <div className="d-flex flex-row my-2">
+//           <label htmlFor="weight" className="form-label col-5 my-auto ">
+//             Body height:
+//           </label>
+
+//           <input
+//             {...register("height", validationRules.height)}
+//             id="height"
+//             type="number"
+//             step="0.1"
+//             className="form-control col rounded-5"
+//             placeholder="height"
+//           />
+//           <span className="my-auto form-label"> &nbsp;cm</span>
+//         </div>
+//         <div className="d-flex flex-row my-2">
+//           <input
+//             {...register("registerCheckBox", validationRules.registerCheckBox)}
+//             type="checkbox"
+//             className="form-check-label col-3 my-auto rounded-2"
+//           />
+//           I have read and agree to the terms and conditions
+//         </div>
+
+//         <div className="clearfix">
+//           <div className="btn-group float-end">
+//             <button
+//               className="btn btn-primary rounded-5"
+//               style={{ margin: "0 20px", backgroundColor: "gray" }}
+//             >
+//               Cancel
+//             </button>
+//           </div>
+//           <div className="btn-group float-end">
+//             <button
+//               type="submit"
+//               className="btn btn-primary rounded-5"
+//               style={{ margin: "0 20px", backgroundColor: "blue" }}
+//             >
+//               Sign-up
+//             </button>
+//           </div>
+//         </div>
+//         {errors.firstName && <p className="form-text text-danger">{errors.firstName.message}</p>}
+//         {errors.lastName && <p className="form-text text-danger">{errors.lastName.message}</p>}
+//         {errors.birthdate && <p className="form-text text-danger">{errors.birthdate.message}</p>}
+//         {errors.email && <p className="form-text text-danger">{errors.email.message}</p>}
+//         {errors.password && <p className="form-text text-danger">{errors.password.message}</p>}
+//         {errors.confirmPassword && <p className="form-text text-danger">{errors.confirmPassword.message}</p>}
+//         {errors.weight && <p className="form-text text-danger">{errors.weight.message}</p>}
+//         {errors.height && <p className="form-text text-danger">{errors.height.message}</p>}
+//         {errors.registerCheckBox && <p className="form-text text-danger">{errors.registerCheckBox.message}</p>}
+
+//       </form>
+//     </div>
+//   );
+// }
