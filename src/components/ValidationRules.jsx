@@ -1,8 +1,3 @@
-import { toTimeInputString } from "./appointments/appointmentForm";
-
-
-let password="";
-
 export const validationRules = {
   name: {
     required: "Name is a required field",
@@ -88,7 +83,6 @@ export const validationRules = {
       value:
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       message: "invalid email address",
-      //  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
     },
   },
   password: {

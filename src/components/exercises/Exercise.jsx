@@ -33,7 +33,7 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
 
       <div>
         <div>
-          {" "}
+          
           <u> Active muscle groups:</u>
         </div>
         <div> {muscleGroup} </div>

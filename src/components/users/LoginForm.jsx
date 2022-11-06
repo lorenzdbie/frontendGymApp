@@ -1,57 +1,70 @@
 import { useState } from "react";
-
+import { useForm, FormProvider } from "react-hook-form";
+import { LabelInput } from "../FormCreator";
+import { themes, useThemeColors } from "../../contexts/Theme.context";
 
 export default function LoginForm({ onSaveLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { theme} = useThemeColors();
 
-  const handleSubmit = (e) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (e) => {
     e.preventDefault();
     onSaveLogin(email, password);
-    setEmail("");
-    setPassword("");
+    reset();
   };
 
   return (
     <>
       <div className="d-flex flex-row justify-content-center mb-3">
         <picture>
-          <img src="/src/assets/LogoSmall.webp" alt="logo loginScreen" />
+
+        {theme === themes.dark ? 
+            <img
+              src="/src/assets/LogoSmallInvert-removebg.png"
+              alt="logo loginScreen"
+            />
+           : 
+            <img src="/src/assets/LogoSmall-removebg.png" alt="logo loginScreen" />
+          }
+
+
+          
         </picture>
       </div>
       <h2 className="text-center">Login / SignUp</h2>
       <div className="d-flex flex-row justify-content-center align-items-start">
-        <form onSubmit={handleSubmit} className="w-50 mb-3 mx-auto">
-          <div className="mb-" id="login">
-            <label htmlFor="e-mail" className="form-label ">
-              E-mail:
-            </label>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id="email"
+        <FormProvider
+          handleSubmit={handleSubmit}
+          errors={errors}
+          register={register}
+        >
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mb-3 justify-content-md-center formContainer loginlabels"
+          >
+            <LabelInput
+              label="email"
+              name="email"
               type="email"
-              className="form-control rounded-5"
-              placehoder="Enter e-mail"
-              required
+              placeholder="e-mail"
+              id="login"
             />
-          </div>
-          <div className="mb-3" id="login">
-            <label htmlFor="password" className="form-Label">
-              Password:
-            </label>
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              id="password"
+            <LabelInput
+              label="password"
+              name="password"
               type="password"
-              className="form-control rounded-5"
-              placeholder="Enter password"
-              required
+              placeholder="password"
+              id="login"
             />
-          </div>
-          <div className="clearfix">
-            <div className="btn-group float-start">
+            <div className="clearfix d-flex flex-row justify-content-evenly mt-3">
               <button
                 type="submit"
                 className="btn btn-primary rounded-5"
@@ -59,8 +72,6 @@ export default function LoginForm({ onSaveLogin }) {
               >
                 Login
               </button>
-            </div>
-            <div className="btn-group float-end">
               <button
                 type="button"
                 onClick=""
@@ -70,8 +81,8 @@ export default function LoginForm({ onSaveLogin }) {
                 SignUp
               </button>
             </div>
-          </div>
-        </form>
+          </form>
+        </FormProvider>
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import { validationRules } from "./ValidationRules";
 import { TRAININGS } from "../api/mock-data";
+import { themes, useThemeColors } from "../contexts/Theme.context";
 import { BiShowAlt, BiHide } from "react-icons/bi";
 
 const labels = {
@@ -11,7 +12,7 @@ const labels = {
   password: "Password",
   confirmPassword: "Confirm Password",
   date: "Date",
-  birthdate: "Birth date",
+  birthdate: "Date of birth",
   startTime: "Start-time",
   endTime: "End-time",
   specialRequest: "Special requests",
@@ -23,12 +24,13 @@ const labels = {
 
 export function LabelInput({ label, name, type, placeholder, ...rest }) {
   const { register, errors } = useFormContext();
+  const { theme, oppositeTheme } = useThemeColors();
 
   const hasError = name in errors;
 
   if (name === "registerCheckBox") {
     return (
-      <div className="d-flex flex-row my-2">
+      <div className={`d-flex flex-row my-2 border-${oppositeTheme}`}>
         <input
           {...register(name, validationRules[name])}
           type={type}
