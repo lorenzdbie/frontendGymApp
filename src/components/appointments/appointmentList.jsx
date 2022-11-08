@@ -1,8 +1,9 @@
 import { APPOINTMENTS, TRAININGS, USERS } from "../../api/mock-data";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Appointment from "./appointment";
 import AppointmentForm from "./appointmentForm";
 import { useThemeColors } from "../../contexts/Theme.context";
+import * as appointmentsApi from "../../api/appointments.js";
 
 export const updateToDateObject = (list, ...dateProps) => {
   return list.map((entry) => {
@@ -19,7 +20,17 @@ export default function AppointmentList() {
   const [appointments, setAppointments] = useState(
     updateToDateObject(APPOINTMENTS, "date")
   );
+  
   // const [appointments, setAppointments] = useState(APPOINTMENTS);
+
+useEffect(() => {
+  const fetchAppointments = async () => {
+    const fetchedAppointments = await appointmentsApi.getAll();
+    console.log(fetchedAppointments);
+  };
+  fetchAppointments();
+}, []);
+
 
   const handleDelete = (id) => {
     console.log("onDeleteConfirm", id);

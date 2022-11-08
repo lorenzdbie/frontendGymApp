@@ -20,8 +20,8 @@ function App() {
     {/* <Loader loading={true}/> */}
     {/* <Login/> */}
      {/* <ExerciseList/> */}
-     {/* <AppointmentList/> */}
-      <Register/>
+     <AppointmentList/>
+      {/* <Register/> */}
     </>
   );
 }
