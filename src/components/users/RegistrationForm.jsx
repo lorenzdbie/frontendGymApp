@@ -1,6 +1,97 @@
-import { useForm, FormProvider } from "react-hook-form";
-import { LabelInput } from "../FormCreator";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
+import { useState } from "react";
 import { validationRules } from "../ValidationRules";
+import { themes, useThemeColors } from "../../contexts/Theme.context";
+import { BiShowAlt, BiHide } from "react-icons/bi";
+
+const labels = {
+  firstName: "First name",
+  lastName: "Last Name",
+  email: "E-mail",
+  password: "Password",
+  confirmPassword: "Confirm Password",
+  birthdate: "Date of birth",
+  weight: "Weight",
+  height: "Height",
+};
+
+function LabelInput({ label, name, type, placeholder, ...rest }) {
+  const { register, errors } = useFormContext();
+  const { theme, oppositeTheme } = useThemeColors();
+
+  const hasError = name in errors;
+
+  if (name === "registerCheckBox") {
+    return (
+      <div className={`d-flex flex-row my-2 border-${oppositeTheme}`}>
+        <input
+          {...register(name, validationRules[name])}
+          type={type}
+          className="form-check-label col-3 my-auto rounded-2"
+        />
+        I have read and agree to the terms and conditions
+      </div>
+    );
+  }
+
+  if (name === "password" || name === "confirmPassword") {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePassword = () => {
+      setShowPassword(!showPassword);
+    };
+
+    return (
+      <div className="d-flex flex-row my-2">
+        <label htmlFor={name} className="form-label col-5 my-auto ">
+          {labels[name]}:
+        </label>
+        <div className="password my-auto d-flex">
+          <input
+            {...register(name, validationRules[name])}
+            id={name}
+            type={showPassword ? "text" : "password"}
+            className="form-control col-2 rounded-5"
+            placeholder={placeholder}
+          />
+          <button
+            className={`passwordButton bg-light text-dark`}
+            type="button"
+            onClick={togglePassword}
+          >
+            {showPassword ? <BiShowAlt /> : <BiHide />}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="d-flex flex-row my-2">
+      <label htmlFor={name} className="form-label col-5 my-auto ">
+        {labels[name]}:
+      </label>
+      <input
+        {...register(name, validationRules[name])}
+        id={name}
+        type={type}
+        className="form-control col rounded-5 my-auto"
+        placeholder={placeholder ? placeholder : null}
+        {...rest}
+      />
+      {name === "weight" ? (
+        <span className="my-auto form-label">&nbsp;kg</span>
+      ) : null}
+      {name === "height" ? (
+        <span className="my-auto form-label">&nbsp;cm</span>
+      ) : null}
+      {hasError ? (
+        <div className="form-text text-danger">{errors[name].message}</div>
+      ) : null}
+    </div>
+  );
+}
+
 
 export default function RegistrationForm({ onSaveRegistration }) {
   const {

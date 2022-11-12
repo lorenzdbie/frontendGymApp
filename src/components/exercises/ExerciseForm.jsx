@@ -1,7 +1,70 @@
 // import { useState } from "react";
 import { memo } from "react";
-import { useForm, FormProvider } from "react-hook-form";
-import { LabelInput, LabelTextArea } from "../FormCreator";
+import { useForm, useFormContext, FormProvider } from "react-hook-form";
+import { validationRules } from "../ValidationRules";
+
+const labels = {
+  name: "Exercise name",
+  muscleGroup: "Muscle groups",
+};
+
+function LabelInput({ label, name, type, placeholder, ...rest }) {
+  const { register, errors } = useFormContext();
+
+  const hasError = name in errors;
+
+  return (
+    <div className="d-flex flex-row my-2">
+      <label htmlFor={name} className="form-label col-5 my-auto ">
+        {labels[name]}:
+      </label>
+      <input
+        {...register(name, validationRules[name])}
+        id={name}
+        type={type}
+        className="form-control col rounded-5 my-auto"
+        placeholder={placeholder ? placeholder : null}
+        {...rest}
+      />
+      {name === "weight" ? (
+        <span className="my-auto form-label">&nbsp;kg</span>
+      ) : null}
+      {name === "height" ? (
+        <span className="my-auto form-label">&nbsp;cm</span>
+      ) : null}
+      {hasError ? (
+        <div className="form-text text-danger">{errors[name].message}</div>
+      ) : null}
+    </div>
+  );
+};
+
+function LabelTextArea({ label, name, type, placeholder, ...rest }) {
+  const { register, errors } = useFormContext();
+
+  const hasError = name in errors;
+
+  return (
+    <div className="d-flex flex-column mt-0">
+      <label htmlFor={name} className="form-label col-7">
+        {labels[name]}:
+      </label>
+      <textarea
+        {...register(name, validationRules[name])}
+        id={name}
+        type={type}
+        cols="1"
+        rows="6"
+        className="form-control col rounded-5"
+        placeholder={placeholder}
+        {...rest}
+      />
+      {hasError ? (
+        <div className="form-text text-danger">{errors[name].message}</div>
+      ) : null}
+    </div>
+  );
+};
 
 export default memo(function ExerciseForm({ onSaveExercise }) {
   const {

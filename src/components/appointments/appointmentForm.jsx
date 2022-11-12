@@ -1,7 +1,9 @@
 import { memo, useCallback, useState } from "react";
 import DumbbellIntensity from "./dumbellIntensity";
-import { useForm, FormProvider } from "react-hook-form";
-import { LabelInput, LabelTextArea, ExerciseSelect } from "../FormCreator";
+import { useForm,useFormContext ,FormProvider } from "react-hook-form";
+import { validationRules } from "../ValidationRules";
+import { TRAININGS } from "../../api/mock-data";
+import { themes, useThemeColors } from "../../contexts/Theme.context";
 
 export const toDateInputString = (date) => {
   if (!date) return null;
@@ -27,6 +29,113 @@ const addTimeToDate = (date, time) => {
   let tijd = date + "T" + time + ":00.000Z";
   return tijd;
 };
+
+const labels = {
+  firstName: "First name",
+  lastName: "Last Name",
+  date: "Date",
+  startTime: "Start-time",
+  endTime: "End-time",
+  name: "Exercise name",
+  specialRequest: "Special requests",
+};
+
+function LabelInput({ label, name, type, placeholder, ...rest }) {
+  const { register, errors } = useFormContext();
+  const { theme, oppositeTheme } = useThemeColors();
+
+  const hasError = name in errors;
+
+
+  return (
+    <div className="d-flex flex-row my-2">
+      <label htmlFor={name} className="form-label col-5 my-auto ">
+        {labels[name]}:
+      </label>
+      <input
+        {...register(name, validationRules[name])}
+        id={name}
+        type={type}
+        className="form-control col rounded-5 my-auto"
+        placeholder={placeholder ? placeholder : null}
+        {...rest}
+      />
+      {name === "weight" ? (
+        <span className="my-auto form-label">&nbsp;kg</span>
+      ) : null}
+      {name === "height" ? (
+        <span className="my-auto form-label">&nbsp;cm</span>
+      ) : null}
+      {hasError ? (
+        <div className="form-text text-danger">{errors[name].message}</div>
+      ) : null}
+    </div>
+  );
+}
+
+function LabelTextArea({ label, name, type, placeholder, ...rest }) {
+  const { register, errors } = useFormContext();
+
+  const hasError = name in errors;
+
+    return (
+      <div className="d-flex flex-column mt-0">
+        <label htmlFor={name} className="form-label col-7">
+          {labels[name]}:
+        </label>
+        <textarea
+          {...register(name, validationRules[name])}
+          id={name}
+          type={type}
+          cols="1"
+          rows="6"
+          className="form-control col rounded-5"
+          placeholder={placeholder}
+          {...rest}
+        />
+        {hasError ? (
+          <div className="form-text text-danger">{errors[name].message}</div>
+        ) : null}
+      </div>
+    );
+  
+}
+
+function ExerciseSelect() {
+  const name = "training";
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [exercises, setExercises] = useState([]);
+
+  const { register, errors } = useFormContext();
+
+  const hasError = name in errors;
+  return (
+    <div className="d-flex flex-row  my-2">
+      <label htmlFor={name} className="form-label col-5 my-auto">
+        Training:
+      </label>
+      <select
+        {...register(name)}
+        id={name}
+        className="form-select col smallOption rounded-5"
+      >
+        <option defaultChecked value="">
+          --Select training--&nbsp;&nbsp;
+        </option>
+        {TRAININGS.map(({ id, name }) => (
+          <option key={id} value={name}>
+            {name}
+          </option>
+        ))}
+      </select>
+      {hasError ? (
+        <div className="form-text text-danger">{errors[name].message}</div>
+      ) : null}
+    </div>
+  );
+}
+
 
 export default memo(function AppointmentForm({
   onSaveAppointment,
