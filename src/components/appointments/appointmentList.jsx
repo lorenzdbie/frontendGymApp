@@ -1,9 +1,12 @@
-import { APPOINTMENTS, TRAININGS, USERS } from "../../api/mock-data";
+import { TRAININGS, USERS } from "../../api/mock-data";
+// import { APPOINTMENTS } from "../../api/mock-data";
 import { useCallback, useState, useEffect } from "react";
-import Appointment from "./appointment";
-import AppointmentForm from "./appointmentForm";
+import Appointment from "./Appointment";
+import AppointmentForm from "./AppointmentForm";
 import { useThemeColors } from "../../contexts/Theme.context";
 import * as appointmentsApi from "../../api/appointments.js";
+import Error from "../Error";
+import Loader from "../Loader";
 
 export const updateToDateObject = (list, ...dateProps) => {
   return list.map((entry) => {
@@ -16,33 +19,50 @@ export const updateToDateObject = (list, ...dateProps) => {
 
 export default function AppointmentList() {
   const { theme, oppositeTheme } = useThemeColors();
+  const [appointments, setAppointments] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  //   updateToDateObject(APPOINTMENTS, "date")
+  // );
 
-  const [appointments, setAppointments] = useState(
-    updateToDateObject(APPOINTMENTS, "date")
-  );
-  
   // const [appointments, setAppointments] = useState(APPOINTMENTS);
 
-useEffect(() => {
-  const fetchAppointments = async () => {
-    const fetchedAppointments = await appointmentsApi.getAll();
-    console.log(fetchedAppointments);
-  };
-  fetchAppointments();
-}, []);
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const fetchedAppointments = await appointmentsApi.getAll();
+        setAppointments(fetchedAppointments);
+      } catch (error) {
+        console.error(error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+      console.log(appointments);
+    };
+    fetchAppointments();
+  }, []);
 
-
-  const handleDelete = (id) => {
-    console.log("onDeleteConfirm", id);
-    const newAppointments = appointments.filter((e) => e.id !== id);
-    setAppointments(newAppointments);
-  };
+  const handleDelete = useCallback(async (idToDelete) => {
+    try {
+      setError(null);
+      await appointmentsApi.deleteById(idToDelete);
+      console.log("onDeleteConfirm", idToDelete);
+      setAppointments((appointments) =>
+        appointments.filter(({ id }) => id !== idToDelete)
+      );
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    }
+  }, []);
 
   console.log(...appointments);
 
   const createAppointment = (
-    firstName,
-    lastName,
+    email,
     date,
     trainingName,
     startTime,
@@ -50,39 +70,19 @@ useEffect(() => {
     intensity,
     specialRequest
   ) => {
-    const fName = firstName.toLowerCase();
-    const lName = lastName.toLowerCase();
     const newAppointments = [
       {
         id: Number(Math.max(...appointments.map((e) => e.id)) + 1),
         date: new Date(date),
         user: {
-          // id: Number(
-          //   USERS.includes((a) => {
-          //     a.firstName.toLowerCase() === firstName.toLowerCase() &&
-          //       a.lastName.toLowerCase() === lastName.tolowerCase();
-          //   })
-          //     ? USERS.filter((a) => {
-          //         a.firstName.toLowerCase() === firstName.tolowerCase() &&
-          //           a.lastName.toLowerCase() === lastName.tolowerCase();
-          //       }).id
-          //     : Math.max(...USERS.map((e) => e.id)) + 1
-          // ),
-          id: Number(
-            // USERS.map((u) => u.firstName).includes(firstName) &&
-            //   USERS.map((u) => u.lastName).includes(lastName)
-
-            USERS.map((user) => {
-              user.firstName.toLowerCase(), user.lastName.toLowerCase();
-            }).includes({ fName, lName })
-              ? USERS.filter((a) => {
-                  a.firstName.toLowerCase() === fName &&
-                    a.lastName.toLowerCase() === lName;
-                }).id
-              : Math.max(...USERS.map((e) => e.id)) + 1
+          id: Number(USERS.filter((e) => e.email === email).map((e) => e.id)),
+          firstName: String(
+            USERS.filter((e) => e.email === email).map((e) => e.firstName)
           ),
-          firstName,
-          lastName,
+          lastName: String(
+            USERS.filter((e) => e.email === email).map((e) => e.lastName)
+          ),
+          email,
         },
         training: {
           id: Number(
@@ -121,16 +121,22 @@ useEffect(() => {
           <br />
           <h6 className="text-center"> Sorted by ID:</h6>
           <div className="apbox">
-            {appointments
-              .sort((a, b) => new Date(a.date) - new Date(b.date))
-              .map((appoint) => (
-                <Appointment
-                  {...appoint}
-                  key={appoint.id}
-                  index={appoint.id}
-                  onDelete={handleDelete}
-                />
-              ))}
+            <Loader loading={loading} />
+            <Error error={error} />
+            {!loading && !error ? (
+              <>
+                {appointments
+                  .sort((a, b) => new Date(a.date) - new Date(b.date))
+                  .map((appoint) => (
+                    <Appointment
+                      key={appoint.id}
+                      index={appoint.id}
+                      onDelete={handleDelete}
+                      {...appoint}
+                    />
+                  ))}
+              </>
+            ) : null}
           </div>
         </div>
       </div>

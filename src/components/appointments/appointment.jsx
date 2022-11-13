@@ -1,5 +1,5 @@
 import { memo, useCallback } from "react";
-import { toTimeInputString } from "./appointmentForm";
+import { toTimeInputString } from "./AppointmentForm";
 
 export const toHoursInputString = (time) => {
   if (!time) return null;
@@ -64,7 +64,7 @@ export default memo(function Appointment({
                 {new Date(date).toLocaleDateString("en-BE", {
                   weekday: "short",
                   year: "numeric",
-                  month: "long",
+                  month: "short",
                   day: "numeric",
                 })}
               </td>

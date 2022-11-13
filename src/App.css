@@ -482,9 +482,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 @media screen and (min-width: 1300px) {
   .landscape {
-    max-width: 1222px;
+    max-width: 2200px;
     margin: 0 auto;
     padding-top: 1em;
+  }
+
+  .mobilehide {
+    margin-left: 5em;
   }
 }
 
@@ -548,7 +552,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 .mobilehide {
-  margin-left: 2em;
+  margin-left: 3em;
 }
 
 .exercise-box {
@@ -635,9 +639,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .apbox {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: flex-start;
-  max-width: 700px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 

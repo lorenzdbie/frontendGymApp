@@ -6,7 +6,6 @@ import { updateToDateObject } from "../appointments/appointmentList";
 import { useThemeColors } from "../../contexts/Theme.context";
 
 export default function Register() {
-
   const { theme, oppositeTheme } = useThemeColors();
   const [users, setUsers] = useState(USERS);
   console.log(...users);
@@ -43,15 +42,14 @@ export default function Register() {
     // console.log("newUsers", JSON.stringify(newUsers));
   };
   return (
-    
-      <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
-        <h1 className="text-center pt-5">Registration</h1>
+    <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
+      <h1 className="text-center pt-5">Registration</h1>
 
-        <div className="d-flex flex-row justify-content-center">
-          <RegistrationForm onSaveRegistration={createAccount} />
-        </div>
+      <div className="d-flex flex-row justify-content-center">
+        <RegistrationForm onSaveRegistration={createAccount} />
+      </div>
 
-        {/* 
+      {/* 
       sorted by ID:
       <div className="container">
         
@@ -75,6 +73,6 @@ export default function Register() {
           </tbody>
         </table>
       </div> */}
-      </div>
+    </div>
   );
 }

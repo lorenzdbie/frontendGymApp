@@ -1,8 +1,8 @@
 import { memo, useCallback, useState } from "react";
-import DumbbellIntensity from "./dumbellIntensity";
-import { useForm,useFormContext ,FormProvider } from "react-hook-form";
+import DumbbellIntensity from "./DumbellIntensity";
+import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
-import { TRAININGS } from "../../api/mock-data";
+import { TRAININGS, USERS } from "../../api/mock-data";
 import { themes, useThemeColors } from "../../contexts/Theme.context";
 
 export const toDateInputString = (date) => {
@@ -31,12 +31,9 @@ const addTimeToDate = (date, time) => {
 };
 
 const labels = {
-  firstName: "First name",
-  lastName: "Last Name",
   date: "Date",
   startTime: "Start-time",
   endTime: "End-time",
-  name: "Exercise name",
   specialRequest: "Special requests",
 };
 
@@ -45,7 +42,6 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
   const { theme, oppositeTheme } = useThemeColors();
 
   const hasError = name in errors;
-
 
   return (
     <div className="d-flex flex-row my-2">
@@ -78,27 +74,62 @@ function LabelTextArea({ label, name, type, placeholder, ...rest }) {
 
   const hasError = name in errors;
 
-    return (
-      <div className="d-flex flex-column mt-0">
-        <label htmlFor={name} className="form-label col-7">
-          {labels[name]}:
-        </label>
-        <textarea
-          {...register(name, validationRules[name])}
-          id={name}
-          type={type}
-          cols="1"
-          rows="6"
-          className="form-control col rounded-5"
-          placeholder={placeholder}
-          {...rest}
-        />
-        {hasError ? (
-          <div className="form-text text-danger">{errors[name].message}</div>
-        ) : null}
-      </div>
-    );
-  
+  return (
+    <div className="d-flex flex-column mt-0">
+      <label htmlFor={name} className="form-label col-7">
+        {labels[name]}:
+      </label>
+      <textarea
+        {...register(name, validationRules[name])}
+        id={name}
+        type={type}
+        cols="1"
+        rows="6"
+        className="form-control col rounded-5"
+        placeholder={placeholder}
+        {...rest}
+      />
+      {hasError ? (
+        <div className="form-text text-danger">{errors[name].message}</div>
+      ) : null}
+    </div>
+  );
+}
+
+function UserSelect() {
+  const name = "user";
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [users, setUsers] = useState([]);
+
+  const { register, errors } = useFormContext();
+
+  const hasError = name in errors;
+
+  return (
+    <div className="d-flex flex-row  my-2">
+      <label htmlFor={name} className="form-label col-5 my-auto">
+        User:
+      </label>
+      <select
+        {...register(name)}
+        id={name}
+        className="form-select col smallOption rounded-5"
+      >
+        <option defaultChecked value="">
+          --Select User--&nbsp;&nbsp;
+        </option>
+        {USERS.map(({ id, firstName, lastName, email }) => (
+          <option key={id} value={email}>
+            {firstName + " " + lastName}
+          </option>
+        ))}
+      </select>
+      {hasError ? (
+        <div className="form-text text-danger">{errors[name].message}</div>
+      ) : null}
+    </div>
+  );
 }
 
 function ExerciseSelect() {
@@ -136,7 +167,6 @@ function ExerciseSelect() {
   );
 }
 
-
 export default memo(function AppointmentForm({
   onSaveAppointment,
   onRate = (f) => f,
@@ -157,8 +187,7 @@ export default memo(function AppointmentForm({
   const onSubmit = (data) => {
     console.log(JSON.stringify(errors));
     onSaveAppointment(
-      data.firstName,
-      data.lastName,
+      data.user,
       data.date,
       data.training,
       addTimeToDate(data.date, data.startTime),
@@ -181,7 +210,7 @@ export default memo(function AppointmentForm({
           onSubmit={handleSubmit(onSubmit)}
           className="mb-3 justify-content-md-center formContainer"
         >
-          <LabelInput
+          {/* <LabelInput
             label="firstName"
             name="firstName"
             type="text"
@@ -192,7 +221,8 @@ export default memo(function AppointmentForm({
             name="lastName"
             type="text"
             placeholder="last name"
-          />
+          /> */}
+          <UserSelect />
           <LabelInput
             label="date"
             name="date"

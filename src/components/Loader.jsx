@@ -6,7 +6,7 @@ export default function Loader({ loading }) {
   if (loading) {
     return (
       <div className={`loaderContainer bg-${theme} text-${oppositeTheme}`}>
-        <div className="d-flex flex-column justify-content-center h-100">
+        <div className="d-flex justify-content-center align-items-center">
           <div className="divSpin">
             <img
               className="dumbbellSpin resize"
