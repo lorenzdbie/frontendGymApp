@@ -3,6 +3,7 @@ import { useState } from "react";
 import { validationRules } from "../ValidationRules";
 import { themes, useThemeColors } from "../../contexts/Theme.context";
 import { BiShowAlt, BiHide } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const labels = {
   firstName: "First name",
@@ -91,7 +92,6 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
     </div>
   );
 }
-
 
 export default function RegistrationForm({ onSaveRegistration }) {
   const {
@@ -189,7 +189,10 @@ export default function RegistrationForm({ onSaveRegistration }) {
                 className="btn btn-primary rounded-5"
                 style={{ margin: "0 20px", backgroundColor: "gray" }}
               >
-                Cancel
+                <Link to={"/Login"} className="text-light">
+                  {" "}
+                  Cancel
+                </Link>
               </button>
             </div>
             <div className="btn-group float-end">

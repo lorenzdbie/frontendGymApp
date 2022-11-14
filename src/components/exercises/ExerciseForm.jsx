@@ -75,7 +75,8 @@ export default memo(function ExerciseForm({ onSaveExercise }) {
   } = useForm();
 
   const onSubmit = (data) => {
-    onSaveExercise(data.name, data.muscleGroup);
+    const { name, muscleGroup} = data;
+    onSaveExercise({name,muscleGroup});
     reset();
   };
 

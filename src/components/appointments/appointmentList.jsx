@@ -4,7 +4,7 @@ import { useCallback, useState, useEffect } from "react";
 import Appointment from "./Appointment";
 import AppointmentForm from "./AppointmentForm";
 import { useThemeColors } from "../../contexts/Theme.context";
-import * as appointmentsApi from "../../api/appointments.js";
+import * as appointmentsApi from "../../api/appointments";
 import Error from "../Error";
 import Loader from "../Loader";
 
@@ -22,28 +22,57 @@ export default function AppointmentList() {
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  //   updateToDateObject(APPOINTMENTS, "date")
-  // );
+  const [currentAppointment, setCurrentAppointment] = useState({});
 
-  // const [appointments, setAppointments] = useState(APPOINTMENTS);
+  const refreshAppointments = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const fetchedAppointments = await appointmentsApi.getAll();
+      setAppointments(fetchedAppointments);
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    } finally {
+      setLoading(false);
+      console.log("start:", appointments);
+    }
+  }, []);
+
+  const setAppointmentToUpdate = useCallback(
+    (id) => {
+      // console.log("setting appointment to update with id: ", id);
+      // console.log("type of id: ", typeof id);
+      // console.log("value of appointments[0]: ", appointments[0]);
+      // for (let i = 0; i < appointments.length; i++) {
+      //   if (appointments[i].id === id) {
+      //     console.log(appointments[i]);
+      //     const selectedAppointment = appointments[i];
+      //     setCurrentAppointment({selectedAppointment});
+      //     console.log("currentAppointment: ", currentAppointment);
+      //     break;
+      //   }
+      // }
+      const selectedAppointment = appointments.find(
+        (appointment) => appointment.id === id
+      );
+      // console.log("selectedAppointment: ", selectedAppointment);
+      setCurrentAppointment(selectedAppointment);
+      // console.log("currentAppointment: ", currentAppointment);
+
+      // console.log("appointments: ", appointments);
+      // console.log("currentAppointment: ", currentAppointment);
+      // console.log(`Current Appointment with id ${id} is set`);
+      // console.log({ ...currentAppointment });
+    },
+    [appointments]
+  );
 
   useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const fetchedAppointments = await appointmentsApi.getAll();
-        setAppointments(fetchedAppointments);
-      } catch (error) {
-        console.error(error);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-      console.log(appointments);
-    };
-    fetchAppointments();
-  }, []);
+    refreshAppointments();
+    // console.log("start:", appointments);
+    console.log("currentAppointment: ", currentAppointment);
+  }, [refreshAppointments, currentAppointment]);
 
   const handleDelete = useCallback(async (idToDelete) => {
     try {
@@ -59,67 +88,38 @@ export default function AppointmentList() {
     }
   }, []);
 
-  console.log(...appointments);
-
-  const createAppointment = (
-    email,
-    date,
-    trainingName,
-    startTime,
-    endTime,
-    intensity,
-    specialRequest
-  ) => {
-    const newAppointments = [
-      {
-        id: Number(Math.max(...appointments.map((e) => e.id)) + 1),
-        date: new Date(date),
-        user: {
-          id: Number(USERS.filter((e) => e.email === email).map((e) => e.id)),
-          firstName: String(
-            USERS.filter((e) => e.email === email).map((e) => e.firstName)
-          ),
-          lastName: String(
-            USERS.filter((e) => e.email === email).map((e) => e.lastName)
-          ),
-          email,
-        },
-        training: {
-          id: Number(
-            TRAININGS.filter((e) => e.name === trainingName).map((e) => e.id)
-          ),
-          name: trainingName,
-          muscleGroup: String(
-            TRAININGS.filter((e) => e.name === trainingName).map(
-              (e) => e.muscleGroup
-            )
-          ),
-        },
-        startTime,
-        endTime,
-        intensity,
-        specialRequest,
-      },
-      ...appointments,
-    ];
-
-    setAppointments(newAppointments);
-    console.log("appointments", JSON.stringify(appointments));
-    console.log("newAppointments", JSON.stringify(newAppointments));
-  };
+  const handleSaveAppointment = useCallback(
+    async (appointment) => {
+      try {
+        setError(null);
+        await appointmentsApi.save({ ...appointment });
+        setCurrentAppointment({});
+        await refreshAppointments();
+      } catch (error) {
+        console.error(error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [refreshAppointments]
+  );
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
       <h1 className="pt-5 text-center">Appointments</h1>
       <div className="landscape">
         <div className="formContainer">
-          <AppointmentForm onSaveAppointment={createAppointment} />
+          <AppointmentForm
+            onSaveAppointment={handleSaveAppointment}
+            currentAppointment={currentAppointment}
+          />
         </div>
 
         <div className="mobilehide">
           <h2 className="text-center">Appointment List</h2>
           <br />
-          <h6 className="text-center"> Sorted by ID:</h6>
+          <h6 className="text-center"> Sorted by date:</h6>
           <div className="apbox">
             <Loader loading={loading} />
             <Error error={error} />
@@ -130,9 +130,9 @@ export default function AppointmentList() {
                   .map((appoint) => (
                     <Appointment
                       key={appoint.id}
-                      index={appoint.id}
-                      onDelete={handleDelete}
                       {...appoint}
+                      onDelete={handleDelete}
+                      onEdit={setAppointmentToUpdate}
                     />
                   ))}
               </>

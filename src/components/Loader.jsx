@@ -5,8 +5,8 @@ export default function Loader({ loading }) {
   const { theme, oppositeTheme } = useThemeColors();
   if (loading) {
     return (
-      <div className={`loaderContainer bg-${theme} text-${oppositeTheme}`}>
-        <div className="d-flex justify-content-center align-items-center">
+      <div className={`d-flex flex-column bg-${theme} text-${oppositeTheme}`}>
+    
           <div className="divSpin">
             <img
               className="dumbbellSpin resize"
@@ -27,7 +27,6 @@ export default function Loader({ loading }) {
             <span className="loading">.</span>
           </div>
         </div>
-      </div>
     );
   }
 

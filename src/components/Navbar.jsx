@@ -8,9 +8,9 @@ const NavItem = ({ label, to }) => {
 
   return (
     <li className={`nav-item mx-2 text-${oppositeTheme}`}>
-      {/* <Link to={to} className={`nav-link active text-${oppositeTheme}`}> */}
-      {label}
-      {/* </Link> */}
+      <Link to={to} className={`nav-link active text-${oppositeTheme}`}>
+        {label}
+      </Link>
     </li>
   );
 };
@@ -45,9 +45,9 @@ export default memo(function Navbar() {
           </div>
 
           <ul className="navbar-nav ml-auto me-auto mb-lg-0">
-            <NavItem label="Exercises" to="/" />
+            <NavItem label="Exercises" to="/exercises" />
             <NavItem label="Appointments" to="/appointments" />
-            <NavItem label="profile" to="/profile" />
+            <NavItem label="Home" to="/" />
           </ul>
         </div>
       </div>

@@ -3,6 +3,8 @@ import { validationRules } from "../ValidationRules";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import { themes, useThemeColors } from "../../contexts/Theme.context";
 import { BiShowAlt, BiHide } from "react-icons/bi";
+import Register from "./Register";
+import { Link } from "react-router-dom";
 
 const labels = {
   email: "E-mail",
@@ -22,10 +24,10 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
     };
 
     return (
-      <div className="d-flex flex-row my-2">
-        <label htmlFor={name} className="form-label col-5 my-auto ">
+      <div className="d-flex flex-col mb-4">
+        {/* <label htmlFor={name} className="form-label col-5 my-auto hide">
           {labels[name]}:
-        </label>
+        </label> */}
         <div className="password my-auto d-flex">
           <input
             {...register(name, validationRules[name])}
@@ -47,10 +49,10 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
   }
 
   return (
-    <div className="d-flex flex-row my-2">
-      <label htmlFor={name} className="form-label col-5 my-auto ">
+    <div className="d-flex flex-col my-3">
+      {/* <label htmlFor={name} className="form-label col-5 my-auto ">
         {labels[name]}:
-      </label>
+      </label> */}
       <input
         {...register(name, validationRules[name])}
         id={name}
@@ -72,11 +74,10 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
   );
 }
 
-
 export default function LoginForm({ onSaveLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { theme} = useThemeColors();
+  const { theme } = useThemeColors();
 
   const {
     register,
@@ -95,18 +96,17 @@ export default function LoginForm({ onSaveLogin }) {
     <>
       <div className="d-flex flex-row justify-content-center mb-3">
         <picture>
-
-        {theme === themes.dark ? 
+          {theme === themes.dark ? (
             <img
               src="/src/assets/LogoSmallInvert-removebg.png"
               alt="logo loginScreen"
             />
-           : 
-            <img src="/src/assets/LogoSmall-removebg.png" alt="logo loginScreen" />
-          }
-
-
-          
+          ) : (
+            <img
+              src="/src/assets/LogoSmall-removebg.png"
+              alt="logo loginScreen"
+            />
+          )}
         </picture>
       </div>
       <h2 className="text-center">Login / SignUp</h2>
@@ -116,10 +116,7 @@ export default function LoginForm({ onSaveLogin }) {
           errors={errors}
           register={register}
         >
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="mb-3 justify-content-md-center formContainer loginlabels"
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="">
             <LabelInput
               label="email"
               name="email"
@@ -144,11 +141,13 @@ export default function LoginForm({ onSaveLogin }) {
               </button>
               <button
                 type="button"
-                onClick=""
                 className="btn btn-primary rounded-5"
                 style={{ margin: "0 auto", backgroundColor: "red" }}
               >
-                SignUp
+                <Link to={"/register"} className="text-light">
+                  {" "}
+                  SignUp
+                </Link>
               </button>
             </div>
           </form>

@@ -18,7 +18,7 @@ const Dumbbell = memo(({ index, selected = false, onSelect = (f) => f }) => {
 
 export default memo(function DumbbellIntensity({
   totalDumbbells = 5,
-  selectedDumbbells = 0,
+  selectedDumbbells,
   onRate,
 }) {
   const dumbbells = useMemo(() => [...Array(totalDumbbells)], [totalDumbbells]);

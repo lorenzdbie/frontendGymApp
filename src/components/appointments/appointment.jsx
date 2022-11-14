@@ -1,5 +1,7 @@
 import { memo, useCallback } from "react";
 import { toTimeInputString } from "./AppointmentForm";
+import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
+import { useThemeColors } from "../../contexts/Theme.context";
 
 export const toHoursInputString = (time) => {
   if (!time) return null;
@@ -21,8 +23,11 @@ export default memo(function Appointment({
   intensity,
   specialRequest,
   onDelete,
+  onEdit,
 }) {
   console.log("rendering appointment...");
+
+  const { theme, oppositeTheme } = useThemeColors();
 
   const handleDelete = useCallback(
     (event) => {
@@ -32,20 +37,35 @@ export default memo(function Appointment({
     [id, onDelete]
   );
 
+  const handleUpdate = useCallback(
+    (event) => {
+      event.preventDefault();
+      console.log("to update id: ", id);
+      onEdit(id);
+    },
+    [id, onEdit]
+  );
+
   return (
     <div className="appointment-box">
       <div className="appoitment-boxHead">
         <div>
           <span>Appointment # {id}</span>
         </div>
-        <div>
+        <div className="btn-group float-end">
           <button
             type="button"
-            className="close"
-            aria-label="Close"
+            className={`btn btn-${theme}`}
+            onClick={handleUpdate}
+          >
+            <IoPencilOutline />
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger"
             onClick={handleDelete}
           >
-            <span aria-hidden="true">&times;</span>
+            <IoTrashOutline />
           </button>
         </div>
       </div>

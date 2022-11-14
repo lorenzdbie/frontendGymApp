@@ -1,15 +1,41 @@
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState, useEffect, useMemo } from "react";
 import Exercise from "./Exercise";
 import { TRAININGS } from "../../api/mock-data";
 import ExerciseForm from "./ExerciseForm";
 import { useThemeColors } from "../../contexts/Theme.context";
+import * as exercisesApi from "../../api/exercises";
+import Loader from "../Loader";
+import Error from "../Error";
 
 export default function ExerciseList() {
   const { theme, oppositeTheme } = useThemeColors();
 
-  const [exercises, setExercises] = useState(TRAININGS);
+  const [exercises, setExercises] = useState([]);
   const [text, setText] = useState("");
   const [search, setSearch] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+const refreshExercises = useCallback(async () => {
+
+    try {
+      setLoading(true);
+      setError(null);
+      const fetchedExercises = await exercisesApi.getAll();
+      setExercises(fetchedExercises);
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+
+  useEffect(() => {
+    refreshExercises();
+  }, [refreshExercises]);
+
 
   const filteredExercises = useMemo(
     () =>
@@ -27,28 +53,51 @@ export default function ExerciseList() {
     setTimeout(setSearch(text), 1500);
   };
 
-  const createExercise = useCallback(
-    (name, muscleGroup) => {
-      const newExercises = [
-        ...exercises,
-        {
-          id: Number(Math.max(...exercises.map((e) => e.id)) + 1),
-          name,
-          muscleGroup,
-        },
-      ];
-      setExercises(newExercises);
-      console.log("newExercises", JSON.stringify(newExercises));
-    },
-    [exercises]
-  );
 
-  function CreateExerciseList({ exercises }) {
-    const handleDelete = (id) => {
-      console.log("onDeleteConfirm", id);
-      const newExercises = exercises.filter((e) => e.id !== id);
-      setExercises(newExercises);
-    };
+  const handleDelete = useCallback(async (idToDelete) => {
+    try {
+      setError(null);
+      await exercisesApi.deleteById(idToDelete);
+      console.log("deleted exercise with id: ", idToDelete);
+      setExercises((exercises) => exercises.filter((exercise) => exercise.id !== idToDelete));
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    }
+  }, [])
+
+
+  const createExercise = useCallback(async (exercise) => {
+    try {
+      setError(null);
+      await exercisesApi.save({...exercise,});
+      await refreshExercises();
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    }finally{
+      setLoading(false);
+    }
+  }, [refreshExercises]);
+  
+
+  // const createExercise = useCallback(
+  //   (name, muscleGroup) => {
+  //     const newExercises = [
+  //       ...exercises,
+  //       {
+  //         id: Number(Math.max(...exercises.map((e) => e.id)) + 1),
+  //         name,
+  //         muscleGroup,
+  //       },
+  //     ];
+  //     setExercises(newExercises);
+  //     console.log("newExercises", JSON.stringify(newExercises));
+  //   },
+  //   [exercises]
+  // );
+
+  function CreateExerciseList({ exercises, onDelete }) {
 
     if (exercises.length === 0) {
       return <div className="exbox">"there are no exercises"</div>;
@@ -57,14 +106,20 @@ export default function ExerciseList() {
       <>
         <h6 className="text-center"> Sorted by ID:</h6>
         <div className={`exbox`}>
+          <Loader loading={loading} />
+          <Error error={error} />
+          {!loading && !error ?(
+          <>
           {exercises.map((ex) => (
             <Exercise
               {...ex}
               key={ex.id}
               index={ex.id}
-              onDelete={handleDelete}
+              onDelete={onDelete}
             />
           ))}
+          </>
+          ) : null}
         </div>
       </>
     );
@@ -89,23 +144,10 @@ export default function ExerciseList() {
         <div className="formContainer">
           <ExerciseForm onSaveExercise={createExercise} />
         </div>
-
         <div className="mobilehide">
           <h2 className="text-center">Exercise List</h2>
           <br />
-
-          <CreateExerciseList exercises={filteredExercises} />
-          {/* <h6> Sorted by ID:</h6>
-          <div className="exbox">
-            {exercises.map((ex) => (
-              <Exercise
-                {...ex}
-                key={ex.id}
-                index={ex.id}
-                onDelete={handleDelete}
-              />
-            ))}
-          </div> */}
+          <CreateExerciseList exercises={filteredExercises} onDelete={handleDelete} />
         </div>
       </div>
     </div>
