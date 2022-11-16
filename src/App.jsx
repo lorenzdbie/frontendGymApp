@@ -1,12 +1,13 @@
 import "./App.css";
-import ExerciseList from "./components/exercises/ExerciseList";
-import {Routes, Route, Navigate} from "react-router-dom";
-import AppointmentList from "./components/appointments/appointmentList";
-import NotFound from "./components/NotFound";
-import Register from "./components/users/Register";
-import Login from "./components/users/Login";
-import Navbar from "./components/Navbar";
 import React from "react";
+import {Routes, Route, Navigate} from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Login from "./components/users/Login";
+import Register from "./components/users/Register";
+import AppointmentList from "./components/appointments/appointmentList";
+import ExerciseList from "./components/exercises/ExerciseList";
+import UserList from "./components/users/UserList";
+import NotFound from "./components/NotFound";
 import {useThemeColors } from "./contexts/Theme.context";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/appointments/edit/:id" element={<AppointmentList/>}/>
         <Route path="/exercises" element={<ExerciseList/>}/>
         <Route path="/exercises/edit/:id" element={<ExerciseList/>}/>
+        <Route path="/users" element={<UserList/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
 

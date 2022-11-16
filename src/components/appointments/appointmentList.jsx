@@ -1,5 +1,3 @@
-import { TRAININGS, USERS } from "../../api/mock-data";
-// import { APPOINTMENTS } from "../../api/mock-data";
 import { useCallback, useState, useEffect } from "react";
 import Appointment from "./Appointment";
 import AppointmentForm from "./AppointmentForm";
@@ -34,7 +32,6 @@ export default function AppointmentList() {
       setError(error);
     } finally {
       setLoading(false);
-      console.log("start:", appointments);
     }
   }, []);
 

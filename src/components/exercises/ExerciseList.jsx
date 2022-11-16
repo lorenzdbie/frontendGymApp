@@ -1,6 +1,5 @@
 import { useCallback, useState, useEffect, useMemo } from "react";
 import Exercise from "./Exercise";
-import { TRAININGS } from "../../api/mock-data";
 import ExerciseForm from "./ExerciseForm";
 import { useThemeColors } from "../../contexts/Theme.context";
 import * as exercisesApi from "../../api/exercises";
@@ -9,7 +8,6 @@ import Error from "../Error";
 
 export default function ExerciseList() {
   const { theme, oppositeTheme } = useThemeColors();
-
   const [exercises, setExercises] = useState([]);
   const [text, setText] = useState("");
   const [search, setSearch] = useState("");
@@ -142,7 +140,7 @@ const refreshExercises = useCallback(async () => {
       <h1 className="mt-5 text-center">Exercises</h1>
       <div className="landscape">
         <div className="formContainer">
-          <ExerciseForm onSaveExercise={createExercise} />
+          <ExerciseForm refreshExercises={refreshExercises} />
         </div>
         <div className="mobilehide">
           <h2 className="text-center">Exercise List</h2>

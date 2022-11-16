@@ -1,9 +1,10 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { memo } from "react";
 import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
 import * as exercisesApi from "../../api/exercises";
 import { useNavigate, useParams } from "react-router";
+import { useEffect } from "react";
 
 const labels = {
   name: "Exercise name",
@@ -39,7 +40,7 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
       ) : null}
     </div>
   );
-};
+}
 
 function LabelTextArea({ label, name, type, placeholder, ...rest }) {
   const { register, errors } = useFormContext();
@@ -66,29 +67,67 @@ function LabelTextArea({ label, name, type, placeholder, ...rest }) {
       ) : null}
     </div>
   );
-};
+}
 
-export default memo(function ExerciseForm({ onSaveExercise }) {
+export default memo(function ExerciseForm({ refreshExercises }) {
+  const [error, setError] = useState(null);
   const {
+    setValue,
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const { name, muscleGroup} = data;
-    onSaveExercise({name,muscleGroup});
-    reset();
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const onSubmit = async (data) => {
+    const { name, muscleGroup } = data;
+
+    try {
+      setError(null);
+      await exercisesApi.save({ id, name, muscleGroup });
+      refreshExercises();
+      navigate("/exercises");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
   };
+
+  useEffect(() => {
+    if (!id) {
+      reset();
+      return;
+    }
+
+    const fetchExercise = async () => {
+      try{
+        setError(null);
+        const exercise = await exercisesApi.getById(id);
+        setValue("name", exercise.name);
+        setValue("muscleGroup", exercise.muscleGroup);
+      } catch (error) {
+        console.log(error);
+        setError(error.message);
+      }
+    };
+    fetchExercise();
+    refreshExercises();
+  }, [id, setValue, reset]);
+    
 
   return (
     <div className="d-flex flex-column col-12 ">
-      <h2 className="text-center">Add exercise</h2>
+      <h2 className="text-center">
+        {id ? "Save exercise: " : "Add exercise: "}
+      </h2>
       <FormProvider
         handleSubmit={handleSubmit}
         errors={errors}
         register={register}
+        isSubmitting={isSubmitting}
       >
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -108,8 +147,12 @@ export default memo(function ExerciseForm({ onSaveExercise }) {
           />
           <div className="clearfix my-4 d-flex flex-row justify-content-center">
             <div className="btn-group">
-              <button type="submit" className="btn btn-primary rounded-5">
-                Add Exercise
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn btn-primary rounded-5"
+              >
+                {id ? "Save exercise" : "Add exercise"}
               </button>
             </div>
           </div>

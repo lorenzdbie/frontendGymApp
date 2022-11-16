@@ -415,12 +415,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   #body {
     width: 100%;
-    min-width: 500px;
+    min-width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
     padding: auto;
+  }
+
+  .fullscreen{
+    width: 100%;
+    min-width: 380px;
+    min-height: 100%;
+    display: block;
+    margin: 0;
   }
 
   #App {
@@ -459,6 +467,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   .mobilehide {
     display: none;
+  }
+
+  .usertable {
+    overflow: scroll;
   }
 }
 
@@ -664,7 +676,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin: auto;
   color: white;
 }
-
 
 tr > td:first-child {
   width: 35%;

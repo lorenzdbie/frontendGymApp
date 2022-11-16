@@ -47,6 +47,7 @@ export default memo(function Navbar() {
           <ul className="navbar-nav ml-auto me-auto mb-lg-0">
             <NavItem label="Exercises" to="/exercises" />
             <NavItem label="Appointments" to="/appointments" />
+            <NavItem label="Users" to="/users" />
             <NavItem label="Home" to="/" />
           </ul>
         </div>

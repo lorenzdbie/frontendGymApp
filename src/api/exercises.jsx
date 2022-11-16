@@ -8,11 +8,18 @@ export const getAll = async () => {
   return data.trainings;
 };
 
+export const getById = async (id) => {
+  const { data } = await axios.get(`${baseUrl}/${id}`);
+  console.log(data);
+  return data;
+};
+
 export const deleteById = async (id) => {
   await axios.delete(`${baseUrl}/${id}`);
 };
 
 export const save = async (training) => {
+  console.log(training);
   const { id, ...values } = training;
 
   await axios({
@@ -20,4 +27,4 @@ export const save = async (training) => {
     url: `${baseUrl}/${id ?? ""}`,
     data: values,
   });
-}
+};
