@@ -16,15 +16,17 @@ function App() {
     <>
     <div className={`bg-${theme} text-${oppositeTheme}`}>
       <Navbar/>
-      {/* <AppointmentList/> */}
+     
 
 
       <Routes>
         <Route path="/" element={<Navigate to="/Login"/>}/>
-        <Route path="/appointments" element={<AppointmentList/>}/>
-        <Route path="/exercises" element={<ExerciseList/>}/>
-        <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/appointments" element={<AppointmentList/>}/>
+        <Route path="/appointments/edit/:id" element={<AppointmentList/>}/>
+        <Route path="/exercises" element={<ExerciseList/>}/>
+        <Route path="/exercises/edit/:id" element={<ExerciseList/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
 

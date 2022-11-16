@@ -135,6 +135,7 @@ export default function LoginForm({ onSaveLogin }) {
               <button
                 type="submit"
                 className="btn btn-primary rounded-5"
+                data-cy="submit_login"
                 style={{ margin: "0 auto", backgroundColor: "blue" }}
               >
                 Login
@@ -142,6 +143,7 @@ export default function LoginForm({ onSaveLogin }) {
               <button
                 type="button"
                 className="btn btn-primary rounded-5"
+                data-cy="signUp"
                 style={{ margin: "0 auto", backgroundColor: "red" }}
               >
                 <Link to={"/register"} className="text-light">

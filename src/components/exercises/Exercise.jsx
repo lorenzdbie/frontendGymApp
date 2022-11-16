@@ -1,10 +1,13 @@
 import { memo, useCallback } from "react";
-// import { useThemeColors } from "../../contexts/Themecontext";
+import { Link } from 'react-router-dom';
+import { useThemeColors } from "../../contexts/Theme.context";
+
+import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 
 export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
   console.log("rendering exercise...");
 
-  // const { theme, oppositeTheme } = useThemeColors();
+  const { theme } = useThemeColors();
 
   const handleDelete = useCallback(
     (event) => {
@@ -19,14 +22,20 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
       <div className="exercise-boxHead">
         <div>{id}</div>
         <div>{name}</div>
-        <div>
+        <div className="btn-group float-end">
+          <Link
+            type="button"
+            className={`btn btn-${theme}`}
+            to={`/exercises/edit/${id}`}
+          >
+            <IoPencilOutline />
+          </Link>
           <button
             type="button"
-            className="close"
-            aria-label="Close"
+            className="btn btn-danger"
             onClick={handleDelete}
           >
-            <span aria-hidden="true">&times;</span>
+            <IoTrashOutline />
           </button>
         </div>
       </div>

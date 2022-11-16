@@ -18,7 +18,7 @@ export default function NotFound() {
       <div className=" f-flex flex-row justify-content-center">
         <header
           className={`text-center text-${oppositeTheme}`}
-          Style="font-size:4em"
+          style={{fontSize:"4em"}}
         >
           Page not found!!!
         </header>

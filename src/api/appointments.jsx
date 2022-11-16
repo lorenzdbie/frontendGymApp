@@ -7,6 +7,11 @@ export const getAll = async () => {
   // console.log(data.appointments);
   return data.appointments;
 };
+export const getById = async (id) => {
+  const { data } = await axios.get(`${baseUrl}/${id}`);
+  console.log(data);
+  return data;
+};
 
 export const deleteById = async (id) => {
   await axios.delete(`${baseUrl}/${id}`);

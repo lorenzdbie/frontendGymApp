@@ -2,6 +2,7 @@ import { memo, useCallback } from "react";
 import { toTimeInputString } from "./AppointmentForm";
 import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 import { useThemeColors } from "../../contexts/Theme.context";
+import { Link } from 'react-router-dom';
 
 export const toHoursInputString = (time) => {
   if (!time) return null;
@@ -23,11 +24,10 @@ export default memo(function Appointment({
   intensity,
   specialRequest,
   onDelete,
-  onEdit,
 }) {
   console.log("rendering appointment...");
 
-  const { theme, oppositeTheme } = useThemeColors();
+  const { theme } = useThemeColors();
 
   const handleDelete = useCallback(
     (event) => {
@@ -37,29 +37,21 @@ export default memo(function Appointment({
     [id, onDelete]
   );
 
-  const handleUpdate = useCallback(
-    (event) => {
-      event.preventDefault();
-      console.log("to update id: ", id);
-      onEdit(id);
-    },
-    [id, onEdit]
-  );
 
   return (
-    <div className="appointment-box">
+    <div className="appointment-box" cy-data="appointment" >
       <div className="appoitment-boxHead">
         <div>
-          <span>Appointment # {id}</span>
+          <span cy-data="appointment_id" >Appointment # {id}</span>
         </div>
         <div className="btn-group float-end">
-          <button
+          <Link
             type="button"
             className={`btn btn-${theme}`}
-            onClick={handleUpdate}
+            to={`/appointments/edit/${id}`}
           >
             <IoPencilOutline />
-          </button>
+          </Link>
           <button
             type="button"
             className="btn btn-danger"
@@ -75,11 +67,11 @@ export default memo(function Appointment({
           <tbody>
             <tr>
               <td>Trainee:</td>
-              <td>{user.firstName + " " + user.lastName}</td>
+              <td cy-data="appointment_user" >{user.firstName + " " + user.lastName}</td>
             </tr>
             <tr>
               <td>Date:</td>
-              <td>
+              <td cy-data="appointment_date">
                 {" "}
                 {new Date(date).toLocaleDateString("en-BE", {
                   weekday: "short",
@@ -90,22 +82,22 @@ export default memo(function Appointment({
               </td>
             </tr>
             <tr>
-              <td>Training</td>
-              <td>{training.muscleGroup}</td>
+              <td>Training:</td>
+              <td cy-data="appointment_training">{training.name}</td>
             </tr>
             <tr>
               <td>Starts at:</td>
-              <td>{toTimeInputString(startTime)}</td>
+              <td cy-data="appointment_startTime">{toTimeInputString(startTime)}</td>
             </tr>
             <tr>
               <td>Duration:</td>
-              <td>
+              <td cy-data="appointment_duration">
                 {toHoursInputString(new Date(endTime) - new Date(startTime))}{" "}
                 hours
               </td>
             </tr>
             <tr>
-              <td>intensity</td>
+              <td>intensity: </td>
               <td>{intensity}</td>
             </tr>
             {specialRequest ? (

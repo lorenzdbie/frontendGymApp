@@ -2,6 +2,8 @@
 import { memo } from "react";
 import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
+import * as exercisesApi from "../../api/exercises";
+import { useNavigate, useParams } from "react-router";
 
 const labels = {
   name: "Exercise name",

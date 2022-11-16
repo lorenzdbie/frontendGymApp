@@ -7,8 +7,10 @@ import {
   Controller,
 } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
-import * as exercisesApi from "../../api/exercises";
+import * as appointmentsApi from "../../api/appointments";
+
 import * as usersApi from "../../api/users";
+import { useNavigate, useParams } from "react-router";
 import Error from "../Error";
 
 export const toDateInputString = (date) => {
@@ -236,9 +238,9 @@ function ExerciseSelect() {
 }
 
 export default memo(function AppointmentForm({
-  currentAppontment,
-  onSaveAppointment,
+  refreshAppointments,
 }) {
+  const [error, setError] = useState(null);
   const {
     setValue,
     register,
@@ -251,9 +253,10 @@ export default memo(function AppointmentForm({
       intensity: 0,
     },
   });
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  const onSubmit = (data) => {
-    console.log(JSON.stringify(errors));
+  const onSubmit = async (data) => {
     const {
       date,
       user,
@@ -266,63 +269,58 @@ export default memo(function AppointmentForm({
     const start = addTimeToDate(date, startTime);
     const end = addTimeToDate(date, endTime);
 
-    let appointment = {
-      userId: user,
-      date: new Date(date),
-      trainingId: training,
-      startTime: new Date(start),
-      endTime: new Date(end),
-      intensity: parseInt(intensity),
-      specialRequest,
-    };
-    onSaveAppointment({ ...appointment, id: currentAppontment?.id });
-    reset();
+    try {
+      setError(null);
+      await appointmentsApi.save({
+        id,
+        userId: user,
+        date: new Date(date),
+        trainingId: training,
+        startTime: new Date(start),
+        endTime: new Date(end),
+        intensity: parseInt(intensity),
+        specialRequest,
+      });
+      refreshAppointments();
+      navigate("/appointments");
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
   };
 
   useEffect(() => {
-    if (
-      currentAppontment &&
-      (Object.keys(currentAppontment).length !== 0 ||
-        currentAppontment.constructor !== Object)
-    ) {
-      const dateAsString = toDateInputString(new Date(currentAppontment.date));
-      const startTimeAsString = toTimeInputString(
-        new date(currentAppontment.startTime)
-      );
-      const endTimeAsString = toTimeInputString(
-        new date(currentAppontment.endTime)
-      );
-      console.log("appointmentId: ", currentAppontment.id);
-
-      setValue("user", `${currentAppontment.user.id}`);
-      console.log("user id: ", currentAppontment.user.id);
-
-      setValue("date", dateAsString);
-      console.log("date: ", dateAsString);
-
-      setValue("startTime", startTimeAsString);
-      console.log("startTime: ", startTimeAsString);
-
-      setValue("endTime", endTimeAsString);
-      console.log("endTime: ", endTimeAsString);
-
-      setValue("training", `${currentAppontment.training.id}`);
-      console.log("training: ", currentAppontment.training.id);
-
-      setValue("intensity", currentAppontment.intensity);
-      console.log("intensity: ", currentAppontment.intensity);
-
-      setValue("specialRequest", currentAppontment.specialRequest);
-      console.log("specialRequest: ", currentAppontment.specialRequest);
-    } else {
+    if (!id) {
       reset();
+      return;
     }
-  }, [currentAppontment, setValue, reset]);
+    const fetchAppointment = async () => {
+      try {
+        setError(null);
+        const appointment = await appointmentsApi.getById(id);
+        setValue("user", `${appointment.user.id}`);
+        setValue("date", toDateInputString(new Date(appointment.date)));
+        setValue(
+          "startTime",
+          toTimeInputString(new Date(appointment.startTime))
+        );
+        setValue("endTime", toTimeInputString(new Date(appointment.endTime)));
+        setValue("training", `${appointment.training.id}`);
+        setValue("intensity", appointment.intensity);
+        setValue("specialRequest", appointment.specialRequest);
+      } catch (error) {
+        console.log(error);
+        setError(error);
+      }
+    };
+    fetchAppointment();
+    refreshAppointments();
+  }, [id, reset, setValue]);
 
   return (
     <div className="d-flex flex-column col-12 ">
       <h2 className="text-center">
-        {currentAppontment?.id ? "Save appointment:" : "Add appointment:"}
+        {id ? "Save appointment:" : "Add appointment:"}
       </h2>
       <FormProvider
         handleSubmit={handleSubmit}
@@ -335,12 +333,13 @@ export default memo(function AppointmentForm({
           onSubmit={handleSubmit(onSubmit)}
           className="mb-3 justify-content-md-center formContainer"
         >
-          <UserSelect />
+          <UserSelect data-cy="user_input" />
           <LabelInput
             label="date"
             name="date"
             type="date"
             defaultValue={new Date().toISOString().slice(0, 10)}
+            cy-data="date_input"
           />
           <LabelInput
             label="startTime"
@@ -349,6 +348,7 @@ export default memo(function AppointmentForm({
             defaultValue={new Date().toISOString().slice(11, 16)}
             min="08:00"
             max="18:30"
+            cy-data="startTime_input"
           />
           <LabelInput
             label="endTime"
@@ -357,10 +357,11 @@ export default memo(function AppointmentForm({
             defaultValue={new Date().toISOString().slice(11, 16)}
             min="08:30"
             max="19:00"
+            cy-data="endTime_input"
           />
-          <ExerciseSelect />
+          <ExerciseSelect cy-data="training_input" />
 
-          <IntensetySelect />
+          <IntensetySelect cy-data="intensity_input" />
 
           <LabelTextArea
             label="specialRequest"
@@ -369,6 +370,7 @@ export default memo(function AppointmentForm({
             cols="1"
             rows="6"
             placeholder="special request"
+            cy-data="specialRequest_input"
           />
           <div className="clearfix  my-4 d-flex flex-row justify-content-center">
             <div className="btn-group">
@@ -376,8 +378,9 @@ export default memo(function AppointmentForm({
                 type="submit"
                 disabled={isSubmitting}
                 className="btn btn-primary rounded-5"
+                data-cy="submit_appointment"
               >
-                {currentAppontment?.id ? "Save appointment" : "Add appointment"}
+                {id ? "Save appointment" : "Add appointment"}
               </button>
             </div>
           </div>

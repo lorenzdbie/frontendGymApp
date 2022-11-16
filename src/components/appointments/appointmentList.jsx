@@ -22,7 +22,6 @@ export default function AppointmentList() {
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [currentAppointment, setCurrentAppointment] = useState({});
 
   const refreshAppointments = useCallback(async () => {
     try {
@@ -39,40 +38,39 @@ export default function AppointmentList() {
     }
   }, []);
 
-  const setAppointmentToUpdate = useCallback(
-    (id) => {
-      // console.log("setting appointment to update with id: ", id);
-      // console.log("type of id: ", typeof id);
-      // console.log("value of appointments[0]: ", appointments[0]);
-      // for (let i = 0; i < appointments.length; i++) {
-      //   if (appointments[i].id === id) {
-      //     console.log(appointments[i]);
-      //     const selectedAppointment = appointments[i];
-      //     setCurrentAppointment({selectedAppointment});
-      //     console.log("currentAppointment: ", currentAppointment);
-      //     break;
-      //   }
-      // }
-      const selectedAppointment = appointments.find(
-        (appointment) => appointment.id === id
-      );
-      // console.log("selectedAppointment: ", selectedAppointment);
-      setCurrentAppointment(selectedAppointment);
-      // console.log("currentAppointment: ", currentAppointment);
+  // const setAppointmentToUpdate = useCallback(
+  //   (id) => {
+  //     // console.log("setting appointment to update with id: ", id);
+  //     // console.log("type of id: ", typeof id);
+  //     // console.log("value of appointments[0]: ", appointments[0]);
+  //     // for (let i = 0; i < appointments.length; i++) {
+  //     //   if (appointments[i].id === id) {
+  //     //     console.log(appointments[i]);
+  //     //     const selectedAppointment = appointments[i];
+  //     //     setCurrentAppointment({selectedAppointment});
+  //     //     console.log("currentAppointment: ", currentAppointment);
+  //     //     break;
+  //     //   }
+  //     // }
+  //     const selectedAppointment = appointments.find(
+  //       (appointment) => appointment.id === id
+  //     );
+  //     // console.log("selectedAppointment: ", selectedAppointment);
+  //     setCurrentAppointment(selectedAppointment);
+  //     // console.log("currentAppointment: ", currentAppointment);
 
-      // console.log("appointments: ", appointments);
-      // console.log("currentAppointment: ", currentAppointment);
-      // console.log(`Current Appointment with id ${id} is set`);
-      // console.log({ ...currentAppointment });
-    },
-    [appointments]
-  );
+  //     // console.log("appointments: ", appointments);
+  //     // console.log("currentAppointment: ", currentAppointment);
+  //     // console.log(`Current Appointment with id ${id} is set`);
+  //     // console.log({ ...currentAppointment });
+  //   },
+  //   [appointments]
+  // );
 
   useEffect(() => {
     refreshAppointments();
-    // console.log("start:", appointments);
-    console.log("currentAppointment: ", currentAppointment);
-  }, [refreshAppointments, currentAppointment]);
+
+  }, [refreshAppointments]);
 
   const handleDelete = useCallback(async (idToDelete) => {
     try {
@@ -88,32 +86,13 @@ export default function AppointmentList() {
     }
   }, []);
 
-  const handleSaveAppointment = useCallback(
-    async (appointment) => {
-      try {
-        setError(null);
-        await appointmentsApi.save({ ...appointment });
-        setCurrentAppointment({});
-        await refreshAppointments();
-      } catch (error) {
-        console.error(error);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [refreshAppointments]
-  );
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
       <h1 className="pt-5 text-center">Appointments</h1>
       <div className="landscape">
         <div className="formContainer">
-          <AppointmentForm
-            onSaveAppointment={handleSaveAppointment}
-            currentAppointment={currentAppointment}
-          />
+          <AppointmentForm refreshAppointments={refreshAppointments} />
         </div>
 
         <div className="mobilehide">
@@ -132,7 +111,7 @@ export default function AppointmentList() {
                       key={appoint.id}
                       {...appoint}
                       onDelete={handleDelete}
-                      onEdit={setAppointmentToUpdate}
+                      // onEdit={setAppointmentToUpdate}
                     />
                   ))}
               </>
