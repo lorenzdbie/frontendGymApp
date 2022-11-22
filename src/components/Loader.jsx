@@ -5,7 +5,7 @@ export default function Loader({ loading }) {
   const { theme, oppositeTheme } = useThemeColors();
   if (loading) {
     return (
-      <div className={`d-flex flex-column bg-${theme} text-${oppositeTheme}`}>
+      <div className={`d-flex flex-column bg-${theme} text-${oppositeTheme}`} data-cy="loading">
     
           <div className="divSpin">
             <img

@@ -2,7 +2,7 @@ import { memo, useCallback } from "react";
 import { toTimeInputString } from "./AppointmentForm";
 import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 import { useThemeColors } from "../../contexts/Theme.context";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export const toHoursInputString = (time) => {
   if (!time) return null;
@@ -37,12 +37,11 @@ export default memo(function Appointment({
     [id, onDelete]
   );
 
-
   return (
-    <div className="appointment-box" cy-data="appointment" >
+    <div className="appointment-box" data-cy="appointment">
       <div className="appoitment-boxHead">
         <div>
-          <span cy-data="appointment_id" >Appointment # {id}</span>
+          <span data-cy="appointment_id">Appointment # {id}</span>
         </div>
         <div className="btn-group float-end">
           <Link
@@ -56,6 +55,7 @@ export default memo(function Appointment({
             type="button"
             className="btn btn-danger"
             onClick={handleDelete}
+            data-cy="appointment_delete_btn"
           >
             <IoTrashOutline />
           </button>
@@ -67,12 +67,13 @@ export default memo(function Appointment({
           <tbody>
             <tr>
               <td>Trainee:</td>
-              <td cy-data="appointment_user" >{user.firstName + " " + user.lastName}</td>
+              <td data-cy="appointment_user">
+                {user.firstName + " " + user.lastName}
+              </td>
             </tr>
             <tr>
               <td>Date:</td>
-              <td cy-data="appointment_date">
-                {" "}
+              <td data-cy="appointment_date">
                 {new Date(date).toLocaleDateString("en-BE", {
                   weekday: "short",
                   year: "numeric",
@@ -83,27 +84,29 @@ export default memo(function Appointment({
             </tr>
             <tr>
               <td>Training:</td>
-              <td cy-data="appointment_training">{training.name}</td>
+              <td data-cy="appointment_training">{training.name}</td>
             </tr>
             <tr>
               <td>Starts at:</td>
-              <td cy-data="appointment_startTime">{toTimeInputString(startTime)}</td>
+              <td data-cy="appointment_startTime">
+                {toTimeInputString(startTime)}
+              </td>
             </tr>
             <tr>
               <td>Duration:</td>
-              <td cy-data="appointment_duration">
+              <td data-cy="appointment_duration">
                 {toHoursInputString(new Date(endTime) - new Date(startTime))}{" "}
                 hours
               </td>
             </tr>
             <tr>
               <td>intensity: </td>
-              <td>{intensity}</td>
+              <td data-cy="appointment_intensity">{intensity}</td>
             </tr>
             {specialRequest ? (
               <tr>
                 <td>Special request:</td>
-                <td>{specialRequest}</td>
+                <td data-cy="appointment_specialRequest">{specialRequest}</td>
               </tr>
             ) : (
               ""

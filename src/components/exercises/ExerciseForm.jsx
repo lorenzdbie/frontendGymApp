@@ -17,28 +17,32 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
   const hasError = name in errors;
 
   return (
-    <div className="d-flex flex-row my-2">
-      <label htmlFor={name} className="form-label col-5 my-auto ">
-        {labels[name]}:
-      </label>
-      <input
-        {...register(name, validationRules[name])}
-        id={name}
-        type={type}
-        className="form-control col rounded-5 my-auto"
-        placeholder={placeholder ? placeholder : null}
-        {...rest}
-      />
-      {name === "weight" ? (
-        <span className="my-auto form-label">&nbsp;kg</span>
-      ) : null}
-      {name === "height" ? (
-        <span className="my-auto form-label">&nbsp;cm</span>
-      ) : null}
+    <>
+      <div className="d-flex flex-row my-2">
+        <label htmlFor={name} className="form-label col-5 my-auto ">
+          {labels[name]}:
+        </label>
+        <input
+          {...register(name, validationRules[name])}
+          id={name}
+          type={type}
+          className="form-control col rounded-5 my-auto"
+          placeholder={placeholder ? placeholder : null}
+          {...rest}
+        />
+        {name === "weight" ? (
+          <span className="my-auto form-label">&nbsp;kg</span>
+        ) : null}
+        {name === "height" ? (
+          <span className="my-auto form-label">&nbsp;cm</span>
+        ) : null}
+      </div>
       {hasError ? (
-        <div className="form-text text-danger">{errors[name].message}</div>
+        <div className="form-text text-danger" data-cy="labelInput-error">
+          {errors[name].message}
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }
 
@@ -48,24 +52,28 @@ function LabelTextArea({ label, name, type, placeholder, ...rest }) {
   const hasError = name in errors;
 
   return (
-    <div className="d-flex flex-column mt-0">
-      <label htmlFor={name} className="form-label col-7">
-        {labels[name]}:
-      </label>
-      <textarea
-        {...register(name, validationRules[name])}
-        id={name}
-        type={type}
-        cols="1"
-        rows="6"
-        className="form-control col rounded-5"
-        placeholder={placeholder}
-        {...rest}
-      />
+    <>
+      <div className="d-flex flex-column mt-0">
+        <label htmlFor={name} className="form-label col-7">
+          {labels[name]}:
+        </label>
+        <textarea
+          {...register(name, validationRules[name])}
+          id={name}
+          type={type}
+          cols="1"
+          rows="6"
+          className="form-control col rounded-5"
+          placeholder={placeholder}
+          {...rest}
+        />
+      </div>
       {hasError ? (
-        <div className="form-text text-danger">{errors[name].message}</div>
+        <div className="form-text text-danger" data-cy="labelTextArea-error">
+          {errors[name].message}
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }
 
@@ -103,7 +111,7 @@ export default memo(function ExerciseForm({ refreshExercises }) {
     }
 
     const fetchExercise = async () => {
-      try{
+      try {
         setError(null);
         const exercise = await exercisesApi.getById(id);
         setValue("name", exercise.name);
@@ -116,7 +124,6 @@ export default memo(function ExerciseForm({ refreshExercises }) {
     fetchExercise();
     refreshExercises();
   }, [id, setValue, reset]);
-    
 
   return (
     <div className="d-flex flex-column col-12 ">
@@ -138,12 +145,14 @@ export default memo(function ExerciseForm({ refreshExercises }) {
             name="name"
             type="text"
             placeholder="Exercise name"
+            data-cy="exerciseName_input"
           />
           <LabelTextArea
             label="muscleGroup"
             name="muscleGroup"
             type="text"
             placeholder="Muscle groups"
+            data-cy="muscleGroup_input"
           />
           <div className="clearfix my-4 d-flex flex-row justify-content-center">
             <div className="btn-group">
@@ -151,6 +160,7 @@ export default memo(function ExerciseForm({ refreshExercises }) {
                 type="submit"
                 disabled={isSubmitting}
                 className="btn btn-primary rounded-5"
+                data-cy="submit_exercise"
               >
                 {id ? "Save exercise" : "Add exercise"}
               </button>

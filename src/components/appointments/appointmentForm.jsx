@@ -8,7 +8,7 @@ import {
 } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
 import * as appointmentsApi from "../../api/appointments";
-
+import * as exercisesApi from "../../api/exercises";
 import * as usersApi from "../../api/users";
 import { useNavigate, useParams } from "react-router";
 import Error from "../Error";
@@ -51,29 +51,33 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
   const hasError = name in errors;
 
   return (
-    <div className="d-flex flex-row my-2">
-      <label htmlFor={name} className="form-label col-5 my-auto ">
-        {labels[name]}:
-      </label>
-      <input
-        {...register(name, validationRules[name])}
-        id={name}
-        type={type}
-        disabled={isSubmitting}
-        className="form-control col rounded-5 my-auto"
-        placeholder={placeholder ? placeholder : null}
-        {...rest}
-      />
-      {name === "weight" ? (
-        <span className="my-auto form-label">&nbsp;kg</span>
-      ) : null}
-      {name === "height" ? (
-        <span className="my-auto form-label">&nbsp;cm</span>
-      ) : null}
+    <>
+      <div className="d-flex flex-row my-2">
+        <label htmlFor={name} className="form-label col-5 my-auto ">
+          {labels[name]}:
+        </label>
+        <input
+          {...register(name, validationRules[name])}
+          id={name}
+          type={type}
+          disabled={isSubmitting}
+          className="form-control col rounded-5 my-auto"
+          placeholder={placeholder ? placeholder : null}
+          {...rest}
+        />
+        {name === "weight" ? (
+          <span className="my-auto form-label">&nbsp;kg</span>
+        ) : null}
+        {name === "height" ? (
+          <span className="my-auto form-label">&nbsp;cm</span>
+        ) : null}
+      </div>
       {hasError ? (
-        <div className="form-text text-danger">{errors[name].message}</div>
+        <div className="form-text text-danger" data-cy="labelInputAppointment-error">
+          {errors[name].message}
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }
 
@@ -83,29 +87,33 @@ function LabelTextArea({ label, name, type, placeholder, ...rest }) {
   const hasError = name in errors;
 
   return (
-    <div className="d-flex flex-column mt-0">
-      <label htmlFor={name} className="form-label col-7">
-        {labels[name]}:
-      </label>
-      <textarea
-        {...register(name, validationRules[name])}
-        id={name}
-        type={type}
-        disabled={isSubmitting}
-        cols="1"
-        rows="6"
-        className="form-control col rounded-5"
-        placeholder={placeholder}
-        {...rest}
-      />
+    <>
+      <div className="d-flex flex-column mt-0">
+        <label htmlFor={name} className="form-label col-7">
+          {labels[name]}:
+        </label>
+        <textarea
+          {...register(name, validationRules[name])}
+          id={name}
+          type={type}
+          disabled={isSubmitting}
+          cols="1"
+          rows="6"
+          className="form-control col rounded-5"
+          placeholder={placeholder}
+          {...rest}
+        />
+      </div>
       {hasError ? (
-        <div className="form-text text-danger">{errors[name].message}</div>
+        <div className="form-text text-danger" data-cy="labelTextArea-error">
+          {errors[name].message}
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }
 
-function UserSelect() {
+function UserSelect(props) {
   const name = "user";
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -133,33 +141,36 @@ function UserSelect() {
   const hasError = name in errors;
 
   return (
-    <div className="d-flex flex-row  my-2">
-      <label htmlFor={name} className="form-label col-5 my-auto">
-        User:
-      </label>
-      <select
-        {...register(name)}
-        id={name}
-        disabled={loading || error || isSubmitting}
-        className="form-select col smallOption rounded-5"
-      >
-        <option defaultChecked>
-          {loading ? "Loading users..." : error || "--Select User--"}
-        </option>
-        {users.map(({ id, firstName, lastName }) => (
-          <option key={id} value={id}>
-            {firstName + " " + lastName}
+    <>
+      <div className="d-flex flex-row  my-2">
+        <label htmlFor={name} className="form-label col-5 my-auto">
+          User:
+        </label>
+        <select
+          {...register(name)}
+          {...props}
+          id={name}
+          disabled={loading || error || isSubmitting}
+          className="form-select col smallOption rounded-5"
+        >
+          <option defaultChecked className="">
+            {loading ? "Loading users..." : error || "--Select User--"}
           </option>
-        ))}
-      </select>
+          {users.map(({ id, firstName, lastName }) => (
+            <option key={id} value={id}>
+              {firstName + " " + lastName}
+            </option>
+          ))}
+        </select>
+      </div>
       {hasError ? (
         <div className="form-text text-danger">{errors[name].message}</div>
       ) : null}
-    </div>
+    </>
   );
 }
 
-function IntensetySelect() {
+function IntensetySelect(props) {
   const { control } = useFormContext();
 
   return (
@@ -176,6 +187,7 @@ function IntensetySelect() {
               selectedDumbbells={value}
               id="intensity"
               onRate={onChange}
+              {...props}
             />
           </div>
         </div>
@@ -184,7 +196,7 @@ function IntensetySelect() {
   );
 }
 
-function ExerciseSelect() {
+function ExerciseSelect(props) {
   const name = "training";
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -211,35 +223,36 @@ function ExerciseSelect() {
 
   const hasError = name in errors;
   return (
-    <div className="d-flex flex-row  my-2">
-      <label htmlFor={name} className="form-label col-5 my-auto">
-        Training:
-      </label>
-      <select
-        {...register(name)}
-        id={name}
-        disabled={loading || error || isSubmitting}
-        className="form-select col smallOption rounded-5"
-      >
-        <option defaultChecked>
-          {loading ? "Loading exercises..." : error || "--Select Training--"}
-        </option>
-        {exercises.map(({ id, name }) => (
-          <option key={id} value={id}>
-            {name}
+    <>
+      <div className="d-flex flex-row  my-2">
+        <label htmlFor={name} className="form-label col-5 my-auto">
+          Training:
+        </label>
+        <select
+          {...register(name)}
+          {...props}
+          id={name}
+          disabled={loading || error || isSubmitting}
+          className="form-select col smallOption rounded-5"
+        >
+          <option defaultChecked>
+            {loading ? "Loading exercises..." : error || "--Select Training--"}
           </option>
-        ))}
-      </select>
+          {exercises.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </div>
       {hasError ? (
         <div className="form-text text-danger">{errors[name].message}</div>
       ) : null}
-    </div>
+    </>
   );
 }
 
-export default memo(function AppointmentForm({
-  refreshAppointments,
-}) {
+export default memo(function AppointmentForm({ refreshAppointments }) {
   const [error, setError] = useState(null);
   const {
     setValue,
@@ -339,7 +352,7 @@ export default memo(function AppointmentForm({
             name="date"
             type="date"
             defaultValue={new Date().toISOString().slice(0, 10)}
-            cy-data="date_input"
+            data-cy="date_input"
           />
           <LabelInput
             label="startTime"
@@ -348,7 +361,7 @@ export default memo(function AppointmentForm({
             defaultValue={new Date().toISOString().slice(11, 16)}
             min="08:00"
             max="18:30"
-            cy-data="startTime_input"
+            data-cy="startTime_input"
           />
           <LabelInput
             label="endTime"
@@ -357,11 +370,11 @@ export default memo(function AppointmentForm({
             defaultValue={new Date().toISOString().slice(11, 16)}
             min="08:30"
             max="19:00"
-            cy-data="endTime_input"
+            data-cy="endTime_input"
           />
-          <ExerciseSelect cy-data="training_input" />
+          <ExerciseSelect data-cy="training_input" />
 
-          <IntensetySelect cy-data="intensity_input" />
+          <IntensetySelect data-cy="intensity_input" />
 
           <LabelTextArea
             label="specialRequest"
@@ -370,7 +383,7 @@ export default memo(function AppointmentForm({
             cols="1"
             rows="6"
             placeholder="special request"
-            cy-data="specialRequest_input"
+            data-cy="specialRequest_input"
           />
           <div className="clearfix  my-4 d-flex flex-row justify-content-center">
             <div className="btn-group">

@@ -1,0 +1,9 @@
+{
+  "trainings": [
+    {
+      "id": 1,
+      "name": "Training 1",
+      "muscleGroup": "training muscle groups"
+    }
+  ]
+}

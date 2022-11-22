@@ -18,15 +18,16 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
   );
 
   return (
-    <div className="exercise-box">
+    <div className="exercise-box" data-cy="exercise">
       <div className="exercise-boxHead">
-        <div>{id}</div>
-        <div>{name}</div>
+        <div data-cy="exercise_id" >{id}</div>
+        <div data-cy="exercise_name" >{name}</div>
         <div className="btn-group float-end">
           <Link
             type="button"
             className={`btn btn-${theme}`}
             to={`/exercises/edit/${id}`}
+            data-cy="exercise_edit_btn"
           >
             <IoPencilOutline />
           </Link>
@@ -34,6 +35,7 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
             type="button"
             className="btn btn-danger"
             onClick={handleDelete}
+            data-cy="exercise_delete_btn"
           >
             <IoTrashOutline />
           </button>
@@ -45,7 +47,7 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
           
           <u> Active muscle groups:</u>
         </div>
-        <div> {muscleGroup} </div>
+        <div data-cy="exercise_muscleGroup"> {muscleGroup} </div>
       </div>
     </div>
   );

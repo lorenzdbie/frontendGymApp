@@ -2,10 +2,14 @@ export const validationRules = {
   name: {
     required: "Name is a required field",
     minLength: { value: 2, message: "Name must be at least 2 characters long" },
-    maxLength: { value: 20, message: "Name can only be 20 characters long" },
+    maxLength: { value: 30, message: "Name can only be 30 characters long" },
   },
   muscleGroup: {
     required: "Muscle groups is a required field",
+    minLength: {
+      value: 3,
+      message: "Muscle group must be at least 3 characters long",
+    },
     maxLength: {
       value: 100,
       message: "Muscle group can only be 100 characters long",
@@ -113,4 +117,3 @@ export const validationRules = {
     required: "You must agree to the terms and conditions",
   },
 };
-

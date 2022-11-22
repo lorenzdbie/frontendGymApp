@@ -14,8 +14,7 @@ export default function ExerciseList() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-const refreshExercises = useCallback(async () => {
-
+  const refreshExercises = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -29,11 +28,9 @@ const refreshExercises = useCallback(async () => {
     }
   }, []);
 
-
   useEffect(() => {
     refreshExercises();
   }, [refreshExercises]);
-
 
   const filteredExercises = useMemo(
     () =>
@@ -51,33 +48,35 @@ const refreshExercises = useCallback(async () => {
     setTimeout(setSearch(text), 1500);
   };
 
-
   const handleDelete = useCallback(async (idToDelete) => {
     try {
       setError(null);
       await exercisesApi.deleteById(idToDelete);
       console.log("deleted exercise with id: ", idToDelete);
-      setExercises((exercises) => exercises.filter((exercise) => exercise.id !== idToDelete));
+      setExercises((exercises) =>
+        exercises.filter((exercise) => exercise.id !== idToDelete)
+      );
     } catch (error) {
       console.error(error);
       setError(error);
     }
-  }, [])
+  }, []);
 
-
-  const createExercise = useCallback(async (exercise) => {
-    try {
-      setError(null);
-      await exercisesApi.save({...exercise,});
-      await refreshExercises();
-    } catch (error) {
-      console.error(error);
-      setError(error);
-    }finally{
-      setLoading(false);
-    }
-  }, [refreshExercises]);
-  
+  const createExercise = useCallback(
+    async (exercise) => {
+      try {
+        setError(null);
+        await exercisesApi.save({ ...exercise });
+        await refreshExercises();
+      } catch (error) {
+        console.error(error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [refreshExercises]
+  );
 
   // const createExercise = useCallback(
   //   (name, muscleGroup) => {
@@ -96,7 +95,6 @@ const refreshExercises = useCallback(async () => {
   // );
 
   function CreateExerciseList({ exercises, onDelete }) {
-
     if (exercises.length === 0) {
       return <div className="exbox">"there are no exercises"</div>;
     }
@@ -104,19 +102,19 @@ const refreshExercises = useCallback(async () => {
       <>
         <h6 className="text-center"> Sorted by ID:</h6>
         <div className={`exbox`}>
-          <Loader loading={loading} />
+          <Loader loading={loading}/>
           <Error error={error} />
-          {!loading && !error ?(
-          <>
-          {exercises.map((ex) => (
-            <Exercise
-              {...ex}
-              key={ex.id}
-              index={ex.id}
-              onDelete={onDelete}
-            />
-          ))}
-          </>
+          {!loading && !error ? (
+            <>
+              {exercises.map((ex) => (
+                <Exercise
+                  {...ex}
+                  key={ex.id}
+                  index={ex.id}
+                  onDelete={onDelete}
+                />
+              ))}
+            </>
           ) : null}
         </div>
       </>
@@ -134,6 +132,7 @@ const refreshExercises = useCallback(async () => {
             placeholder="Search exercises"
             value={text}
             onChange={handleSearch}
+            data-cy="exercises_search_input"
           />
         </div>
       </div>
@@ -145,7 +144,14 @@ const refreshExercises = useCallback(async () => {
         <div className="mobilehide">
           <h2 className="text-center">Exercise List</h2>
           <br />
-          <CreateExerciseList exercises={filteredExercises} onDelete={handleDelete} />
+          <Loader loading={loading}/>
+          <Error error={error} />
+          {!loading && !error ? (
+            <CreateExerciseList
+              exercises={filteredExercises}
+              onDelete={handleDelete}
+            />
+          ) : null}
         </div>
       </div>
     </div>
