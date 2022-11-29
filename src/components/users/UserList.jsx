@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useThemeColors } from "../../contexts/Theme.context";
-import * as usersApi from "../../api/users";
+import useUsers from "../../api/users";
 import Loader from "../Loader";
 import Error from "../Error";
 import User from "./User";
@@ -10,6 +10,7 @@ export default function UserList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const usersApi = useUsers();
 
   const refreshUsers = useCallback(async () => {
     try {

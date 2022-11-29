@@ -4,6 +4,9 @@ import { validationRules } from "../ValidationRules";
 import { themes, useThemeColors } from "../../contexts/Theme.context";
 import { BiShowAlt, BiHide } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import useUsers from "../../api/users";
+import { useNavigate } from "react-router";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const labels = {
   firstName: "First name",
@@ -93,35 +96,62 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
   );
 }
 
-export default function RegistrationForm({ onSaveRegistration }) {
+export default function RegistrationForm(/* { onSaveRegistration } */) {
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(JSON.stringify(data));
-    onSaveRegistration(
-      data.firstName,
-      data.lastName,
-      data.birthdate,
-      data.email,
-      data.password,
-      data.weight,
-      data.height
-    );
-    reset();
+  const usersApi = useUsers();
+  const navigate = useNavigate();
+  const { user } = useAuth0();
+
+  // const onSubmit = (data) => {
+  //   console.log(JSON.stringify(data));
+  //   onSaveRegistration(
+  //     data.firstName,
+  //     data.lastName,
+  //     data.birthdate,
+  //     data.email,
+  //     data.password,
+  //     data.weight,
+  //     data.height
+  //   );
+  //   reset();
+  // };
+
+  const onSubmit = async (data) => {
+    const { firstName, lastName, birthdate, weight, height } = data;
+    const { email } = user;
+
+    try {
+      setError(null);
+      await usersApi.register({
+        firstName,
+        lastName,
+        email,
+        birthdate: new Date(birthdate),
+        weight,
+        height,
+      });
+      // refreshUsers();
+      navigate("/appointments");
+    } catch (error) {
+      setError(error);
+    }
   };
 
   return (
     <div className="d-flex flex-column col-12">
-      <h2 className="text-center">Register account:</h2>
+      <h2 className="text-center">Add additional account information:</h2>
       <FormProvider
         handleSubmit={handleSubmit}
         errors={errors}
         register={register}
+        isSubmitting={isSubmitting}
       >
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -145,13 +175,13 @@ export default function RegistrationForm({ onSaveRegistration }) {
             type="date"
             defaultValue={new Date().toISOString().slice(0, 10)}
           />
-          <LabelInput
+          {/* <LabelInput
             label="email"
             name="email"
             type="email"
             placeholder="e-mail"
-          />
-          <LabelInput
+          /> */}
+          {/* <LabelInput
             label="password"
             name="password"
             type="password"
@@ -162,7 +192,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
             name="confirmPassword"
             type="password"
             placeholder="Password"
-          />
+          /> */}
           <LabelInput
             label="weight"
             name="weight"
@@ -184,7 +214,7 @@ export default function RegistrationForm({ onSaveRegistration }) {
           />
 
           <div className="mt-3 clearfix">
-            <div className="btn-group float-end">
+            {/* <div className="btn-group float-end">
               <button
                 className="btn btn-primary rounded-5"
                 style={{ margin: "0 20px", backgroundColor: "gray" }}
@@ -194,10 +224,11 @@ export default function RegistrationForm({ onSaveRegistration }) {
                   Cancel
                 </Link>
               </button>
-            </div>
+            </div> */}
             <div className="btn-group float-end">
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="btn btn-primary rounded-5"
                 style={{ margin: "0 20px", backgroundColor: "blue" }}
               >

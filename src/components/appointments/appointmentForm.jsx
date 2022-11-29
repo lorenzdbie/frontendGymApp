@@ -7,9 +7,9 @@ import {
   Controller,
 } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
-import * as appointmentsApi from "../../api/appointments";
-import * as exercisesApi from "../../api/exercises";
-import * as usersApi from "../../api/users";
+import useAppointments from "../../api/appointments";
+import useExercises from "../../api/exercises";
+import useUsers from "../../api/users";
 import { useNavigate, useParams } from "react-router";
 import Error from "../Error";
 
@@ -73,7 +73,10 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
         ) : null}
       </div>
       {hasError ? (
-        <div className="form-text text-danger" data-cy="labelInputAppointment-error">
+        <div
+          className="form-text text-danger"
+          data-cy="labelInputAppointment-error"
+        >
           {errors[name].message}
         </div>
       ) : null}
@@ -118,6 +121,7 @@ function UserSelect(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
   const [users, setUsers] = useState([]);
+  const usersApi = useUsers();
 
   const { register, errors, isSubmitting } = useFormContext();
 
@@ -201,6 +205,7 @@ function ExerciseSelect(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [exercises, setExercises] = useState([]);
+  const exercisesApi = useExercises();
 
   const { register, errors, isSubmitting } = useFormContext();
 
@@ -268,6 +273,7 @@ export default memo(function AppointmentForm({ refreshAppointments }) {
   });
   const navigate = useNavigate();
   const { id } = useParams();
+  const appointmentsApi = useAppointments();
 
   const onSubmit = async (data) => {
     const {
@@ -346,7 +352,7 @@ export default memo(function AppointmentForm({ refreshAppointments }) {
           onSubmit={handleSubmit(onSubmit)}
           className="mb-3 justify-content-md-center formContainer"
         >
-          <UserSelect data-cy="user_input" />
+          {/* <UserSelect data-cy="user_input" /> */}
           <LabelInput
             label="date"
             name="date"

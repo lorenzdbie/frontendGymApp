@@ -29,10 +29,10 @@ export default function Register() {
         lastName,
         birthdate: new Date(birthdate),
         email,
+        password,
         weight,
         height,
         credits: 0,
-        role: "user",
       },
     ];
 

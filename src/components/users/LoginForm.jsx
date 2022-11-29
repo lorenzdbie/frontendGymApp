@@ -5,6 +5,7 @@ import { themes, useThemeColors } from "../../contexts/Theme.context";
 import { BiShowAlt, BiHide } from "react-icons/bi";
 import Register from "./Register";
 import { Link } from "react-router-dom";
+import LoginButton from "../authentication/loginButton";
 
 const labels = {
   email: "E-mail",
@@ -111,7 +112,7 @@ export default function LoginForm({ onSaveLogin }) {
       </div>
       <h2 className="text-center">Login / SignUp</h2>
       <div className="d-flex flex-row justify-content-center align-items-start">
-        <FormProvider
+        {/* <FormProvider
           handleSubmit={handleSubmit}
           errors={errors}
           register={register}
@@ -153,7 +154,10 @@ export default function LoginForm({ onSaveLogin }) {
               </button>
             </div>
           </form>
-        </FormProvider>
+        </FormProvider> */}
+        <div className="clearfix d-flex flex-row justify-content-evenly mt-3">
+          <LoginButton />
+        </div>
       </div>
     </>
   );

@@ -4,14 +4,17 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { ThemeProvider } from "./contexts/Theme.context";
+import  MyAuth0Provider  from "./contexts/MyAuth0Provider";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <MyAuth0Provider>
       <ThemeProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </ThemeProvider>
-    </BrowserRouter>
+    </MyAuth0Provider>
   </React.StrictMode>
 );

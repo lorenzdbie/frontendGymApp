@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Montserrat+Alternates:ital,wght@0,400;1,800&display=swap");
-
 #root {
   max-width: 1280px;
   height: 100vh;
@@ -32,6 +31,19 @@
   min-width: 100%;
   position: absolute;
 }
+
+.rbc-day-slot {
+  font-size: 0.6em;
+}
+
+/* .rbc-button-link {
+  background-color: dark;
+} */
+
+/* .rbc-today {
+  background-color: grey;
+  color:black
+} */
 
 /* .nav {
   margin-left: auto;
@@ -404,7 +416,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   /* padding: 13em 0 20em 0; */
 }
 
-@media screen and (max-width: 625px) {
+@media screen and (max-width: 700px) {
   #root {
     width: 100%;
     min-width: 380px;
@@ -423,7 +435,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: auto;
   }
 
-  .fullscreen{
+  .fullscreen {
     width: 100%;
     min-width: 380px;
     min-height: 100%;
@@ -482,6 +494,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .landscape {
   min-width: 380px;
   padding-top: 1em;
+  margin: 0 3em;
 }
 @media screen and (min-width: 1300px) {
   .landscape {
@@ -491,7 +504,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .mobilehide {
-    margin-left: 5em;
+    margin: 0 5em;
   }
 }
 

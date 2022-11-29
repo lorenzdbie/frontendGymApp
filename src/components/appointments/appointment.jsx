@@ -11,7 +11,7 @@ export const toHoursInputString = (time) => {
   }
   let aString = time.toISOString();
   console.log(aString);
-  return aString.substring(aString.indexOf("T") + 2, aString.indexOf("Z") - 7);
+  return aString.substring(aString.indexOf("T") + 1, aString.indexOf("Z") - 7);
 };
 
 export default memo(function Appointment({

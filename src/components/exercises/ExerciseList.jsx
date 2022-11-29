@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect, useMemo } from "react";
 import Exercise from "./Exercise";
 import ExerciseForm from "./ExerciseForm";
 import { useThemeColors } from "../../contexts/Theme.context";
-import * as exercisesApi from "../../api/exercises";
+import useExercises from "../../api/exercises";
 import Loader from "../Loader";
 import Error from "../Error";
 
@@ -13,6 +13,7 @@ export default function ExerciseList() {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const exercisesApi = useExercises();
 
   const refreshExercises = useCallback(async () => {
     try {
@@ -102,7 +103,7 @@ export default function ExerciseList() {
       <>
         <h6 className="text-center"> Sorted by ID:</h6>
         <div className={`exbox`}>
-          <Loader loading={loading}/>
+          <Loader loading={loading} />
           <Error error={error} />
           {!loading && !error ? (
             <>
@@ -144,7 +145,7 @@ export default function ExerciseList() {
         <div className="mobilehide">
           <h2 className="text-center">Exercise List</h2>
           <br />
-          <Loader loading={loading}/>
+          <Loader loading={loading} />
           <Error error={error} />
           {!loading && !error ? (
             <CreateExerciseList
