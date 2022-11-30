@@ -29,7 +29,9 @@ export const validationRules = {
     required: "Date is a required field",
     validate: (value) => {
       const date = new Date(value);
-      const today = new Date();
+      const today = new Date().getDate();
+      console.log(date);
+      console.log(today);
       if (date < today) {
         return "Date must be in the future";
       }

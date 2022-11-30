@@ -2,7 +2,7 @@ import { useState } from "react";
 import { memo } from "react";
 import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import { validationRules } from "../ValidationRules";
-import * as exercisesApi from "../../api/exercises";
+import useExercises from "../../api/exercises";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 
@@ -87,6 +87,7 @@ export default memo(function ExerciseForm({ refreshExercises }) {
     formState: { errors, isSubmitting },
   } = useForm();
 
+  const exercisesApi = useExercises();
   const navigate = useNavigate();
   const { id } = useParams();
 

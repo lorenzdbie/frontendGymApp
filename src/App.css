@@ -672,7 +672,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 0;
   border: black solid 1px;
   border-top: none;
-  border-radius: 9px;
+  border-radius: 10px;
 }
 
 .appointment-box > div:first-child {
@@ -680,7 +680,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: row;
   justify-content: space-between;
   text-align: left;
-  border-radius: 9px;
+  border-radius: 10px 10px 10px 0;
   background-color: #888;
 }
 

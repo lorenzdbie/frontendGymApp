@@ -54,7 +54,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="edit:id"
+                  path="edit/:id"
                   element={
                     <RequireAuth>
                       <AppointmentList />
@@ -88,7 +88,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="edit:id"
+                  path="edit/:id"
                   element={
                     <RequireAuth>
                       <ExerciseList />

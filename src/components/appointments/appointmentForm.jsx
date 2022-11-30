@@ -11,7 +11,7 @@ import useAppointments from "../../api/appointments";
 import useExercises from "../../api/exercises";
 import useUsers from "../../api/users";
 import { useNavigate, useParams } from "react-router";
-import Error from "../Error";
+
 
 export const toDateInputString = (date) => {
   if (!date) return null;

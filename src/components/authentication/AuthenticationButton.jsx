@@ -17,8 +17,8 @@ export default function AuthenticationButton() {
             style={{ width: "40px", height: "40px" }}
           />
         </div>
-        <div className="col">{name}</div>
-        <div className="col">
+        <div className="col mr-2">{name} {givenName}</div>
+        <div className="col mx-2">
           <LogoutButton />
         </div>
       </div>
