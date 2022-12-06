@@ -2,8 +2,8 @@
   "trainings": [
     {
       "id": 1,
-      "name": "Training 1",
-      "muscleGroup": "training muscle groups"
+      "name": "Strength: Chest",
+      "muscleGroup": "all chest muscles"
     }
   ]
 }

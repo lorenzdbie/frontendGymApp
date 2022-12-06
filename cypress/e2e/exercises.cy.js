@@ -1,4 +1,8 @@
 describe("exercises test", () => {
+  beforeEach(() => {
+    cy.login();
+  });
+
   it("show exercise", () => {
     cy.intercept("GET", "http://localhost:9000/api/trainings", {
       fixture: "exercises.json"
@@ -6,8 +10,8 @@ describe("exercises test", () => {
 
     cy.visit("http://localhost:5173/exercises");
     cy.get("[data-cy=exercise]").should("have.length", 1);
-    cy.get("[data-cy=exercise_name]").eq(0).contains("Training 1");
-    cy.get("[data-cy=exercise_muscleGroup]").eq(0).should("contain", "training muscle groups");
+    cy.get("[data-cy=exercise_name]").eq(0).contains("Strength: Chest");
+    cy.get("[data-cy=exercise_muscleGroup]").eq(0).should("contain", "all chest muscles");
 
   });
   it("very slow response", () => {
@@ -28,10 +32,10 @@ describe("exercises test", () => {
 
   it("check filter", () => {
     cy.visit("http://localhost:5173/exercises");
-    cy.get("[data-cy=exercises_search_input]").type("press");
-    cy.get("[data-cy=exercise]").should("have.length", 2);
-    cy.get("[data-cy=exercise_name]").each((el, idx) => {
-      expect(el[0].textContent).to.match(/press/);
+    cy.get("[data-cy=exercises_search_input]").type("Strength");
+    cy.get("[data-cy=exercise]").should("have.length", 6);
+    cy.get("[data-cy=exercise_name]").each((el) => {
+      expect(el[0].textContent).to.match(/Strength/);
     });
   });
 

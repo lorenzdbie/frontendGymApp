@@ -4,15 +4,15 @@
       "id": 4,
       "date": "2022-12-01T23:00:00.000Z",
       "user": {
-        "id": 4,
-        "firstName": "firstName",
-        "lastName": "lastName",
-        "email": "name@test.com"
+        "id": 5,
+        "firstName": "Test firstName",
+        "lastName": "Test lastName",
+        "email": "e2e-testing@fitnessapp.be"
       },
       "training": {
         "id": 5,
-        "name": "Shoulder press",
-        "muscleGroup": "Shoulders"
+        "name": "Strength: Arms",
+        "muscleGroup": "all arm muscles"
       },
       "startTime": "2022-12-02T10:00:00.000Z",
       "endTime": "2022-12-02T12:30:00.000Z",

@@ -1,21 +1,26 @@
 describe("add exercise test", () => {
+
+  beforeEach(() => {
+    cy.login();
+  });
+  
   it("add exercise", () => {
     cy.visit("http://localhost:5173/exercises");
     cy.get("[data-cy=exerciseName_input]").type("test");
     cy.get("[data-cy=muscleGroup_input]").type("this is a test");
     cy.get("[data-cy=submit_exercise]").click();
 
-    cy.get("[data-cy=exercise_name]").eq(5).contains("test");
-    cy.get("[data-cy=exercise_muscleGroup]").eq(5).contains("this is a test");
+    // cy.get("[data-cy=exercise_name]").eq(11).should("contain", "test");
+    // cy.get("[data-cy=exercise_muscleGroup]").eq(11).contains("this is a test");
 
-    cy.get("[data-cy=exercise]").should("have.length", 6);
+    cy.get("[data-cy=exercise]").should("have.length", 12);
 
   });
 
   it("remove again", () => {
     cy.visit("http://localhost:5173/exercises");
-    cy.get("[data-cy=exercise_delete_btn]").eq(5).click();
-    cy.get("[data-cy=exercise]").should("have.length", 5);
+    cy.get("[data-cy=exercise_delete_btn]").eq(11).click();
+    cy.get("[data-cy=exercise]").should("have.length", 11);
   });
 
   it("name is too short", () => {

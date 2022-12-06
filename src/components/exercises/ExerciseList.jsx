@@ -107,14 +107,16 @@ export default function ExerciseList() {
           <Error error={error} />
           {!loading && !error ? (
             <>
-              {exercises.map((ex) => (
-                <Exercise
-                  {...ex}
-                  key={ex.id}
-                  index={ex.id}
-                  onDelete={onDelete}
-                />
-              ))}
+              {exercises
+                .sort((a, b) => a.id - b.id)
+                .map((ex) => (
+                  <Exercise
+                    {...ex}
+                    key={ex.id}
+                    index={ex.id}
+                    onDelete={onDelete}
+                  />
+                ))}
             </>
           ) : null}
         </div>

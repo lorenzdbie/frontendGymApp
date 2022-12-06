@@ -56,5 +56,6 @@ export default memo(function Navbar() {
         </div>
       </div>
     </nav>
+    
   );
 });

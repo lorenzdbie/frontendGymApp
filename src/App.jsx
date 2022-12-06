@@ -14,16 +14,14 @@ import NotFound from "./components/NotFound";
 import { useThemeColors } from "./contexts/Theme.context";
 import RequireAuth from "./components/authentication/requireAuth";
 import AuthLanding from "./components/authentication/AuthLanding";
-import { useAuth0 } from "@auth0/auth0-react";
+
 
 function App() {
   const { theme, oppositeTheme } = useThemeColors();
 
   return (
-    
       <div className={`bg-${theme} text-${oppositeTheme}`}>
         <Navbar />
-
         <Routes>
           <Route path="/" element={<Navigate replace to="/Login" />} />
               <Route path="/register">
