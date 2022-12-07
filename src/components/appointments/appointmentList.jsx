@@ -5,7 +5,7 @@ import { useThemeColors } from "../../contexts/Theme.context";
 import useAppointments from "../../api/appointments";
 import Error from "../Error";
 import Loader from "../Loader";
-import useUsers from "../../api/users";
+// import useUsers from "../../api/users";
 import { Link } from "react-router-dom";
 
 export const updateToDateObject = (list, ...dateProps) => {
@@ -20,11 +20,11 @@ export const updateToDateObject = (list, ...dateProps) => {
 export default function AppointmentList() {
   const { theme, oppositeTheme } = useThemeColors();
   const [appointments, setAppointments] = useState([]);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const appointmentsApi = useAppointments();
-  const userApi = useUsers();
+  // const userApi = useUsers();
 
   const refreshAppointments = useCallback(async () => {
     try {
@@ -40,21 +40,20 @@ export default function AppointmentList() {
     }
   }, []);
 
-  const refreshUsers = useCallback(async () => {
-    try {
-      setError(null);
-      const fetchedUsers = await userApi.getAll();
-      setUsers(fetchedUsers);
-    } catch (error) {
-      console.error(error);
-      setError(error);
-    }
-  }, []);
+  // const refreshUsers = useCallback(async () => {
+  //   try {
+  //     setError(null);
+  //     const fetchedUsers = await userApi.getAll();
+  //     setUsers(fetchedUsers);
+  //   } catch (error) {
+  //     console.error(error);
+  //     setError(error);
+  //   }
+  // }, []);
 
   useEffect(() => {
     refreshAppointments();
-    refreshUsers();
-  }, [refreshAppointments, refreshUsers]);
+  }, [refreshAppointments]);
 
   const handleDelete = useCallback(async (idToDelete) => {
     try {
