@@ -5,8 +5,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "/src/components/Navbar.jsx";
 import Login from "/src/components/users/Login.jsx";
 import Register from "/src/components/users/Register.jsx";
-// import AppointmentList from "/src/components/appointments/AppointmentList.jsx";
-import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
+import AppointmentList from "/src/components/appointments/AppointmentList.jsx";
+// import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
 import UserList from "/src/components/users/UserList.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
@@ -34,7 +34,7 @@ function App() {
               </Route>
               
               <Route path="/appointments">
-               {/*
+               
                <Route
                   index
                   element={
@@ -59,15 +59,15 @@ function App() {
                     </RequireAuth>
                   }
                 />
-                */}
-                <Route
+                
+                {/* <Route
                   path="overview"
                   element={
                     <RequireAuth>
                       <AppointmentOverviewList />
                     </RequireAuth>
                   }
-                />
+                /> */}
               </Route>
               
               <Route path="/exercises">
