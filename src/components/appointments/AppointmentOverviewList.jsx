@@ -6,7 +6,7 @@ import Error from "/src/components/Error.jsx";
 import Loader from "/src/components/Loader.jsx";
 
 
-export default memo(function AppointmentOverviewList() {
+export default function AppointmentOverviewList() {
   const { theme, oppositeTheme } = useThemeColors();
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
@@ -82,7 +82,7 @@ export default memo(function AppointmentOverviewList() {
       </div>
     </>
   );
- });
+ };
 
 //  import { useCallback, useState, useEffect, memo } from "react";
 // import Appointment from "./Appointment";
