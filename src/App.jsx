@@ -8,6 +8,7 @@ import Register from "/src/components/users/Register.jsx";
 // import AppointmentList from "/src/components/appointments/AppointmentList.jsx";
 // import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
 // import Appointment from "/src/components/appointments/Appointment.jsx";
+import Afspraak from "/src/components/afspraken/Afspraak.jsx";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
 import UserList from "/src/components/users/UserList.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className={`bg-${theme} text-${oppositeTheme}`}>
+      <Afspraak />
       <Navbar />
       <Routes>
         <Route path="/" element={<Navigate replace to="/Login" />} />
