@@ -115,63 +115,63 @@ function LabelTextArea({ label, name, type, placeholder, ...rest }) {
   );
 }
 
-function UserSelect(props) {
-  const name = "user";
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
-  const [users, setUsers] = useState([]);
-  const usersApi = useUsers();
+// function UserSelect(props) {
+//   const name = "user";
+//   const [error, setError] = useState(null);
+//   const [loading, setLoading] = useState(null);
+//   const [users, setUsers] = useState([]);
+//   const usersApi = useUsers();
 
-  const { register, errors, isSubmitting } = useFormContext();
+//   const { register, errors, isSubmitting } = useFormContext();
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const users = await usersApi.getAll();
-        setUsers(users);
-      } catch (error) {
-        console.log(error);
-        setError(error.message || "Something went wrong, try again later");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUsers();
-  }, []);
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         setLoading(true);
+//         setError(null);
+//         const users = await usersApi.getAll();
+//         setUsers(users);
+//       } catch (error) {
+//         console.log(error);
+//         setError(error.message || "Something went wrong, try again later");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchUsers();
+//   }, []);
 
-  const hasError = name in errors;
+//   const hasError = name in errors;
 
-  return (
-    <>
-      <div className="d-flex flex-row  my-2">
-        <label htmlFor={name} className="form-label col-5 my-auto">
-          User:
-        </label>
-        <select
-          {...register(name)}
-          {...props}
-          id={name}
-          disabled={loading || error || isSubmitting}
-          className="form-select col smallOption rounded-5"
-        >
-          <option defaultChecked className="">
-            {loading ? "Loading users..." : error || "--Select User--"}
-          </option>
-          {users.map(({ id, firstName, lastName }) => (
-            <option key={id} value={id}>
-              {firstName + " " + lastName}
-            </option>
-          ))}
-        </select>
-      </div>
-      {hasError ? (
-        <div className="form-text text-danger">{errors[name].message}</div>
-      ) : null}
-    </>
-  );
-}
+//   return (
+//     <>
+//       <div className="d-flex flex-row  my-2">
+//         <label htmlFor={name} className="form-label col-5 my-auto">
+//           User:
+//         </label>
+//         <select
+//           {...register(name)}
+//           {...props}
+//           id={name}
+//           disabled={loading || error || isSubmitting}
+//           className="form-select col smallOption rounded-5"
+//         >
+//           <option defaultChecked className="">
+//             {loading ? "Loading users..." : error || "--Select User--"}
+//           </option>
+//           {users.map(({ id, firstName, lastName }) => (
+//             <option key={id} value={id}>
+//               {firstName + " " + lastName}
+//             </option>
+//           ))}
+//         </select>
+//       </div>
+//       {hasError ? (
+//         <div className="form-text text-danger">{errors[name].message}</div>
+//       ) : null}
+//     </>
+//   );
+// }
 
 function IntensetySelect(props) {
   const { control } = useFormContext();
