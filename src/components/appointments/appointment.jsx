@@ -1,34 +1,34 @@
 import { memo, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { useThemeColors } from "/src/contexts/Theme.context.jsx";
+// import { Link } from "react-router-dom";
+// import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 
-import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
+// import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 
 export default memo(function Appointment({
-  id,
-  user,
-  date,
-  training,
-  startTime,
-  endTime,
-  intensity,
-  specialRequest,
-  onDelete,
+  // id,
+  // user,
+  // date,
+  // training,
+  // startTime,
+  // endTime,
+  // intensity,
+  // specialRequest,
+  // onDelete,
 }) {
-  console.log("rendering appointment...");
+  // console.log("rendering appointment...");
 
-  const { theme } = useThemeColors();
+  // const { theme } = useThemeColors();
 
-  const durationInMinutes = (new Date(endTime).getTime() - new Date(startTime).getTime())/1000/60;
+  // const durationInMinutes = (new Date(endTime).getTime() - new Date(startTime).getTime())/1000/60;
  
 
-  const handleDelete = useCallback(
-    (event) => {
-      event.preventDefault();
-      onDelete(id);
-    },
-    [id, onDelete]
-  );
+  // const handleDelete = useCallback(
+  //   (event) => {
+  //     event.preventDefault();
+  //     onDelete(id);
+  //   },
+  //   [id, onDelete]
+  // );
 
   // return (
   //   <div className="appointment-box" data-cy="appointment">
