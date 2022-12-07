@@ -9,14 +9,14 @@ import useUsers from "/src/api/users.jsx";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export const updateToDateObject = (list, ...dateProps) => {
-  return list.map((entry) => {
-    for (const prop of dateProps) {
-      entry[prop] = new Date(entry[prop]);
-    }
-    return entry;
-  });
-};
+// export const updateToDateObject = (list, ...dateProps) => {
+//   return list.map((entry) => {
+//     for (const prop of dateProps) {
+//       entry[prop] = new Date(entry[prop]);
+//     }
+//     return entry;
+//   });
+// };
 
 export default function AppointmentList() {
   const { theme, oppositeTheme } = useThemeColors();
