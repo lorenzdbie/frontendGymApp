@@ -74,7 +74,7 @@ export default function Afspraak({id, user, date, training, startTime, endTime, 
              <tr>
                <td>Date:</td>
                <td data-cy="appointment_date">
-                 {new Date(date).toLocaleDateString("en-BE", {
+                 {new Date(date).toLocaleDateString("en-be", {
                    weekday: "short",
                    year: "numeric",
                    month: "short",
@@ -90,7 +90,7 @@ export default function Afspraak({id, user, date, training, startTime, endTime, 
                <td>Starts at:</td>
                <td data-cy="appointment_startTime">
                  {
-                 substractHourForDST(new Date(startTime)).toLocaleTimeString("en-BE", { hour: "2-digit", minute: "2-digit" })}
+                 new Date(startTime).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone:"UTC" })}
                 
                </td>
              </tr>

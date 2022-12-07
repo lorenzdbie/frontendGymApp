@@ -11,6 +11,7 @@ import Register from "/src/components/users/Register.jsx";
 // import Afspraak from "/src/components/afspraken/Afspraak.jsx";
 // import AfspraakForm from "/src/components/afspraken/AfspraakForm.jsx";
 import AfsprakenList from "/src/components/afspraken/AfsprakenList.jsx";
+import AfspraakOverviewList from "/src/components/afspraken/AfspraakOverviewList.jsx";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
 import UserList from "/src/components/users/UserList.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
@@ -62,15 +63,15 @@ function App() {
             }
           />
 
-           {/* <Route
-                  path="overview"
-                  element={
-                    <RequireAuth>
-                      <AppointmentOverviewList />
-                    </RequireAuth>
-                  }
-                /> */}
-        </Route> 
+          <Route
+            path="overview"
+            element={
+              <RequireAuth>
+                <AfspraakOverviewList />
+              </RequireAuth>
+            }
+          />
+        </Route>
         {/* <Route path="/overview">
           <Route
             index
