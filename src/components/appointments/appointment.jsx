@@ -56,7 +56,7 @@ export default memo(function Appointment({
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <table>
           <tbody>
             <tr>
@@ -108,7 +108,7 @@ export default memo(function Appointment({
             )}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 });
