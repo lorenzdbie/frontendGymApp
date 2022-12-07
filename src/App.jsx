@@ -9,6 +9,7 @@ import Register from "/src/components/users/Register.jsx";
 // import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
 // import Appointment from "/src/components/appointments/Appointment.jsx";
 import Afspraak from "/src/components/afspraken/Afspraak.jsx";
+import AfspraakForm from "/src/components/afspraken/AfspraakForm";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
 import UserList from "/src/components/users/UserList.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
