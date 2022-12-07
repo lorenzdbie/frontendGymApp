@@ -23,7 +23,7 @@ export default function User({
         })}
       </td>
       <td className="text-center">{weight} kg</td>
-      <td className="text-center">{height} m</td>
+      <td className="text-center">{height} cm</td>
     </tr>
   );
 }
