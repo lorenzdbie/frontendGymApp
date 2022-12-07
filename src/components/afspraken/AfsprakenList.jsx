@@ -7,6 +7,7 @@ import Error from "/src/components/Error.jsx";
 import Loader from "/src/components/Loader.jsx";
 import useUsers from "/src/api/users.jsx";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -71,6 +72,17 @@ export default function AfsprakenList() {
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
+         {error? (
+        <div className="d-flex mt-5 justify-content-center">
+          <Link
+            type="button"
+            className={`btn btn-danger text-${oppositeTheme} d-flex align-items-center`}
+            to={`/register`}
+          >
+            <h2 className="text-center">we need attitional user information</h2>
+          </Link>
+        </div>
+      ) : (
         <>
           <h1 className="pt-5 text-center">Appointments</h1>
           <div className="landscape">
@@ -102,6 +114,7 @@ export default function AfsprakenList() {
             </div>
           </div>
         </>
+      )}
     </div>
   );
 }
