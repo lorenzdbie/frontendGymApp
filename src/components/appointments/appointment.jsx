@@ -1,7 +1,8 @@
 import { memo, useCallback } from "react";
-import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
-import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 import { Link } from "react-router-dom";
+import { useThemeColors } from "/src/contexts/Theme.context.jsx";
+
+import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 
 export default memo(function Appointment({
   id,
@@ -40,6 +41,7 @@ export default memo(function Appointment({
             type="button"
             className={`btn btn-${theme}`}
             to={`/appointments/edit/${id}`}
+            data-cy="appointment_edit_btn"
           >
             <IoPencilOutline />
           </Link>
