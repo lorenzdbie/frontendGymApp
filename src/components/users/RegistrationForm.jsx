@@ -1,10 +1,10 @@
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import { useState } from "react";
-import { validationRules } from "../ValidationRules";
-import { themes, useThemeColors } from "../../contexts/Theme.context";
+import { validationRules } from "../ValidationRules.jsx";
+import { themes, useThemeColors } from "../../contexts/Theme.context.jsx";
 import { BiShowAlt, BiHide } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import useUsers from "../../api/users";
+// import { Link } from "react-router-dom";
+import useUsers from "../../api/users.jsx";
 import { useNavigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
 

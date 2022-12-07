@@ -1,8 +1,8 @@
-import { useTheme, themes, useThemeColors } from "../contexts/Theme.context";
+import { useTheme, themes, useThemeColors } from "../contexts/Theme.context.jsx";
 import { memo } from "react";
 import { IoMoonSharp, IoSunny } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import AuthenticationButton from "./authentication/AuthenticationButton";
+import AuthenticationButton from "./authentication/AuthenticationButton.jsx";
 
 const NavItem = ({ label, to }) => {
   const { oppositeTheme } = useThemeColors();
@@ -47,8 +47,8 @@ export default memo(function Navbar() {
 
           <ul className="navbar-nav ml-auto me-auto mb-lg-0">
             <NavItem label="Home" to="/" />
-            {/* <NavItem label="Appointments" to="/appointments" />
-            <NavItem label="Overview" to="/appointments/overview" /> */}
+            <NavItem label="Appointments" to="/appointments" />
+            <NavItem label="Overview" to="/appointments/overview" />
             <NavItem label="Exercises" to="/exercises" />
             <NavItem label="Users" to="/users" />
           </ul>

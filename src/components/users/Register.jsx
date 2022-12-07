@@ -1,9 +1,9 @@
-import { USERS } from "../../api/mock-data";
+import { USERS } from "../../api/mock-data.jsx";
 import { useState } from "react";
 import User from "./User";
-import RegistrationForm from "./RegistrationForm";
-import { updateToDateObject } from "../appointments/appointmentList";
-import { useThemeColors } from "../../contexts/Theme.context";
+import RegistrationForm from "./RegistrationForm.jsx";
+import { updateToDateObject } from "../appointments/appointmentList.jsx";
+import { useThemeColors } from "../../contexts/Theme.context.jsx";
 
 export default function Register() {
   const { theme, oppositeTheme } = useThemeColors();
@@ -17,7 +17,6 @@ export default function Register() {
     lastName,
     birthdate,
     email,
-    password,
     weight,
     height
   ) => {
@@ -29,7 +28,6 @@ export default function Register() {
         lastName,
         birthdate: new Date(birthdate),
         email,
-        password,
         weight,
         height,
         credits: 0,

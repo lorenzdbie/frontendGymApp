@@ -1,16 +1,16 @@
 import "./App.css";
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useState, useCallback, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Login from "./components/users/Login";
-import Register from "./components/users/Register";
-// import AppointmentList from "./components/appointments/AppointmentList";
-// import AppointmentOverviewList from "./components/appointments/AppointmentOverviewList";
-import ExerciseList from "./components/exercises/ExerciseList";
-import UserList from "./components/users/UserList";
-import { useThemeColors } from "./contexts/Theme.context";
-import RequireAuth from "./components/authentication/RequireAuth";
+// import { useState, useCallback, useEffect } from "react";
+import Navbar from "./components/Navbar.jsx";
+import Login from "./components/users/Login.jsx";
+import Register from "./components/users/Register.jsx";
+import AppointmentList from "./components/appointments/AppointmentList.jsx";
+import AppointmentOverviewList from "./components/appointments/AppointmentOverviewList.jsx";
+import ExerciseList from "./components/exercises/ExerciseList.jsx";
+import UserList from "./components/users/UserList.jsx";
+import { useThemeColors } from "./contexts/Theme.context.jsx";
+import RequireAuth from "./components/authentication/RequireAuth.jsx";
 
 
 
@@ -32,7 +32,7 @@ function App() {
                   }
                 />
               </Route>
-              {/* <Route path="/appointments">
+              <Route path="/appointments">
                 <Route
                   index
                   element={
@@ -57,16 +57,15 @@ function App() {
                     </RequireAuth>
                   }
                 />
-                {/* <Route
+                <Route
                   path="overview"
                   element={
                     <RequireAuth>
                       <AppointmentOverviewList />
                     </RequireAuth>
                   }
-                /> 
-              </Route> */}
-
+                />
+              </Route>
               <Route path="/exercises">
                 <Route
                   index

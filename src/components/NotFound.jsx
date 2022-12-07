@@ -1,5 +1,5 @@
 import dumbbellLoader from "../assets/loader.png";
-import { useThemeColors } from "../contexts/Theme.context";
+import { useThemeColors } from "../contexts/Theme.context.jsx";
 
 export default function NotFound() {
   const { theme, oppositeTheme } = useThemeColors();

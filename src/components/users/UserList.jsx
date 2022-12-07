@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
-import { useThemeColors } from "../../contexts/Theme.context";
-import useUsers from "../../api/users";
-import Loader from "../Loader";
-import Error from "../Error";
-import User from "./User";
+import { useThemeColors } from "../../contexts/Theme.context.jsx";
+import useUsers from "../../api/users.jsx";
+import Loader from "../Loader.jsx";
+import Error from "../Error.jsx";
+import User from "./User.jsx";
 
 export default function UserList() {
   const { theme, oppositeTheme } = useThemeColors();
