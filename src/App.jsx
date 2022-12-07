@@ -5,7 +5,7 @@ import { useState, useCallback, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Login from "./components/users/Login";
 import Register from "./components/users/Register";
-import AppointmentList from "./components/appointments/AppointmentList";
+// import AppointmentList from "./components/appointments/AppointmentList";
 // import AppointmentOverviewList from "./components/appointments/AppointmentOverviewList";
 import ExerciseList from "./components/exercises/ExerciseList";
 import UserList from "./components/users/UserList";
@@ -32,7 +32,7 @@ function App() {
                   }
                 />
               </Route>
-              <Route path="/appointments">
+              {/* <Route path="/appointments">
                 <Route
                   index
                   element={
@@ -64,8 +64,9 @@ function App() {
                       <AppointmentOverviewList />
                     </RequireAuth>
                   }
-                /> */}
-              </Route>
+                /> 
+              </Route> */}
+
               <Route path="/exercises">
                 <Route
                   index
