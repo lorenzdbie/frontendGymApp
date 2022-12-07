@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { memo } from "react";
 import { useForm, useFormContext, FormProvider } from "react-hook-form";
-import { validationRules } from "../ValidationRules.jsx";
-import useExercises from "../../api/exercises.jsx";
+import { validationRules } from "/src/components/ValidationRules.jsx";
+import useExercises from "/src/api/exercises.jsx";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 

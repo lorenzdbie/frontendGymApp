@@ -1,8 +1,8 @@
-import { useTheme, themes, useThemeColors } from "../contexts/Theme.context.jsx";
+import { useTheme, themes, useThemeColors } from "/src/contexts/Theme.context.jsx";
 import { memo } from "react";
 import { IoMoonSharp, IoSunny } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import AuthenticationButton from "./authentication/AuthenticationButton.jsx";
+import AuthenticationButton from "/src/components/authentication/AuthenticationButton.jsx";
 
 const NavItem = ({ label, to }) => {
   const { oppositeTheme } = useThemeColors();

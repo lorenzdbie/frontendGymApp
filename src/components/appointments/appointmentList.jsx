@@ -1,11 +1,11 @@
 import { useCallback, useState, useEffect } from "react";
-import Appointment from "./Appointment.jsx";
-import AppointmentForm from "./AppointmentForm.jsx";
-import { useThemeColors } from "../../contexts/Theme.context.jsx";
-import useAppointments from "../../api/appointments.jsx";
-import Error from "../Error.jsx";
-import Loader from "../Loader.jsx";
-// import useUsers from "../../api/users";
+import Appointment from "/src/components/appointments/Appointment.jsx";
+import AppointmentForm from "/src/components/appointments/AppointmentForm.jsx";
+import { useThemeColors } from "/src/contexts/Theme.context.jsx";
+import useAppointments from "/src/api/appointments.jsx";
+import Error from "/src/components/Error.jsx";
+import Loader from "/src/components/Loader.jsx";
+// import useUsers from "/src/api/users.jsx";
 import { Link } from "react-router-dom";
 
 export const updateToDateObject = (list, ...dateProps) => {

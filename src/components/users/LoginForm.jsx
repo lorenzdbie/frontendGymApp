@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { validationRules } from "../ValidationRules.jsx";
+import { validationRules } from "/src/components/ValidationRules.jsx";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
-import { themes, useThemeColors } from "../../contexts/Theme.context";
+import { themes, useThemeColors } from "/src/contexts/Theme.context";
 import { BiShowAlt, BiHide } from "react-icons/bi";
-// import Register from "./Register";
+// import Register from "/src/components/users/Register.jsx";
 // import { Link } from "react-router-dom";
-import LoginButton from "../authentication/LoginButton.jsx";
+import LoginButton from "/src/components/authentication/LoginButton.jsx";
 
 const labels = {
   email: "E-mail",

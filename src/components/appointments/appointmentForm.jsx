@@ -1,17 +1,16 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import DumbbellIntensity from "./DumbellIntensity.jsx";
+import DumbbellIntensity from "/src/components/appointments/DumbellIntensity.jsx";
 import {
   useForm,
   useFormContext,
   FormProvider,
   Controller,
 } from "react-hook-form";
-import { validationRules } from "../ValidationRules.jsx";
-import useAppointments from "../../api/appointments.jsx";
-import useExercises from "../../api/exercises.jsx";
-import useUsers from "../../api/users.jsx";
+import { validationRules } from "/src/components/ValidationRules.jsx";
+import useAppointments from "/src/api/appointments.jsx";
+import useExercises from "/src/api/exercises.jsx";
+import useUsers from "/src/api/users.jsx";
 import { useNavigate, useParams } from "react-router";
-
 
 export const toDateInputString = (date) => {
   if (!date) return null;

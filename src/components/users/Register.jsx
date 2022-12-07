@@ -1,9 +1,9 @@
-import { USERS } from "../../api/mock-data.jsx";
+import { USERS } from "/src/api/mock-data.jsx";
 import { useState } from "react";
-import User from "./User";
-import RegistrationForm from "./RegistrationForm.jsx";
-import { updateToDateObject } from "../appointments/AppointmentList.jsx";
-import { useThemeColors } from "../../contexts/Theme.context.jsx";
+import User from "/src/components/users/User.jsx";
+import RegistrationForm from "/src/components/users/RegistrationForm.jsx";
+import { updateToDateObject } from "/src/components/appointments/AppointmentList.jsx";
+import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 
 export default function Register() {
   const { theme, oppositeTheme } = useThemeColors();
