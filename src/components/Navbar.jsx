@@ -48,8 +48,8 @@ export default memo(function Navbar() {
           <ul className="navbar-nav ml-auto me-auto mb-lg-0">
             <NavItem label="Home" to="/" />
             {/* <NavItem label="Appointments" to="/appointments" />
-            <NavItem label="Overview" to="/appointments/overview" />
-            <NavItem label="Exercises" to="/exercises" /> */}
+            <NavItem label="Overview" to="/appointments/overview" /> */}
+            <NavItem label="Exercises" to="/exercises" /> 
             <NavItem label="Users" to="/users" />
           </ul>
           <AuthenticationButton />
