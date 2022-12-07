@@ -19,12 +19,11 @@ Een applicatie om eem afspraak te maken bij een Personal trainer waar bepaalde g
 ## Screenshots
 
 <img width="1309" alt="Screenshot 2022-12-07 at 20 30 42" src="https://user-images.githubusercontent.com/83095711/206277663-05ba3ae1-b558-48e4-ba21-fb2847122231.png">
-
 <img width="1320" alt="Screenshot 2022-12-07 at 20 30 06" src="https://user-images.githubusercontent.com/83095711/206277557-a77ca0ef-4573-442d-9c0e-6a593a33765e.png">
-
 <img width="1311" alt="Screenshot 2022-12-07 at 20 32 03" src="https://user-images.githubusercontent.com/83095711/206277928-faef5047-08ed-4498-8bc5-269d0c245c6c.png">
 <img width="1321" alt="Screenshot 2022-12-07 at 20 32 33" src="https://user-images.githubusercontent.com/83095711/206278029-b4a8a2c0-5204-40fa-9405-85ac78e3a1e6.png">
 <img width="682" alt="Screenshot 2022-12-07 at 20 33 13" src="https://user-images.githubusercontent.com/83095711/206278144-47f45073-b39d-4b1c-91be-82a44fdcee19.png">
+<img width="684" alt="Screenshot 2022-12-07 at 20 34 37" src="https://user-images.githubusercontent.com/83095711/206278391-60da3e1d-1106-455b-969c-945e51172a1b.png">
 
 
 ## Behaalde minimumvereisten
