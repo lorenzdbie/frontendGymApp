@@ -6,7 +6,7 @@ import Navbar from "/src/components/Navbar.jsx";
 import Login from "/src/components/users/Login.jsx";
 import Register from "/src/components/users/Register.jsx";
 // import AppointmentList from "/src/components/appointments/AppointmentList.jsx";
-// import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
+import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
 import UserList from "/src/components/users/UserList.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
@@ -32,9 +32,10 @@ function App() {
                   }
                 />
               </Route>
-              {/*
+              
               <Route path="/appointments">
-                <Route
+               {/*
+               <Route
                   index
                   element={
                     <RequireAuth>
@@ -58,6 +59,7 @@ function App() {
                     </RequireAuth>
                   }
                 />
+                */}
                 <Route
                   path="overview"
                   element={
@@ -67,7 +69,7 @@ function App() {
                   }
                 />
               </Route>
-              */}
+              
               <Route path="/exercises">
                 <Route
                   index
