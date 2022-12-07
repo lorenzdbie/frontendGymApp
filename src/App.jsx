@@ -5,15 +5,13 @@ import { useState, useCallback, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Login from "./components/users/Login";
 import Register from "./components/users/Register";
-import AppointmentList from "./components/appointments/appointmentList";
-// import AppointmentOverviewList from "./components/appointments/appointmentOverviewList";
+import AppointmentList from "./components/appointments/AppointmentList";
+// import AppointmentOverviewList from "./components/appointments/AppointmentOverviewList";
 import ExerciseList from "./components/exercises/ExerciseList";
 import UserList from "./components/users/UserList";
-import useUsers from "./api/users";
-import NotFound from "./components/NotFound";
 import { useThemeColors } from "./contexts/Theme.context";
-import RequireAuth from "./components/authentication/requireAuth";
-import AuthLanding from "./components/authentication/AuthLanding";
+import RequireAuth from "./components/authentication/RequireAuth";
+
 
 
 function App() {
