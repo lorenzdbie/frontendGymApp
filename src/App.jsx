@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className={`bg-${theme} text-${oppositeTheme}`}>
-      <Afspraak />
+      {/* <Afspraak /> */}
       <Navbar />
       <Routes>
         <Route path="/" element={<Navigate replace to="/Login" />} />
