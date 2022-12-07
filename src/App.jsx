@@ -7,7 +7,7 @@ import Login from "/src/components/users/Login.jsx";
 import Register from "/src/components/users/Register.jsx";
 // import AppointmentList from "/src/components/appointments/AppointmentList.jsx";
 // import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
-import Appointment from "/src/components/appointments/Appointment.jsx";
+// import Appointment from "/src/components/appointments/Appointment.jsx";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
 import UserList from "/src/components/users/UserList.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";

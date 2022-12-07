@@ -3,8 +3,7 @@ import { memo, useCallback } from "react";
 // import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 
 // import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
-
-export default memo(function Appointment({
+ export default memo(function Appointment({
   // id,
   // user,
   // date,
@@ -15,7 +14,7 @@ export default memo(function Appointment({
   // specialRequest,
   // onDelete,
 }) {
-  // console.log("rendering appointment...");
+  console.log("rendering appointment...");
 
   // const { theme } = useThemeColors();
 
