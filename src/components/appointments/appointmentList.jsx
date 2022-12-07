@@ -6,8 +6,6 @@ import useAppointments from "../../api/appointments";
 import Error from "../Error";
 import Loader from "../Loader";
 import useUsers from "../../api/users";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 
 export const updateToDateObject = (list, ...dateProps) => {
@@ -27,7 +25,6 @@ export default function AppointmentList() {
   const [loading, setLoading] = useState(true);
   const appointmentsApi = useAppointments();
   const userApi = useUsers();
-  const { user } = useAuth0();
 
   const refreshAppointments = useCallback(async () => {
     try {
@@ -75,7 +72,7 @@ export default function AppointmentList() {
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
-      {error? (
+      {error ? (
         <div className="d-flex mt-5 justify-content-center">
           <Link
             type="button"
@@ -109,7 +106,6 @@ export default function AppointmentList() {
                           key={appoint.id}
                           {...appoint}
                           onDelete={handleDelete}
-                          // onEdit={setAppointmentToUpdate}
                         />
                       ))}
                   </>
