@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/users/Login";
 import Register from "./components/users/Register";
 import AppointmentList from "./components/appointments/appointmentList";
-import AppointmentOverviewList from "./components/appointments/appointmentOverviewList";
+// import AppointmentOverviewList from "./components/appointments/appointmentOverviewList";
 import ExerciseList from "./components/exercises/ExerciseList";
 import UserList from "./components/users/UserList";
 import useUsers from "./api/users";
@@ -59,14 +59,14 @@ function App() {
                     </RequireAuth>
                   }
                 />
-                <Route
+                {/* <Route
                   path="overview"
                   element={
                     <RequireAuth>
                       <AppointmentOverviewList />
                     </RequireAuth>
                   }
-                />
+                /> */}
               </Route>
               <Route path="/exercises">
                 <Route

@@ -6,36 +6,12 @@ import Error from "../Error";
 import Loader from "../Loader";
 
 
-// moment.tz.setDefault("Europe/Stockholm");
-
-// const localizer = momentLocalizer(moment);
-
-// //substract 1 hour from the date to get the correct time if daylight saving time is not active
-// function substractHourForDST(date) {
-//   Date.prototype.stdTimezoneOffset = function () {
-//     var jan = new Date(this.getFullYear(), 0, 1);
-//     var jul = new Date(this.getFullYear(), 6, 1);
-//     return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-//   };
-//   Date.prototype.isDstObserved = function () {
-//     return this.getTimezoneOffset() < this.stdTimezoneOffset();
-//   };
-
-//   if (date.isDstObserved()) {
-//     return date;
-//   } else {
-//     date.setTime(date.getTime() - 1 * 60 * 60 * 1000);
-//     return date;
-//   }
-// }
-
 export default memo(function AppointmentOverviewList() {
   const { theme, oppositeTheme } = useThemeColors();
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const appointmentsApi = useAppointments();
-  const [events, setEvents] = useState([]);
 
   const refreshAppointments = useCallback(async () => {
     try {
@@ -43,25 +19,6 @@ export default memo(function AppointmentOverviewList() {
       setError(null);
       const fetchedAppointments = await appointmentsApi.getAll();
       setAppointments(fetchedAppointments);
-      // const allEvents = fetchedAppointments.map((appointment) => {
-      //   const name =
-      //     `${appointment.user.firstName} ${appointment.user.lastName}` +
-      //     " : " +
-      //     `${appointment.training.name}`;
-      //   return {
-      //     id: appointment.id,
-      //     title: name,
-      //     start: substractHourForDST(new Date(appointment.startTime)),
-      //     end: substractHourForDST(new Date(appointment.endTime)),
-      //   };
-      // });
-      // setEvents(allEvents);
-      // console.log(fetchedAppointments);
-      // console.log(
-      //   `events: ${allEvents.forEach((event) =>
-      //     console.log(event.id, event.title, event.start, event.end)
-      //   )}`
-      // );
     } catch (error) {
       console.error(error);
       setError(error);
@@ -70,41 +27,9 @@ export default memo(function AppointmentOverviewList() {
     }
   }, []);
 
-  const refreshevents = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const fetchedAppointments = await appointmentsApi.getAll();
-      const allEvents = fetchedAppointments.filter((appoint) => new Date(appoint.date) > new Date()).map((appointment) => {
-        const name =
-          `${appointment.user.firstName} ${appointment.user.lastName}` +
-          " : " +
-          `${appointment.training.name}`;
-        return {
-          id: appointment.id,
-          title: name,
-          start: substractHourForDST(new Date(appointment.startTime)),
-          end: substractHourForDST(new Date(appointment.endTime)),
-        };
-      });
-      setEvents(allEvents);
-      console.log(
-        `events: ${allEvents.forEach((event) =>
-          console.log(event.id, event.title, event.start, event.end)
-        )}`
-      );
-    } catch (error) {
-      console.error(error);
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [refreshAppointments]);
-
   useEffect(() => {
     refreshAppointments();
-    refreshevents();
-  }, [refreshAppointments, refreshevents]);
+  }, [refreshAppointments]);
 
   const handleDelete = useCallback(async (idToDelete) => {
     try {
