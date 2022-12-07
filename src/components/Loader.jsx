@@ -1,4 +1,4 @@
-import dumbbellLoader from "/src/assets/loader.png";
+import dumbbellLoader from "/logos/loader.png";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 
 export default function Loader({ loading }) {

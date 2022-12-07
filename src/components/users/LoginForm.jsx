@@ -99,12 +99,12 @@ export default function LoginForm({ onSaveLogin }) {
         <picture>
           {theme === themes.dark ? (
             <img
-              src="/src/assets/LogoSmallInvert-removebg.png"
+              src="/logos/LogoSmallInvert-removebg.png"
               alt="logo loginScreen"
             />
           ) : (
             <img
-              src="/src/assets/LogoSmall-removebg.png"
+              src="/logos/LogoSmall-removebg.png"
               alt="logo loginScreen"
             />
           )}
