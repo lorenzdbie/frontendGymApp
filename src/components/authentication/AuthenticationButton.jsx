@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./loginButton";
-import LogoutButton from "./logoutButton";
+import LoginButton from "./LoginButton.jsx";
+import LogoutButton from "./LogoutButton.jsx";
 
 export default function AuthenticationButton() {
   const { isAuthenticated, user } = useAuth0();

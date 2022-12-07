@@ -1,10 +1,10 @@
 import { useCallback, useState, useEffect } from "react";
-import Appointment from "./Appointment";
-import AppointmentForm from "./AppointmentForm";
-import { useThemeColors } from "../../contexts/Theme.context";
-import useAppointments from "../../api/appointments";
-import Error from "../Error";
-import Loader from "../Loader";
+import Appointment from "./Appointment.jsx";
+import AppointmentForm from "./AppointmentForm.jsx";
+import { useThemeColors } from "../../contexts/Theme.context.jsx";
+import useAppointments from "../../api/appointments.jsx";
+import Error from "../Error.jsx";
+import Loader from "../Loader.jsx";
 // import useUsers from "../../api/users";
 import { Link } from "react-router-dom";
 

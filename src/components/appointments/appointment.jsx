@@ -1,7 +1,7 @@
 import { memo, useCallback } from "react";
-import { toTimeInputString } from "./AppointmentForm";
+import { toTimeInputString } from "./AppointmentForm.jsx";
 import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
-import { useThemeColors } from "../../contexts/Theme.context";
+import { useThemeColors } from "../../contexts/Theme.context.jsx";
 import { Link } from "react-router-dom";
 
 export const toHoursInputString = (time) => {

@@ -1,15 +1,15 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import DumbbellIntensity from "./DumbellIntensity";
+import DumbbellIntensity from "./DumbellIntensity.jsx";
 import {
   useForm,
   useFormContext,
   FormProvider,
   Controller,
 } from "react-hook-form";
-import { validationRules } from "../ValidationRules";
-import useAppointments from "../../api/appointments";
-import useExercises from "../../api/exercises";
-import useUsers from "../../api/users";
+import { validationRules } from "../ValidationRules.jsx";
+import useAppointments from "../../api/appointments.jsx";
+import useExercises from "../../api/exercises.jsx";
+import useUsers from "../../api/users.jsx";
 import { useNavigate, useParams } from "react-router";
 
 

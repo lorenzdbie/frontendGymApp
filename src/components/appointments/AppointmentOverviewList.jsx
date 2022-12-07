@@ -1,9 +1,9 @@
 import { useCallback, useState, useEffect, memo } from "react";
-import Appointment from "./Appointment";
-import { useThemeColors } from "../../contexts/Theme.context";
-import useAppointments from "../../api/appointments";
-import Error from "../Error";
-import Loader from "../Loader";
+import Appointment from "./Appointment.jsx";
+import { useThemeColors } from "../../contexts/Theme.context.jsx";
+import useAppointments from "../../api/appointments.jsx";
+import Error from "../Error.jsx";
+import Loader from "../Loader.jsx";
 
 
 export default memo(function AppointmentOverviewList() {

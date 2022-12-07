@@ -1,10 +1,10 @@
 import { useCallback, useState, useEffect, useMemo } from "react";
-import Exercise from "./Exercise";
-import ExerciseForm from "./ExerciseForm";
-import { useThemeColors } from "../../contexts/Theme.context";
-import useExercises from "../../api/exercises";
-import Loader from "../Loader";
-import Error from "../Error";
+import Exercise from "./Exercise.jsx";
+import ExerciseForm from "./ExerciseForm.jsx";
+import { useThemeColors } from "../../contexts/Theme.context.jsx";
+import useExercises from "../../api/exercises.jsx";
+import Loader from "../Loader.jsx";
+import Error from "../Error.jsx";
 
 export default function ExerciseList() {
   const { theme, oppositeTheme } = useThemeColors();

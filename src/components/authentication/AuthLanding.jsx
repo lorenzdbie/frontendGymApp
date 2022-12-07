@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router-dom";
-import Error from "../Error";
-import LoginButton from "./LoginButton";
+import Error from "../Error.jsx";
+import LoginButton from "./LoginButton.jsx";
 
 export default function AuthLanding() {
   const { error, isAuthenticated, isLoading } = useAuth0();

@@ -2,7 +2,7 @@ import { USERS } from "../../api/mock-data.jsx";
 import { useState } from "react";
 import User from "./User";
 import RegistrationForm from "./RegistrationForm.jsx";
-import { updateToDateObject } from "../appointments/appointmentList.jsx";
+import { updateToDateObject } from "../appointments/AppointmentList.jsx";
 import { useThemeColors } from "../../contexts/Theme.context.jsx";
 
 export default function Register() {

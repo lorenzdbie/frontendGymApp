@@ -1,6 +1,6 @@
 import { useState, useHistory } from "react";
-import LoginForm from "./loginForm";
-import { useThemeColors } from "../../contexts/Theme.context";
+import LoginForm from "./LoginForm.jsx";
+import { useThemeColors } from "../../contexts/Theme.context.jsx";
 
 export default function Login() {
   const [email, setEmail] = useState("");
