@@ -1,28 +1,7 @@
 import { memo, useCallback } from "react";
-// import { toTimeInputString } from "/src/components/appointments/AppointmentForm.jsx";
 import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 import { Link } from "react-router-dom";
-
-const toHoursInputString = (time) => {
-  if (!time) return null;
-  if (typeof time !== Object) {
-    time = new Date(time);
-  }
-  let aString = time.toISOString();
-  console.log(aString);
-  return aString.substring(aString.indexOf("T") + 1, aString.indexOf("Z") - 7);
-};
-
-const toTimeInputString = (time) => {
-  if (!time) return null;
-  if (typeof time !== Object) {
-    time = new Date(time);
-  }
-  let aString = time.toISOString();
-  console.log(aString);
-  return aString.substring(aString.indexOf("T") + 1, aString.indexOf("Z") - 7);
-};
 
 export default memo(function Appointment({
   id,
@@ -38,6 +17,9 @@ export default memo(function Appointment({
   console.log("rendering appointment...");
 
   const { theme } = useThemeColors();
+
+  const durationInMinutes = (new Date(endTime).getTime() - new Date(startTime).getTime())/1000/60;
+ 
 
   const handleDelete = useCallback(
     (event) => {
@@ -99,14 +81,15 @@ export default memo(function Appointment({
             <tr>
               <td>Starts at:</td>
               <td data-cy="appointment_startTime">
-                {toTimeInputString(startTime)}
+                {new Date(startTime).toLocaleTimeString("en-BE", { hour: "2-digit", minute: "2-digit" })}
+                
               </td>
             </tr>
             <tr>
               <td>Duration:</td>
               <td data-cy="appointment_duration">
-                {toHoursInputString(new Date(endTime) - new Date(startTime))}{" "}
-                hours
+                {durationInMinutes}
+                {" "}minutes
               </td>
             </tr>
             <tr>
