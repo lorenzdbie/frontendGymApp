@@ -4,6 +4,24 @@ import {useThemeColors} from "/src/contexts/Theme.context.jsx";
 
 import {IoTrashOutline, IoPencilOutline} from "react-icons/io5";
 
+function substractHourForDST(date) {
+  Date.prototype.stdTimezoneOffset = function () {
+    var jan = new Date(this.getFullYear(), 0, 1);
+    var jul = new Date(this.getFullYear(), 6, 1);
+    return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+  };
+  Date.prototype.isDstObserved = function () {
+    return this.getTimezoneOffset() < this.stdTimezoneOffset();
+  };
+
+  if (date.isDstObserved()) {
+    return date;
+  } else {
+    date.setTime(date.getTime() - 1 * 60 * 60 * 1000);
+    return date;
+  }
+}
+
 export default function Afspraak({id, user, date, training, startTime, endTime, intensity, specialRequest, onDelete}){
   console.log("test");
 
@@ -71,7 +89,8 @@ export default function Afspraak({id, user, date, training, startTime, endTime, 
              <tr>
                <td>Starts at:</td>
                <td data-cy="appointment_startTime">
-                 {new Date(startTime).toLocaleTimeString("en-BE", { hour: "2-digit", minute: "2-digit" })}
+                 {
+                 substractHourForDST(new Date(startTime)).toLocaleTimeString("en-BE", { hour: "2-digit", minute: "2-digit" })}
                 
                </td>
              </tr>

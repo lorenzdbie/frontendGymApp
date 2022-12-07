@@ -20,6 +20,8 @@ export default function AfsprakenList() {
   const userApi = useUsers();
   const { user } = useAuth0();
 
+
+
   const refreshAppointments = useCallback(async () => {
     try {
       setLoading(true);
@@ -49,6 +51,9 @@ export default function AfsprakenList() {
     refreshAppointments();
     refreshUsers();
   }, [refreshAppointments, refreshUsers]);
+
+
+
 
   const handleDelete = useCallback(async (idToDelete) => {
     try {

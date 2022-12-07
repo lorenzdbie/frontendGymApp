@@ -8,8 +8,8 @@ import Register from "/src/components/users/Register.jsx";
 // import AppointmentList from "/src/components/appointments/AppointmentList.jsx";
 // import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
 // import Appointment from "/src/components/appointments/Appointment.jsx";
-import Afspraak from "/src/components/afspraken/Afspraak.jsx";
-import AfspraakForm from "/src/components/afspraken/AfspraakForm";
+// import Afspraak from "/src/components/afspraken/Afspraak.jsx";
+// import AfspraakForm from "/src/components/afspraken/AfspraakForm.jsx";
 import AfsprakenList from "/src/components/afspraken/AfsprakenList.jsx";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
 import UserList from "/src/components/users/UserList.jsx";
@@ -36,12 +36,12 @@ function App() {
           />
         </Route>
 
-        {/* <Route path="/appointments">
+        <Route path="/appointments">
           <Route
             index
             element={
               <RequireAuth>
-                <AppointmentList />
+                <AfsprakenList />
               </RequireAuth>
             }
           />
@@ -49,7 +49,7 @@ function App() {
             path="add"
             element={
               <RequireAuth>
-                <AppointmentList />
+                <AfsprakenList />
               </RequireAuth>
             }
           />
@@ -57,20 +57,20 @@ function App() {
             path="edit/:id"
             element={
               <RequireAuth>
-                <AppointmentList />
+                <AfsprakenList />
               </RequireAuth>
             }
           />
 
-           <Route
+           {/* <Route
                   path="overview"
                   element={
                     <RequireAuth>
                       <AppointmentOverviewList />
                     </RequireAuth>
                   }
-                />
-        </Route> */}
+                /> */}
+        </Route> 
         {/* <Route path="/overview">
           <Route
             index
