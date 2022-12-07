@@ -1,7 +1,5 @@
 # Examenopdracht Front-end Web Development
 
-> Schrap hierboven wat niet past
-
 - Student: Lorenz De Bie
 - Studentennummer: 702547ld
 - E-mailadres: lorenz.debie@student.hogent.be
@@ -11,13 +9,16 @@
 Ik verwacht dat volgende software reeds geïnstalleerd is:
 
 - [vite](https://vitejs.dev)
+-
 
 > Vul eventueel aan
 
 ## Opstarten
+ Eerst, installeer de dependencies met yarn install.
+ Maak een .env bestand aan met volgende gegevens:
 
-> Deze applicatie gebruikt vite: opstartcommando = npm run dev
-> 
+ Deze applicatie gebruikt vite gebruik yarn run dev.
+
 
 
 ## Testen
