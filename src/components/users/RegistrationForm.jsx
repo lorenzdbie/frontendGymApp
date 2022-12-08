@@ -9,13 +9,13 @@ import { useNavigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import { toDateInputString } from "/src/components/afspraken/AfspraakForm";
 
 const labels = {
   firstName: "First name",
   lastName: "Last Name",
   email: "E-mail",
-  password: "Password",
-  confirmPassword: "Confirm Password",
   birthdate: "Date of birth",
   weight: "Weight",
   height: "Height",
@@ -40,37 +40,37 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
     );
   }
 
-  if (name === "password" || name === "confirmPassword") {
-    const [showPassword, setShowPassword] = useState(false);
+  // if (name === "password" || name === "confirmPassword") {
+  //   const [showPassword, setShowPassword] = useState(false);
 
-    const togglePassword = () => {
-      setShowPassword(!showPassword);
-    };
+  //   const togglePassword = () => {
+  //     setShowPassword(!showPassword);
+  //   };
 
-    return (
-      <div className="d-flex flex-row my-2">
-        <label htmlFor={name} className="form-label col-5 my-auto ">
-          {labels[name]}:
-        </label>
-        <div className="password my-auto d-flex">
-          <input
-            {...register(name, validationRules[name])}
-            id={name}
-            type={showPassword ? "text" : "password"}
-            className="form-control col-2 rounded-5"
-            placeholder={placeholder}
-          />
-          <button
-            className={`passwordButton bg-light text-dark`}
-            type="button"
-            onClick={togglePassword}
-          >
-            {showPassword ? <BiShowAlt /> : <BiHide />}
-          </button>
-        </div>
-      </div>
-    );
-  }
+  //   return (
+  //     <div className="d-flex flex-row my-2">
+  //       <label htmlFor={name} className="form-label col-5 my-auto ">
+  //         {labels[name]}:
+  //       </label>
+  //       <div className="password my-auto d-flex">
+  //         <input
+  //           {...register(name, validationRules[name])}
+  //           id={name}
+  //           type={showPassword ? "text" : "password"}
+  //           className="form-control col-2 rounded-5"
+  //           placeholder={placeholder}
+  //         />
+  //         <button
+  //           className={`passwordButton bg-light text-dark`}
+  //           type="button"
+  //           onClick={togglePassword}
+  //         >
+  //           {showPassword ? <BiShowAlt /> : <BiHide />}
+  //         </button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="d-flex flex-row my-2">
@@ -101,6 +101,7 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
 export default function RegistrationForm(/* { onSaveRegistration } */) {
   const [error, setError] = useState(null);
   const {
+    setValue,
     register,
     handleSubmit,
     reset,
@@ -110,20 +111,9 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
   const usersApi = useUsers();
   const navigate = useNavigate();
   const { user } = useAuth0();
-
-  // const onSubmit = (data) => {
-  //   console.log(JSON.stringify(data));
-  //   onSaveRegistration(
-  //     data.firstName,
-  //     data.lastName,
-  //     data.birthdate,
-  //     data.email,
-  //     data.password,
-  //     data.weight,
-  //     data.height
-  //   );
-  //   reset();
-  // };
+  
+  let id = null;
+ 
 
   const onSubmit = async (data) => {
     const { firstName, lastName, birthdate, weight, height } = data;
@@ -149,6 +139,31 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
       setError(error);
     }
   };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setError(null);
+        const user = await usersApi.getUserByAuthId();
+        id = user.id;
+        console.log(`userid: ${id}`);
+        if (id) {
+          setValue("firstName", user.firstName);
+          setValue("lastName", user.lastName);
+          setValue("birthdate", toDateInputString(new Date(user.birthdate)));
+          setValue("weight", user.weight);
+          setValue("height", user.height);
+                   
+        }
+
+      
+
+      } catch (error) {
+        setError(error);
+      }
+    };
+    fetchUsers();
+  }, [setValue, id, reset]);
 
   return (
     <div className="d-flex flex-column col-12">
@@ -234,11 +249,12 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
             <div className="btn-group float-end">
               <button
                 type="submit"
+                label="submit"
                 disabled={isSubmitting}
                 className="btn btn-primary rounded-5"
                 style={{ margin: "0 20px", backgroundColor: "blue" }}
               >
-                add information
+                Add information
               </button>
               <ToastContainer />
             </div>

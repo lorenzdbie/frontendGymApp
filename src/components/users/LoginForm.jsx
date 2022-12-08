@@ -6,6 +6,8 @@ import { BiShowAlt, BiHide } from "react-icons/bi";
 // import Register from "/src/components/users/Register.jsx";
 // import { Link } from "react-router-dom";
 import LoginButton from "/src/components/authentication/LoginButton.jsx";
+import LogoutButton from "/src/components/authentication/LogoutButton.jsx";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const labels = {
   email: "E-mail",
@@ -75,6 +77,16 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
   );
 }
 
+function LoginLogoutButton(){
+const { isAuthenticated} = useAuth0();
+if (isAuthenticated) {
+  return <LogoutButton />;
+}
+return <LoginButton />;
+
+}
+
+
 export default function LoginForm({ onSaveLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -110,7 +122,7 @@ export default function LoginForm({ onSaveLogin }) {
           )}
         </picture>
       </div>
-      <h2 className="text-center">Login / SignUp</h2>
+      
       <div className="d-flex flex-row justify-content-center align-items-start">
         {/* <FormProvider
           handleSubmit={handleSubmit}
@@ -156,7 +168,7 @@ export default function LoginForm({ onSaveLogin }) {
           </form>
         </FormProvider> */}
         <div className="clearfix d-flex flex-row justify-content-evenly mt-3">
-          <LoginButton />
+          <LoginLogoutButton />
         </div>
       </div>
     </>

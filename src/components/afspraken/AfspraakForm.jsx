@@ -221,10 +221,6 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
   const { id } = useParams();
   const appointmentsApi = useAppointments();
 
-  // const notify = () => {
-  //   toast.success(id ? "Appointment edited!" : "Appointment created!");
-  // };
-
   const onSubmit = async (data) => {
     const {
       date,

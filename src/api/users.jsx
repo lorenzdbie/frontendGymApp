@@ -39,23 +39,46 @@ const useUsers = () => {
   //   );
   // });
 
-  const register = useCallback( async (user) => {
-    const token = await getAccessTokenSilently();
-    console.log(user);
-    const { data } = await axios.post(`${baseUrl}/register`, user, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(data);
-    return data;
-  }, [getAccessTokenSilently]);
+  const getUserByAuthId = useCallback(
+    async () => {
+      const token = await getAccessTokenSilently();
+      const { data } = await axios.get(`${baseUrl}/check`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(data);
+      return data;
+    },
+    [getAccessTokenSilently]
+  );
+
+  const register = useCallback(
+    async (user) => {
+      const token = await getAccessTokenSilently();
+      const { id, ...values } = user;
+      console.log(user);
+      const { data } = await axios({
+        method: id ? "PUT" : "POST",
+        url: `${baseUrl}/${id ?? "register"}`,
+        data: values,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(data);
+      // return data;
+    },
+    [getAccessTokenSilently]
+  );
 
   const usersApi = useMemo(
     () => ({
-      getAll, register
+      getAll,
+      register,
+      getUserByAuthId,
     }),
-    [getAll, register]
+    [getAll, register, getUserByAuthId]
   );
 
   return usersApi;

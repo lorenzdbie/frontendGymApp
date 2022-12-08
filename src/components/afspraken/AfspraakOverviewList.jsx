@@ -45,7 +45,7 @@ export default function AfsprakenOverviewList() {
       const fetchedAppointments = await appointmentsApi.getAll();
       setAppointments(fetchedAppointments);
       console.log(fetchedAppointments);
-      const allEvents = fetchedAppointments.map((appointment) => {
+      const allEvents = fetchedAppointments.filter((appointment) => substractHourForDST(new Date(appointment.endTime)) > new Date()).map((appointment) => {
         const name =
           `${appointment.user.firstName} ${appointment.user.lastName}` +
           " : " +
