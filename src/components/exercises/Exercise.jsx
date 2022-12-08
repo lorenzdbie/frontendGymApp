@@ -1,5 +1,5 @@
 import { memo, useCallback } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 
 import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
@@ -20,13 +20,14 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
   return (
     <div className="exercise-box" data-cy="exercise">
       <div className="exercise-boxHead">
-        <div data-cy="exercise_id" >{id}</div>
-        <div data-cy="exercise_name" >{name}</div>
+        <div data-cy="exercise_id">{id}</div>
+        <div data-cy="exercise_name">{name}</div>
         <div className="btn-group float-end">
           <Link
             type="button"
             className={`btn btn-${theme}`}
             to={`/exercises/edit/${id}`}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             data-cy="exercise_edit_btn"
           >
             <IoPencilOutline />
@@ -44,7 +45,6 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
 
       <div>
         <div>
-          
           <u> Active muscle groups:</u>
         </div>
         <div data-cy="exercise_muscleGroup"> {muscleGroup} </div>
