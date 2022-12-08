@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 
 import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function substractHourForDST(date) {
   Date.prototype.stdTimezoneOffset = function () {
@@ -43,6 +45,9 @@ export default function Afspraak({
   const handleDelete = useCallback((event) => {
     event.preventDefault();
     onDelete(id);
+    toast.success("Appointment deleted!", {
+      position: toast.POSITION.BOTTOM_LEFT,
+    });
   });
 
   return (
@@ -57,7 +62,7 @@ export default function Afspraak({
             className={`btn btn-${theme}`}
             to={`/appointments/edit/${id}`}
             data-cy="appointment_edit_btn"
-            onClick={() => window.scrollTo({ top: 500, behavior: "smooth" })}
+            onClick={() => window.scrollTo({ top: -500, behavior: "smooth" })}
           >
             <IoPencilOutline />
           </Link>
@@ -69,6 +74,7 @@ export default function Afspraak({
           >
             <IoTrashOutline />
           </button>
+          <ToastContainer />
         </div>
       </div>
 

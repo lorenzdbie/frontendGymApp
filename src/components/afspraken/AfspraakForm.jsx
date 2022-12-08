@@ -10,6 +10,8 @@ import { validationRules } from "/src/components/ValidationRules.jsx";
 import useAppointments from "/src/api/appointments.jsx";
 import useExercises from "/src/api/exercises.jsx";
 import { useNavigate, useParams } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const toDateInputString = (date) => {
   if (!date) return null;
@@ -42,7 +44,7 @@ const labels = {
   specialRequest: "Special requests",
 };
 
-const addHour= (date = new Date(), hours = 1) => {
+const addHour = (date = new Date(), hours = 1) => {
   date.setHours(date.getHours() + hours);
   return date;
 };
@@ -219,6 +221,10 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
   const { id } = useParams();
   const appointmentsApi = useAppointments();
 
+  // const notify = () => {
+  //   toast.success(id ? "Appointment edited!" : "Appointment created!");
+  // };
+
   const onSubmit = async (data) => {
     const {
       date,
@@ -245,6 +251,9 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
         specialRequest,
       });
       reset();
+      toast.success(id ? "Appointment edited!" : "Appointment created!", {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
       refreshAppointments();
       navigate("/appointments");
     } catch (error) {
@@ -346,6 +355,7 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
               >
                 {id ? "Save appointment" : "Add appointment"}
               </button>
+              <ToastContainer />
             </div>
           </div>
         </form>

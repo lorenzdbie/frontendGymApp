@@ -7,6 +7,8 @@ import { BiShowAlt, BiHide } from "react-icons/bi";
 import useUsers from "/src/api/users.jsx";
 import { useNavigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const labels = {
   firstName: "First name",
@@ -138,6 +140,10 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
         height,
       });
       // refreshUsers();
+      reset();
+      toast.success("Registration successful!", {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
       navigate("/appointments");
     } catch (error) {
       setError(error);
@@ -232,8 +238,9 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
                 className="btn btn-primary rounded-5"
                 style={{ margin: "0 20px", backgroundColor: "blue" }}
               >
-                Sign-up
+                add information
               </button>
+              <ToastContainer />
             </div>
           </div>
         </form>

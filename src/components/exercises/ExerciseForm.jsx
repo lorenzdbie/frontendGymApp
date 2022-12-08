@@ -5,6 +5,8 @@ import { validationRules } from "/src/components/ValidationRules.jsx";
 import useExercises from "/src/api/exercises.jsx";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const labels = {
   name: "Exercise name",
@@ -97,6 +99,10 @@ export default memo(function ExerciseForm({ refreshExercises }) {
     try {
       setError(null);
       await exercisesApi.save({ id, name, muscleGroup });
+      reset();
+      toast.success(id ? "Exercise edited!" : "Exercise created!", {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
       refreshExercises();
       navigate("/exercises");
     } catch (error) {
@@ -165,6 +171,7 @@ export default memo(function ExerciseForm({ refreshExercises }) {
               >
                 {id ? "Save exercise" : "Add exercise"}
               </button>
+              <ToastContainer />
             </div>
           </div>
         </form>
