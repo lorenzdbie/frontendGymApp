@@ -42,6 +42,11 @@ const labels = {
   specialRequest: "Special requests",
 };
 
+const addHour= (date = new Date(), hours = 1) => {
+  date.setHours(date.getHours() + hours);
+  return date;
+};
+
 function LabelInput({ label, name, type, placeholder, ...rest }) {
   const { register, errors, isSubmitting } = useFormContext();
 
@@ -239,6 +244,7 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
         intensity: parseInt(intensity),
         specialRequest,
       });
+      reset();
       refreshAppointments();
       navigate("/appointments");
     } catch (error) {

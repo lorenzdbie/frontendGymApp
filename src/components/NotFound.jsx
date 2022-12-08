@@ -1,4 +1,4 @@
-import dumbbellLoader from "/src/assets/loader.png";
+import dumbbellLoader from "/src/logos/loader.png";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 
 export default function NotFound() {

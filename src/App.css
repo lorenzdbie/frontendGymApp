@@ -418,7 +418,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media screen and (max-width: 700px) {
   #root {
-    width: 100%;
+    width: 100vw;
     min-width: 380px;
     min-height: 100%;
     display: block;
@@ -444,7 +444,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   #App {
-    background-color: white;
     display: flex;
     margin: auto;
     flex-direction: column;
@@ -478,7 +477,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     max-height: 8em;
   }
   .mobilehide {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    width: 95%;
   }
 
   .usertable {
@@ -492,9 +496,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin: 0 auto;
 }
 .landscape {
+  display: flex;
+  flex-direction: column;
   min-width: 380px;
   padding-top: 1em;
-  margin: 0 3em;
+  margin: 0 auto;
 }
 @media screen and (min-width: 1300px) {
   .landscape {
@@ -508,7 +514,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-@media screen and (min-width: 625px) {
+@media screen and (min-width: 700px) {
   #root {
     min-width: 100%;
     display: block;
@@ -565,11 +571,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: space-between;
     align-items: flex-start;
     padding: 3em 2em 2em 4em;
+    gap: 3em;
   }
 }
-.mobilehide {
+/* .mobilehide {
   margin-left: 3em;
-}
+} */
 
 .exercise-box {
   width: 180px;
