@@ -57,7 +57,7 @@ export default function Afspraak({
             className={`btn btn-${theme}`}
             to={`/appointments/edit/${id}`}
             data-cy="appointment_edit_btn"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => window.scrollTo({ top: 500, behavior: "smooth" })}
           >
             <IoPencilOutline />
           </Link>

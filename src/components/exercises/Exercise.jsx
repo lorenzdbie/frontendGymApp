@@ -27,7 +27,7 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
             type="button"
             className={`btn btn-${theme}`}
             to={`/exercises/edit/${id}`}
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => window.scrollTo({ top: 500, behavior: "smooth" })}
             data-cy="exercise_edit_btn"
           >
             <IoPencilOutline />
