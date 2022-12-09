@@ -73,6 +73,7 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
 
 export default function RegistrationForm() {
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState(null);
   const {
     setValue,
     register,
@@ -85,18 +86,18 @@ export default function RegistrationForm() {
   const navigate = useNavigate();
   const { user } = useAuth0();
 
-  let id = null;
+  let id;
 
   const onSubmit = async (data) => {
     const { firstName, lastName, birthdate, weight, height } = data;
     const { email } = user;
 
-    console.log(id);
+    console.log(userId);
 
     try {
       setError(null);
       await usersApi.register({
-        id,
+        id: userId,
         firstName,
         lastName,
         email,
@@ -119,8 +120,10 @@ export default function RegistrationForm() {
       try {
         setError(null);
         const user = await usersApi.getUserByAuthId();
-        id = user.id;
-        console.log(`userid: ${id}`);
+        const id = user.id;
+        setUserId(id);
+        // console.log(`id: ${id}`);
+        // console.log(`userid: ${userId}`);
         if (id) {
           setValue("firstName", user.firstName);
           setValue("lastName", user.lastName);
@@ -133,7 +136,7 @@ export default function RegistrationForm() {
       }
     };
     fetchUsers();
-  }, [setValue, id, reset]);
+  }, [setValue, reset]);
 
   return (
     <div className="d-flex flex-column col-12">
