@@ -29,7 +29,7 @@ export const validationRules = {
     required: "Date is a required field",
     validate: (value) => {
       const date = new Date(value);
-      const today = new Date().getDate();
+      const today = new Date().setHours(0, 0, 0, 0);
       console.log(date);
       console.log(today);
       if (date < today) {

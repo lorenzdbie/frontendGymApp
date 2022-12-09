@@ -12,7 +12,7 @@ moment.tz.setDefault("Europe/Stockholm");
 const localizer = momentLocalizer(moment);
 
 //substract 1 hour from the date to get the correct time if daylight saving time is not active
-function substractHourForDST(date) {
+export function substractHourForDST(date) {
   Date.prototype.stdTimezoneOffset = function () {
     var jan = new Date(this.getFullYear(), 0, 1);
     var jul = new Date(this.getFullYear(), 6, 1);
@@ -45,18 +45,23 @@ export default function AfsprakenOverviewList() {
       const fetchedAppointments = await appointmentsApi.getAll();
       setAppointments(fetchedAppointments);
       console.log(fetchedAppointments);
-      const allEvents = fetchedAppointments.filter((appointment) => substractHourForDST(new Date(appointment.endTime)) > new Date()).map((appointment) => {
-        const name =
-          `${appointment.user.firstName} ${appointment.user.lastName}` +
-          " : " +
-          `${appointment.training.name}`;
-        return {
-          id: appointment.id,
-          title: name,
-          start: substractHourForDST(new Date(appointment.startTime)),
-          end: substractHourForDST(new Date(appointment.endTime)),
-        };
-      });
+      const allEvents = fetchedAppointments
+        .filter(
+          (appointment) =>
+            substractHourForDST(new Date(appointment.endTime)) > new Date()
+        )
+        .map((appointment) => {
+          const name =
+            `${appointment.user.firstName} ${appointment.user.lastName}` +
+            " : " +
+            `${appointment.training.name}`;
+          return {
+            id: appointment.id,
+            title: name,
+            start: substractHourForDST(new Date(appointment.startTime)),
+            end: substractHourForDST(new Date(appointment.endTime)),
+          };
+        });
       setEvents(allEvents);
       console.log(fetchedAppointments);
       console.log(
@@ -72,6 +77,7 @@ export default function AfsprakenOverviewList() {
     }
   }, []);
 
+
   useEffect(() => {
     refreshAppointments();
   }, [refreshAppointments]);
@@ -84,11 +90,13 @@ export default function AfsprakenOverviewList() {
       setAppointments((appointments) =>
         appointments.filter(({ id }) => id !== idToDelete)
       );
+      setEvents((events) => events.filter(({ id }) => id !== idToDelete));
     } catch (error) {
       console.error(error);
       setError(error);
     }
   }, []);
+
 
   return (
     <>
@@ -123,7 +131,10 @@ export default function AfsprakenOverviewList() {
               {!loading && !error ? (
                 <>
                   {appointments
-                    .sort((a, b) => new Date(a.date) - new Date(b.date))
+                    .sort((a, b) => new Date(a.startTime) - new Date(b.startTime)).filter(
+                      (appointment) =>
+                        substractHourForDST(new Date(appointment.endTime)) > new Date()
+                    )
                     .map((appoint) => (
                       <Afspraak
                         key={appoint.id}

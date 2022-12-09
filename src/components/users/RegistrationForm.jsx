@@ -40,65 +40,38 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
     );
   }
 
-  // if (name === "password" || name === "confirmPassword") {
-  //   const [showPassword, setShowPassword] = useState(false);
-
-  //   const togglePassword = () => {
-  //     setShowPassword(!showPassword);
-  //   };
-
-  //   return (
-  //     <div className="d-flex flex-row my-2">
-  //       <label htmlFor={name} className="form-label col-5 my-auto ">
-  //         {labels[name]}:
-  //       </label>
-  //       <div className="password my-auto d-flex">
-  //         <input
-  //           {...register(name, validationRules[name])}
-  //           id={name}
-  //           type={showPassword ? "text" : "password"}
-  //           className="form-control col-2 rounded-5"
-  //           placeholder={placeholder}
-  //         />
-  //         <button
-  //           className={`passwordButton bg-light text-dark`}
-  //           type="button"
-  //           onClick={togglePassword}
-  //         >
-  //           {showPassword ? <BiShowAlt /> : <BiHide />}
-  //         </button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
-    <div className="d-flex flex-row my-2">
-      <label htmlFor={name} className="form-label col-5 my-auto ">
-        {labels[name]}:
-      </label>
-      <input
-        {...register(name, validationRules[name])}
-        id={name}
-        type={type}
-        className="form-control col rounded-5 my-auto"
-        placeholder={placeholder ? placeholder : null}
-        {...rest}
-      />
-      {name === "weight" ? (
-        <span className="my-auto form-label">&nbsp;kg</span>
-      ) : null}
-      {name === "height" ? (
-        <span className="my-auto form-label">&nbsp;cm</span>
-      ) : null}
+    <>
+      <div className="d-flex flex-row my-2">
+        <label htmlFor={name} className="form-label col-5 my-auto ">
+          {labels[name]}:
+        </label>
+        <input
+          {...register(name, validationRules[name])}
+          id={name}
+          type={type}
+          className="form-control col rounded-5 my-auto"
+          placeholder={placeholder ? placeholder : null}
+          {...rest}
+        />
+        {name === "weight" ? (
+          <span className="my-auto form-label">&nbsp;kg</span>
+        ) : null}
+        {name === "height" ? (
+          <span className="my-auto form-label">&nbsp;cm</span>
+        ) : null}
+      </div>
       {hasError ? (
-        <div className="form-text text-danger">{errors[name].message}</div>
+        <div className="form-text text-end text-danger">
+          {errors[name].message}
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }
 
-export default function RegistrationForm(/* { onSaveRegistration } */) {
+export default function RegistrationForm() {
   const [error, setError] = useState(null);
   const {
     setValue,
@@ -111,17 +84,19 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
   const usersApi = useUsers();
   const navigate = useNavigate();
   const { user } = useAuth0();
-  
+
   let id = null;
- 
 
   const onSubmit = async (data) => {
     const { firstName, lastName, birthdate, weight, height } = data;
     const { email } = user;
 
+    console.log(id);
+
     try {
       setError(null);
       await usersApi.register({
+        id,
         firstName,
         lastName,
         email,
@@ -130,11 +105,10 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
         height,
       });
       // refreshUsers();
-      reset();
       toast.success("Registration successful!", {
         position: toast.POSITION.BOTTOM_LEFT,
       });
-      navigate("/appointments");
+     
     } catch (error) {
       setError(error);
     }
@@ -153,11 +127,7 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
           setValue("birthdate", toDateInputString(new Date(user.birthdate)));
           setValue("weight", user.weight);
           setValue("height", user.height);
-                   
         }
-
-      
-
       } catch (error) {
         setError(error);
       }
@@ -196,24 +166,6 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
             type="date"
             defaultValue={new Date().toISOString().slice(0, 10)}
           />
-          {/* <LabelInput
-            label="email"
-            name="email"
-            type="email"
-            placeholder="e-mail"
-          /> */}
-          {/* <LabelInput
-            label="password"
-            name="password"
-            type="password"
-            placeholder="password"
-          />
-          <LabelInput
-            label="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            placeholder="Password"
-          /> */}
           <LabelInput
             label="weight"
             name="weight"
@@ -235,17 +187,6 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
           />
 
           <div className="mt-3 clearfix">
-            {/* <div className="btn-group float-end">
-              <button
-                className="btn btn-primary rounded-5"
-                style={{ margin: "0 20px", backgroundColor: "gray" }}
-              >
-                <Link to={"/Login"} className="text-light">
-                  {" "}
-                  Cancel
-                </Link>
-              </button>
-            </div> */}
             <div className="btn-group float-end">
               <button
                 type="submit"
@@ -264,160 +205,3 @@ export default function RegistrationForm(/* { onSaveRegistration } */) {
     </div>
   );
 }
-
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="firstName" className="form-label col-5 my-auto ">
-//             First name:
-//           </label>
-//           <input
-//             {...register("firstName", validationRules.firstName)}
-//             id="firstName"
-//             type="text"
-//             className="form-control col rounded-5"
-//             placeholder="first name"
-//           />
-//         </div>
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="lastName" className=" form-label col-5 my-auto ">
-//             Last name:
-//           </label>
-
-//           <input
-//             {...register("lastName", validationRules.lastName)}
-//             id="lastName"
-//             type="text"
-//             className="form-control col rounded-5 "
-//             placeholder="last name"
-//           />
-//         </div>
-
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="date" className="form-label col-5 my-auto ">
-//             Birthdate:
-//           </label>
-
-//           <input
-//             {...register("birthdate", validationRules.birthdate)}
-//             defaultValue={new Date().toISOString().slice(0, 10)}
-//             id="birthdate"
-//             type="date"
-//             className="form-control col rounded-5"
-//           />
-//         </div>
-
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="e-mail" className="form-label col-5 my-auto ">
-//             Enter e-mail:
-//           </label>
-
-//           <input
-//             {...register("email", validationRules.email)}
-//             id="email"
-//             type="email"
-//             className="form-control col rounded-5"
-//             placeholder="abc@123.com"
-//           />
-//         </div>
-
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="password" className="form-label col-5 my-auto ">
-//             password:
-//           </label>
-
-//           <input
-//             {...register("password", validationRules.password)}
-//             id="password"
-//             type="password"
-//             className="form-control col rounded-5"
-//             placeholder="password"
-//           />
-//         </div>
-
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="confirmPassword" className="form-label col-5 my-0 ">
-//             Repeat password:
-//           </label>
-
-//           <input
-//             {...register(
-//               "confirmPassword", validationRules.confirmPassword
-//             )}
-//             id="confirmPassword"
-//             type="password"
-//             className="form-control col rounded-5 my-auto"
-//             placeholder="password"
-//           />
-//         </div>
-
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="weight" className="form-label col-5 my-auto ">
-//             Body weight:
-//           </label>
-
-//           <input
-//             {...register("weight", validationRules.weight)}
-//             id="weight"
-//             type="number"
-//             step="0.1"
-//             className="form-control col bodyHW rounded-5"
-//             placeholder="weight"
-//           />
-//           <span className="my-auto form-label"> &nbsp;kg</span>
-//         </div>
-//         <div className="d-flex flex-row my-2">
-//           <label htmlFor="weight" className="form-label col-5 my-auto ">
-//             Body height:
-//           </label>
-
-//           <input
-//             {...register("height", validationRules.height)}
-//             id="height"
-//             type="number"
-//             step="0.1"
-//             className="form-control col rounded-5"
-//             placeholder="height"
-//           />
-//           <span className="my-auto form-label"> &nbsp;cm</span>
-//         </div>
-//         <div className="d-flex flex-row my-2">
-//           <input
-//             {...register("registerCheckBox", validationRules.registerCheckBox)}
-//             type="checkbox"
-//             className="form-check-label col-3 my-auto rounded-2"
-//           />
-//           I have read and agree to the terms and conditions
-//         </div>
-
-//         <div className="clearfix">
-//           <div className="btn-group float-end">
-//             <button
-//               className="btn btn-primary rounded-5"
-//               style={{ margin: "0 20px", backgroundColor: "gray" }}
-//             >
-//               Cancel
-//             </button>
-//           </div>
-//           <div className="btn-group float-end">
-//             <button
-//               type="submit"
-//               className="btn btn-primary rounded-5"
-//               style={{ margin: "0 20px", backgroundColor: "blue" }}
-//             >
-//               Sign-up
-//             </button>
-//           </div>
-//         </div>
-//         {errors.firstName && <p className="form-text text-danger">{errors.firstName.message}</p>}
-//         {errors.lastName && <p className="form-text text-danger">{errors.lastName.message}</p>}
-//         {errors.birthdate && <p className="form-text text-danger">{errors.birthdate.message}</p>}
-//         {errors.email && <p className="form-text text-danger">{errors.email.message}</p>}
-//         {errors.password && <p className="form-text text-danger">{errors.password.message}</p>}
-//         {errors.confirmPassword && <p className="form-text text-danger">{errors.confirmPassword.message}</p>}
-//         {errors.weight && <p className="form-text text-danger">{errors.weight.message}</p>}
-//         {errors.height && <p className="form-text text-danger">{errors.height.message}</p>}
-//         {errors.registerCheckBox && <p className="form-text text-danger">{errors.registerCheckBox.message}</p>}
-
-//       </form>
-//     </div>
-//   );
-// }

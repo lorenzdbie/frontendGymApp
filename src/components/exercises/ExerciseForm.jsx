@@ -40,7 +40,10 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
         ) : null}
       </div>
       {hasError ? (
-        <div className="form-text text-danger" data-cy="labelInput-error">
+        <div
+          className="form-text text-end text-danger"
+          data-cy="labelInput-error"
+        >
           {errors[name].message}
         </div>
       ) : null}
@@ -71,7 +74,10 @@ function LabelTextArea({ label, name, type, placeholder, ...rest }) {
         />
       </div>
       {hasError ? (
-        <div className="form-text text-danger" data-cy="labelTextArea-error">
+        <div
+          className="form-text text-end text-danger"
+          data-cy="labelTextArea-error"
+        >
           {errors[name].message}
         </div>
       ) : null}

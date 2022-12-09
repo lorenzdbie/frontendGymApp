@@ -27,7 +27,7 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
       <div className="exercise-boxHead">
         <div data-cy="exercise_id">{id}</div>
         <div data-cy="exercise_name">{name}</div>
-        <div className="btn-group float-end">
+        <div className="btn-group float-end" style={{maxWidth: "90px", maxHeight:"40px" }}>
           <Link
             type="button"
             className={`btn btn-${theme}`}
@@ -39,7 +39,7 @@ export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
           </Link>
           <button
             type="button"
-            className="btn btn-danger"
+            className="btn btn-danger rounded-end w-100"
             onClick={handleDelete}
             data-cy="exercise_delete_btn"
           >

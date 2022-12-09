@@ -9,6 +9,7 @@ import useUsers from "/src/api/users.jsx";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
+import { substractHourForDST } from "./AfspraakOverviewList";
 
 
 export default function AfsprakenList() {
@@ -40,8 +41,8 @@ export default function AfsprakenList() {
   const refreshUsers = useCallback(async () => {
     try {
       setError(null);
-      const fetchedUsers = await userApi.getAll();
-      setUsers(fetchedUsers);
+      // const fetchedUsers = await userApi.getAll();
+      // setUsers(fetchedUsers);
     } catch (error) {
       console.error(error);
       setError(error);
@@ -72,7 +73,7 @@ export default function AfsprakenList() {
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
-         {error? (
+         {error ? (
         <div className="d-flex mt-5 justify-content-center">
           <Link
             type="button"
@@ -100,7 +101,10 @@ export default function AfsprakenList() {
                 {!loading && !error ? (
                   <>
                     {appointments
-                      .sort((a, b) => new Date(a.date) - new Date(b.date))
+                      .sort((a, b) => new Date(a.date) - new Date(b.date)).filter(
+                        (appointment) =>
+                          substractHourForDST(new Date(appointment.endTime)) > new Date()
+                      )
                       .map((appoint) => (
                         <Afspraak
                           key={appoint.id}

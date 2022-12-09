@@ -505,7 +505,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (min-width: 1300px) {
   .landscape {
     max-width: 2200px;
-    margin: 0 auto;
+    margin: 0;
     padding-top: 1em;
   }
 
@@ -567,6 +567,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .landscape {
     display: flex;
+    margin-right: 100px;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
@@ -606,7 +607,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .exercise-boxHead > div:first-child {
-  padding: 0 0.5em 0 1em;
+  padding: 0 0.5em 0 0.5em;
   margin: auto 0;
   text-align: left;
   color: white;

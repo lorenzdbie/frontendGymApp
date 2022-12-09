@@ -32,21 +32,25 @@ export const toTimeInputString = (time) => {
   return aString.substring(aString.indexOf("T") + 1, aString.indexOf("Z") - 7);
 };
 
-const addTimeToDate = (date, time) => {
+export const addTimeToDate = (date, time) => {
   date = toDateInputString(date);
   let tijd = date + "T" + time + ":00.000Z";
   return tijd;
 };
+
+
+export const addHour = (date = new Date(), hours = 1) => {
+  date.setHours(date.getHours() + hours);
+  return date;
+};
+
+const now = addHour(new Date()).toISOString().slice(11, 16);
+
 const labels = {
   date: "Date",
   startTime: "Start-time",
   endTime: "End-time",
   specialRequest: "Special requests",
-};
-
-const addHour = (date = new Date(), hours = 1) => {
-  date.setHours(date.getHours() + hours);
-  return date;
 };
 
 function LabelInput({ label, name, type, placeholder, ...rest }) {
@@ -60,6 +64,7 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
         <label htmlFor={name} className="form-label col-5 my-auto ">
           {labels[name]}:
         </label>
+        <div></div>
         <input
           {...register(name, validationRules[name])}
           id={name}
@@ -78,7 +83,7 @@ function LabelInput({ label, name, type, placeholder, ...rest }) {
       </div>
       {hasError ? (
         <div
-          className="form-text text-danger"
+          className="form-text text-end text-danger"
           data-cy="labelInputAppointment-error"
         >
           {errors[name].message}
@@ -314,7 +319,7 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
             label="startTime"
             name="startTime"
             type="time"
-            defaultValue={new Date().toISOString().slice(11, 16)}
+            defaultValue={now}
             min="08:00"
             max="18:30"
             data-cy="startTime_input"
@@ -323,7 +328,7 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
             label="endTime"
             name="endTime"
             type="time"
-            defaultValue={new Date().toISOString().slice(11, 16)}
+            defaultValue={now}
             min="08:30"
             max="19:00"
             data-cy="endTime_input"

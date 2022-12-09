@@ -6,23 +6,6 @@ import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function substractHourForDST(date) {
-  Date.prototype.stdTimezoneOffset = function () {
-    var jan = new Date(this.getFullYear(), 0, 1);
-    var jul = new Date(this.getFullYear(), 6, 1);
-    return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-  };
-  Date.prototype.isDstObserved = function () {
-    return this.getTimezoneOffset() < this.stdTimezoneOffset();
-  };
-
-  if (date.isDstObserved()) {
-    return date;
-  } else {
-    date.setTime(date.getTime() - 1 * 60 * 60 * 1000);
-    return date;
-  }
-}
 
 export default function Afspraak({
   id,
@@ -56,7 +39,7 @@ export default function Afspraak({
         <div>
           <span data-cy="appointment_id">Appointment # {id}</span>
         </div>
-        <div className="btn-group float-end">
+        <div className="btn-group float-end" style={{maxWidth: "90px", maxHeight:"40px" }}>
           <Link
             type="button"
             className={`btn btn-${theme}`}
@@ -68,7 +51,7 @@ export default function Afspraak({
           </Link>
           <button
             type="button"
-            className="btn btn-danger"
+            className="btn btn-danger rounded-end w-100"
             onClick={handleDelete}
             data-cy="appointment_delete_btn"
           >
@@ -90,7 +73,7 @@ export default function Afspraak({
             <tr>
               <td>Date:</td>
               <td data-cy="appointment_date">
-                {new Date(date).toLocaleDateString("en-be", {
+                {new Date(date).toLocaleDateString("en-BE", {
                   weekday: "short",
                   year: "numeric",
                   month: "short",
@@ -105,7 +88,7 @@ export default function Afspraak({
             <tr>
               <td>Starts at:</td>
               <td data-cy="appointment_startTime">
-                {new Date(startTime).toLocaleTimeString("en-GB", {
+                {new Date(startTime).toLocaleTimeString("en-BE", {
                   hour: "2-digit",
                   minute: "2-digit",
                   timeZone: "UTC",
