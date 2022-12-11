@@ -1,12 +1,12 @@
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const MyAuth0Provider = ({ children }) => {
-  const domain = `${import.meta.env.VITE_API_AUTH0_DOMAIN}`;
+  const domain = import.meta.env.VITE_API_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_API_AUTH0_CLIENT_ID;
   const audience = import.meta.env.VITE_API_AUTH0_API_AUDIENCE;
-  console.log("domain", domain);
-  console.log("clientId", clientId);
-  console.log("audience", audience);
+  // console.log("domain", domain);
+  // console.log("clientId", clientId);
+  // console.log("audience", audience);
   return (
     <Auth0Provider
       domain={domain}
