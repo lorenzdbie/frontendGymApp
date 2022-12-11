@@ -1,13 +1,12 @@
 import { memo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
-
 import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default memo(function Exercise({ id, name, muscleGroup, onDelete }) {
-  console.log("rendering exercise...");
+  // console.log("rendering exercise...");
 
   const { theme } = useThemeColors();
 

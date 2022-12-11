@@ -7,22 +7,18 @@ import Error from "/src/components/Error.jsx";
 import Loader from "/src/components/Loader.jsx";
 import useUsers from "/src/api/users.jsx";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router";
-import { useAuth0 } from "@auth0/auth0-react";
 import { substractHourForDST } from "./AfspraakOverviewList";
 
-
+//renders an appointmentform and a list of appointments for a specific user
 export default function AfsprakenList() {
+  
   const { theme, oppositeTheme } = useThemeColors();
   const [appointments, setAppointments] = useState([]);
-  const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const appointmentsApi = useAppointments();
+  const [userId, setUserId] = useState(null);
   const userApi = useUsers();
-  const { user } = useAuth0();
-
-
 
   const refreshAppointments = useCallback(async () => {
     try {
@@ -38,24 +34,20 @@ export default function AfsprakenList() {
     }
   }, []);
 
-  const refreshUsers = useCallback(async () => {
-    try {
-      setError(null);
-      // const fetchedUsers = await userApi.getAll();
-      // setUsers(fetchedUsers);
-    } catch (error) {
-      console.error(error);
-      setError(error);
-    }
-  }, []);
-
   useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setError(null);
+        const user = await userApi.getUserByAuthId();
+        const id = user.id;
+        setUserId(id);
+      } catch (error) {
+        setError(error);
+      }
+    };
     refreshAppointments();
-    refreshUsers();
-  }, [refreshAppointments, refreshUsers]);
-
-
-
+    fetchUsers();
+  }, [refreshAppointments]);
 
   const handleDelete = useCallback(async (idToDelete) => {
     try {
@@ -73,7 +65,7 @@ export default function AfsprakenList() {
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
-         {error ? (
+      {!userId ? (
         <div className="d-flex mt-5 justify-content-center">
           <Link
             type="button"
@@ -101,9 +93,11 @@ export default function AfsprakenList() {
                 {!loading && !error ? (
                   <>
                     {appointments
-                      .sort((a, b) => new Date(a.date) - new Date(b.date)).filter(
+                      .sort((a, b) => new Date(a.date) - new Date(b.date))
+                      .filter(
                         (appointment) =>
-                          substractHourForDST(new Date(appointment.endTime)) > new Date()
+                          substractHourForDST(new Date(appointment.endTime)) >
+                          new Date()
                       )
                       .map((appoint) => (
                         <Afspraak

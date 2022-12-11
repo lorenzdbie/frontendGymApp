@@ -18,7 +18,7 @@ export default function Afspraak({
   specialRequest,
   onDelete,
 }) {
-  console.log("test");
+  // console.log("test");
 
   const { theme } = useThemeColors();
 

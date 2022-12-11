@@ -1,9 +1,7 @@
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import { useState } from "react";
 import { validationRules } from "/src/components/ValidationRules.jsx";
-import { themes, useThemeColors } from "/src/contexts/Theme.context.jsx";
-import { BiShowAlt, BiHide } from "react-icons/bi";
-// import { Link } from "react-router-dom";
+import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 import useUsers from "/src/api/users.jsx";
 import { useNavigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -23,7 +21,7 @@ const labels = {
 
 function LabelInput({ label, name, type, placeholder, ...rest }) {
   const { register, errors } = useFormContext();
-  const { theme, oppositeTheme } = useThemeColors();
+  const {  oppositeTheme } = useThemeColors();
 
   const hasError = name in errors;
 

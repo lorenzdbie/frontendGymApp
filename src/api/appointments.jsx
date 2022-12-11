@@ -24,7 +24,7 @@ const useAppointments = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data);
+    // console.log(data);
     return data.appointments;
   }, [getAccessTokenSilently]);
 
@@ -36,7 +36,7 @@ const useAppointments = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
+      // console.log(data);
       return data;
     },
     [getAccessTokenSilently]

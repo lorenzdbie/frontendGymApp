@@ -18,26 +18,6 @@ const useUsers = () => {
     return data.users;
   }, [getAccessTokenSilently]);
 
-  // const registerWithAuth0 = useCallback(async (user) => {
-  //   const signUpUser = {
-  //     cient_id: `${import.meta.env.VITE_API_AUTH0_CLIENT_ID}`,
-  //     email: user.email,
-  //     password: user.password,
-  //     connection: "Username-Password-Authentication",
-  //     user_metadata: {
-  //       firstName: user.firstName,
-  //       lastName: user.lastName,
-  //       email: user.email,
-  //       birthdate: user.birthdate,
-  //       weight: user.weight,
-  //       height: user.height,
-  //     },
-  //   };
-  //   await axios.post(
-  //     `https://${import.meta.env.VITE_API_AUTH0_DOMAIN}/dbconnections/signup`,
-  //     { data: signUpUser }
-  //   );
-  // });
 
   const getUserByAuthId = useCallback(
     async () => {
@@ -47,7 +27,7 @@ const useUsers = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
+      // console.log(data);
       return data;
     },
     [getAccessTokenSilently]
@@ -57,7 +37,7 @@ const useUsers = () => {
     async (user) => {
       const token = await getAccessTokenSilently();
       const { id, ...values } = user;
-      console.log(user);
+      // console.log(user);
       const { data } = await axios({
         method: id ? "PUT" : "POST",
         url: `${baseUrl}/${id ?? "register"}`,
@@ -67,7 +47,6 @@ const useUsers = () => {
         },
       });
       // console.log(data);
-      // return data;
     },
     [getAccessTokenSilently]
   );
