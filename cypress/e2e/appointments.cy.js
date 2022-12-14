@@ -12,10 +12,10 @@ beforeEach(() => {
     cy.visit("http://localhost:5173/appointments");
     cy.get("[data-cy=appointment]").should("have.length", 1);
     cy.get("[data-cy=appointment_user]").eq(0).contains("Test firstName Test lastName");
-    cy.get("[data-cy=appointment_date]").eq(0).should("contain", "Fri, 2 Dec 2022");
+    cy.get("[data-cy=appointment_date]").eq(0).should("contain", "Fri, 3 Feb 2023");
     cy.get("[data-cy=appointment_training]").eq(0).contains("Strength: Arms");
     cy.get("[data-cy=appointment_startTime]").eq(0).should("contain", "10:00");
-    cy.get("[data-cy=appointment_duration]").eq(0).should("contain", "2:30 hours");
+    cy.get("[data-cy=appointment_duration]").eq(0).should("contain", "150 minutes");
     // cy.get("[data-cy=appointment_intensity]").eq(0).should("contain", "3");
     cy.get("[data-cy=appointment_specialRequest]").eq(0).should("contain", "test");
   });

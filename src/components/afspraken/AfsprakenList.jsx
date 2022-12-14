@@ -37,12 +37,15 @@ export default function AfsprakenList() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        setLoading(true);
         setError(null);
         const user = await userApi.getUserByAuthId();
         const id = user.id;
         setUserId(id);
       } catch (error) {
         setError(error);
+      }finally{
+        setLoading(false);
       }
     };
     refreshAppointments();
@@ -65,7 +68,7 @@ export default function AfsprakenList() {
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
-      {!userId ? (
+      {!loading && !error && !userId ? (
         <div className="d-flex mt-5 justify-content-center">
           <Link
             type="button"
