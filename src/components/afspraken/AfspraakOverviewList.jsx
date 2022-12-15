@@ -102,8 +102,6 @@ export default function AfsprakenOverviewList() {
     <>
       <div className={` mt-5 mx-5 pb-5`}>
         <h1 className="py-2 text-center">Appointments</h1>
-        <Loader loading={loading} />
-        <Error error={error} />
         {!loading && !error ? (
           <Calendar
             localizer={localizer}
