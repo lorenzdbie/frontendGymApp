@@ -23,7 +23,10 @@ Een applicatie om een afspraak te maken bij een Personal trainer waar bepaalde g
 - In het tabblad register kan je gebruikersinformatie toevoegen of bewerken.
 
 Bij het registreren bij Auth0 (allereerste nieuwe login) wordt er automatische een srcipt gerund die de nieuwe gebruiker de rol van user toekent.
-Dit gebeurd achter de schermen bij manage.auth0.com
+Dit gebeurd achter de schermen bij https://manage.auth0.com
+
+<img width="1550" alt="Screenshot 2022-12-17 at 17 10 36" src="https://user-images.githubusercontent.com/83095711/208251062-97d5e1ab-99d8-4e33-aed1-a63790f2b579.png">
+
 
 
 ## Screenshots
