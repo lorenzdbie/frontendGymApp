@@ -157,14 +157,14 @@ Users:
 - GET 'api/users' : geeft alle users terug.
 - GET 'api/users/check' : geeft een user terug met een specifiek Auth0id.
 - GET 'api/users/:id' : geeft de user terug met het specifieke id.
-- POST 'api/users/register' : registreerd een nieuwe gebruiker.
-- PUT 'api/users/:id' : update de gegevens van een bestaande gebruiker.
-- DELETE 'api/users/:id' : verwijdert een gebruiker met het specifieke id.
+- POST 'api/users/register' : registreert een nieuwe user.
+- PUT 'api/users/:id' : update de gegevens van een bestaande user.
+- DELETE 'api/users/:id' : verwijdert een user met het specifieke id.
 
 Trainings:
 - GET 'api/trainings' : geeft alle trainings terug.
 - GET 'api/trainings/:id' : geeft de training terug met het specifieke id.
-- POST 'api/trainings' : registreerd een nieuwe trainings.
+- POST 'api/trainings' : registreert een nieuwe training.
 - PUT 'api/trainings/:id' : update de gegevens van een bestaande training.
 - DELETE 'api/trainings/:id' : verwijdert een training met het specifieke id.
 
