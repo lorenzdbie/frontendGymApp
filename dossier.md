@@ -1,9 +1,9 @@
 # Voornaam Familienaam (Studentennummer)
 
-- [x] Front-end Web Development
+- [x] Front-end Web Development:
   - [GitHub repository](https://github.com/Web-IV/2223-frontendweb-Lorenzdebie)
   - [Online versie](https://two223-frontendweb-lorenzdebie.onrender.com/)
-- [x] Web Services: GITHUB URL
+- [x] Web Services: 
   - [GitHub repository](https://github.com/Web-IV/2223-webservices-Lorenzdebie)
   - [Online versie](https://two223-webservices-lorenzdebie.onrender.com)
 
@@ -14,7 +14,13 @@
 
 ## Projectbeschrijving
 
-Een applicatie om eem afspraak te maken bij een Personal trainer waar bepaalde gebruikersgegevens voor nodig zijn, waar de verschillende excercises/trainings kunnen geraadpleegd en gekozen worden. Ook is er een calender waar all gemaakte en niet verlopen afspraken in komen.
+Een applicatie om een afspraak te maken bij een Personal trainer waar bepaalde gebruikersgegevens voor nodig zijn, waar de verschillende excercises/trainings kunnen geraadpleegd en gekozen worden. Ook is er een calender waar all gemaakte en niet verlopen afspraken in komen.
+In het tabblad appointments kan je een afspraak maken fo bewerken.
+In het tabblad overview kan je alle gemaakte en nog niet verlopen afspraken raadplegen. 
+In het tabblad exercises kan je de trainingen bewerken of een nieuwe aanmaken.
+In het tabblad users kan je alle users bekijken die zich hebben geregistreerd hebben op de applicatie.
+In het tabblad register kan je gebruikersinformatie toevoegen of bewerken.
+
 
 ## Screenshots
 
@@ -98,8 +104,8 @@ Een applicatie om eem afspraak te maken bij een Personal trainer waar bepaalde g
         <br />
 
 - **varia**
-  - [ ] een aantal niet-triviale testen (min. 1 controller >=80% coverage)
-  - [ ] minstens één extra technologie
+  - [x] een aantal niet-triviale testen (min. 1 controller >=80% coverage)
+  - [x] minstens één extra technologie
   - [x] duidelijke en volledige `README.md`
   - [x] maakt gebruik van de laatste ES6-features (object destructuring, spread operator...)
   - [x] volledig en tijdig ingediend dossier
@@ -108,11 +114,11 @@ Een applicatie om eem afspraak te maken bij een Personal trainer waar bepaalde g
 
 ### Front-end Web Development
 
-> Hoe heb je jouw applicatie gestructureerd (mappen, design patterns, hiërarchie van componenten, state...)?
+De mappen in src staan gestructureerd volgens functie, api voor alle api-Calls voor de verschillende soorten components, in compinents staan alle verschillende componints files, in de map context staan de context gevoellige files. In de map public staan alle images.
 
 ### Web Services
 
-> Hoe heb je jouw applicatie gestructureerd (mappen, design patterns...)?
+Elke laag(repository, service, rest, core, data...) hebben elk hun eigen map binnen de src map met overzichtelijke naamduiding.
 
 ## Extra technologie
 
@@ -123,7 +129,13 @@ Dit geeft alle gemaakte afspraken terug in calender vorm (Overview-tab)
 
 ### Web Services
 
-> Wat is de extra technologie? Hoe werkt het? Voeg een link naar het npm package toe!
+Nodemailer: https://www.npmjs.com/package/nodemailer
+Na het maken van een appointment stuurt de server automaitisch een email met de gegevens vn de gemaakte afspraak. Doordat connectie met gmail sinds kort Oauth2 verificatie nodig heeft heb er ervoor gekozen op alle email op te vangen met mailtrap.
+
+login gegevens voor mailtrap.io:
+email: lorenz.debie@student.hogent.be
+password: FitnessAppTestMail
+
 
 ## Testresultaten
 
@@ -133,9 +145,38 @@ testen on connectie, appointment, exercise, addAppointment, addExercise
 
 ### Web Services
 
-100% conerage op alle routes, tot aan implementatie Auth0, daarna niets meer.
+Alle routes voor users en trainings werden gestest met bijna perfecte coverage: getAll, getById, add, update en delete.
+Voor appointments werden de routes voor getAll, getById en delete getest.
+De testen voor users en trainings werden samen uitgevoerd, de testen voor appointments word apart uitgevoers wegens user insert conflicten.
 
-> Schrijf hier een korte oplijsting en beschrijving van de geschreven testen + voeg een screenshot van de coverage en uitvoering toe
+
+
+Users:
+GET 'api/users' : geeft alle users terug.
+GET 'api/users/check' : geeft een user terug met een specifiek Auth0id.
+GET 'api/users/:id' : geeft de user terug met het specifieke id.
+POST 'api/users/register' : registreerd een nieuwe gebruiker.
+PUT 'api/users/:id' : update de gegevens van een bestaande gebruiker.
+DELETE 'api/users/:id' : verwijdert een gebruiker met het specifieke id.
+
+Trainings:
+GET 'api/trainings' : geeft alle trainings terug.
+GET 'api/trainings/:id' : geeft de training terug met het specifieke id.
+POST 'api/trainings' : registreerd een nieuwe trainings.
+PUT 'api/trainings/:id' : update de gegevens van een bestaande training.
+DELETE 'api/trainings/:id' : verwijdert een training met het specifieke id.
+
+![Screenshot 2022-12-17 at 15 55 17](https://user-images.githubusercontent.com/83095711/208248021-468e634b-2267-4e83-a5ef-282325d0e3e2.png)
+
+Appointments:
+GET 'api/appointments' : geeft alle afspraken terug.
+GET 'api/appointments/:id' : geeft de afspraak terug met het specifieke id.
+DELETE 'api/appointments/:id' : verwijdert een afspraak met het specifieke id.
+
+![Screenshot 2022-12-17 at 15 57 19](https://user-images.githubusercontent.com/83095711/208247997-7a3bb46a-5fb5-4b0f-b2ef-ca19657b5cc5.png)
+
+Er werden geen testen geschreven om errors/exceptions te triggeren.
+
 
 ## Gekende bugs
 
@@ -145,16 +186,4 @@ een Bug in de package Big-Calendar-React. Dit is aan de zijde van npm
 
 ### Web Services
 
-alle tests falen na implementatie Auth0
-
-## Wat is er verbeterd/aangepast?
-
-> Deze sectie is enkel voor 2e zittijd, verwijder deze in 1e zittijd.
-
-### Front-end Web Development
-
-- Dit en dat
-
-### Web Services
-
-- Oh en dit ook
+Testen dienen in comentaar gezet te worden om afzonderlijk te runnen. POST en PUT testen van afspraken komen niet uit waardoor deze in commentaar moeten blijven staan.
