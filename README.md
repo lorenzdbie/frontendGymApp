@@ -29,5 +29,4 @@ Ik verwacht dat volgende software reeds geïnstalleerd is:
   Eerst, installeer de dependencies met <code>yarn install</code>.
   
   Start Cypress op met <code>yarn run test</code>
-
-> Schrijf hier hoe we de testen uitvoeren (.env bestanden aanmaken, commando's om uit te voeren...)
+  Om de applicatie te testen dient de <a href="https://github.com/Web-IV/2223-webservices-Lorenzdebie">fitnessApp API</a> ook te draaien.
