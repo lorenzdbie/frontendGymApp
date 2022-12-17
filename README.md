@@ -14,7 +14,7 @@ Ik verwacht dat volgende software reeds geïnstalleerd is:
 > Vul eventueel aan
 
 ## Opstarten
- Eerst, installeer de dependencies met yarn install.
+ Eerst, installeer de dependencies met <code>yarn install</code>.
  Maak een .env bestand aan met volgende gegevens:
 
  Deze applicatie gebruikt vite gebruik yarn run dev.
