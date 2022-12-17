@@ -26,7 +26,7 @@ const useExercises = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
+      // console.log(data);
       return data;
     },
     [getAccessTokenSilently]
@@ -47,7 +47,7 @@ const useExercises = () => {
   const save = useCallback(
     async (training) => {
       const token = await getAccessTokenSilently();
-      console.log(training);
+      // console.log(training);
       const { id, ...values } = training;
 
       await axios({
