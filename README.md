@@ -9,7 +9,6 @@
 Ik verwacht dat volgende software reeds geïnstalleerd is:
 
 - [vite](https://vitejs.dev)
--
 
 
 ## Opstarten
