@@ -16,15 +16,11 @@
 
 Een applicatie om een afspraak te maken bij een Personal trainer waar bepaalde gebruikersgegevens voor nodig zijn, waar de verschillende excercises/trainings kunnen geraadpleegd en gekozen worden. Ook is er een calender waar all gemaakte en niet verlopen afspraken in komen.
 
-In het tabblad appointments kan je een afspraak maken fo bewerken.
-
-In het tabblad overview kan je alle gemaakte en nog niet verlopen afspraken raadplegen. 
-
-In het tabblad exercises kan je de trainingen bewerken of een nieuwe aanmaken.
-
-In het tabblad users kan je alle users bekijken die zich hebben geregistreerd hebben op de applicatie.
-
-In het tabblad register kan je gebruikersinformatie toevoegen of bewerken.
+- In het tabblad appointments kan je een afspraak maken fo bewerken.
+- In het tabblad overview kan je alle gemaakte en nog niet verlopen afspraken raadplegen.
+- In het tabblad exercises kan je de trainingen bewerken of een nieuwe aanmaken.
+- In het tabblad users kan je alle users bekijken die zich hebben geregistreerd hebben op de applicatie.
+- In het tabblad register kan je gebruikersinformatie toevoegen of bewerken.
 
 
 ## Screenshots
@@ -138,10 +134,8 @@ Nodemailer: https://www.npmjs.com/package/nodemailer
 Na het maken van een appointment stuurt de server automaitisch een email met de gegevens vn de gemaakte afspraak. Doordat connectie met gmail sinds kort Oauth2 verificatie nodig heeft heb er ervoor gekozen op alle email op te vangen met mailtrap.
 
 login gegevens voor mailtrap.io:
-
-email: lorenz.debie@student.hogent.be
-
-password: FitnessAppTestMail
+- email: lorenz.debie@student.hogent.be
+- password: FitnessAppTestMail
 
 
 
@@ -160,42 +154,27 @@ De testen voor users en trainings werden samen uitgevoerd, de testen voor appoin
 
 
 Users:
-
-GET 'api/users' : geeft alle users terug.
-
-GET 'api/users/check' : geeft een user terug met een specifiek Auth0id.
-
-GET 'api/users/:id' : geeft de user terug met het specifieke id.
-
-POST 'api/users/register' : registreerd een nieuwe gebruiker.
-
-PUT 'api/users/:id' : update de gegevens van een bestaande gebruiker.
-
-DELETE 'api/users/:id' : verwijdert een gebruiker met het specifieke id.
-
+- GET 'api/users' : geeft alle users terug.
+- GET 'api/users/check' : geeft een user terug met een specifiek Auth0id.
+- GET 'api/users/:id' : geeft de user terug met het specifieke id.
+- POST 'api/users/register' : registreerd een nieuwe gebruiker.
+- PUT 'api/users/:id' : update de gegevens van een bestaande gebruiker.
+- DELETE 'api/users/:id' : verwijdert een gebruiker met het specifieke id.
 
 Trainings:
-
-GET 'api/trainings' : geeft alle trainings terug.
-
-GET 'api/trainings/:id' : geeft de training terug met het specifieke id.
-
-POST 'api/trainings' : registreerd een nieuwe trainings.
-
-PUT 'api/trainings/:id' : update de gegevens van een bestaande training.
-
-DELETE 'api/trainings/:id' : verwijdert een training met het specifieke id.
+- GET 'api/trainings' : geeft alle trainings terug.
+- GET 'api/trainings/:id' : geeft de training terug met het specifieke id.
+- POST 'api/trainings' : registreerd een nieuwe trainings.
+- PUT 'api/trainings/:id' : update de gegevens van een bestaande training.
+- DELETE 'api/trainings/:id' : verwijdert een training met het specifieke id.
 
 ![Screenshot 2022-12-17 at 15 55 17](https://user-images.githubusercontent.com/83095711/208248021-468e634b-2267-4e83-a5ef-282325d0e3e2.png)
 
 
 Appointments:
-
-GET 'api/appointments' : geeft alle afspraken terug.
-
-GET 'api/appointments/:id' : geeft de afspraak terug met het specifieke id.
-
-DELETE 'api/appointments/:id' : verwijdert een afspraak met het specifieke id.
+- GET 'api/appointments' : geeft alle afspraken terug.
+- GET 'api/appointments/:id' : geeft de afspraak terug met het specifieke id.
+- DELETE 'api/appointments/:id' : verwijdert een afspraak met het specifieke id.
 
 ![Screenshot 2022-12-17 at 15 57 19](https://user-images.githubusercontent.com/83095711/208247997-7a3bb46a-5fb5-4b0f-b2ef-ca19657b5cc5.png)
 
@@ -210,4 +189,4 @@ een Bug in de package Big-Calendar-React. Dit is aan de zijde van npm
 
 ### Web Services
 
-Testen dienen in comentaar gezet te worden om afzonderlijk te runnen. POST en PUT testen van afspraken komen niet uit waardoor deze in commentaar moeten blijven staan.
+Testen dienen in comentaar gezet te worden om afzonderlijk te runnen. POST en PUT testen van Appointments komen niet uit waardoor deze in commentaar moeten blijven staan.
