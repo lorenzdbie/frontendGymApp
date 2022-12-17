@@ -22,6 +22,9 @@ Een applicatie om een afspraak te maken bij een Personal trainer waar bepaalde g
 - In het tabblad users kan je alle users bekijken die zich hebben geregistreerd hebben op de applicatie.
 - In het tabblad register kan je gebruikersinformatie toevoegen of bewerken.
 
+Bij het registreren bij Auth0 (allereerste nieuwe login) wordt er automatische een srcipt gerund die de nieuwe gebruiker de rol van user toekent.
+Dit gebeurd achter de schermen bij manage.auth0.com
+
 
 ## Screenshots
 
