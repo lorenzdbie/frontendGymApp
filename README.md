@@ -11,10 +11,10 @@ Ik verwacht dat volgende software reeds geïnstalleerd is:
 - [vite](https://vitejs.dev)
 -
 
-> Vul eventueel aan
 
 ## Opstarten
  Eerst, installeer de dependencies met <code>yarn install</code>.
+ 
  Maak een .env bestand aan met volgende gegevens:
  - VITE_API_URL='http://localhost:9000/api'
  - VITE_API_AUTH0_DOMAIN='lorenz-debie-hogent.eu.auth0.com'
@@ -26,5 +26,8 @@ Ik verwacht dat volgende software reeds geïnstalleerd is:
 
 
 ## Testen
+  Eerst, installeer de dependencies met <code>yarn install</code>.
+  
+  Start Cypress op met <code>yarn run test</code>
 
 > Schrijf hier hoe we de testen uitvoeren (.env bestanden aanmaken, commando's om uit te voeren...)
