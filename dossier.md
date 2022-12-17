@@ -37,6 +37,7 @@ Dit gebeurd achter de schermen bij https://manage.auth0.com
 <img width="1321" alt="Screenshot 2022-12-07 at 20 32 33" src="https://user-images.githubusercontent.com/83095711/206278029-b4a8a2c0-5204-40fa-9405-85ac78e3a1e6.png">
 <img width="682" alt="Screenshot 2022-12-07 at 20 33 13" src="https://user-images.githubusercontent.com/83095711/206278144-47f45073-b39d-4b1c-91be-82a44fdcee19.png">
 <img width="684" alt="Screenshot 2022-12-07 at 20 34 37" src="https://user-images.githubusercontent.com/83095711/206278391-60da3e1d-1106-455b-969c-945e51172a1b.png">
+![Screenshot 2022-12-17 at 18 03 14](https://user-images.githubusercontent.com/83095711/208253091-e6cb6b9c-cceb-4450-b6db-832162ff33c8.png)
 
 
 ## Behaalde minimumvereisten
@@ -133,6 +134,9 @@ Elke laag(repository, service, rest, core, data...) hebben elk hun eigen map bin
 
 Big Calendar React: https://www.npmjs.com/package/react-big-calendar
 Dit geeft alle gemaakte afspraken terug in calender vorm (Overview-tab)
+
+React toastify https://www.npmjs.com/package/react-toastify
+dit laat banners(toasts) verschijnen op het scherm bij het aanmaken, aanpassen of verwijderen van appointments, exercises en users.
 
 ### Web Services
 
