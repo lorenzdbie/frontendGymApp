@@ -179,7 +179,6 @@ Trainings:
 - PUT 'api/trainings/:id' : update de gegevens van een bestaande training.
 - DELETE 'api/trainings/:id' : verwijdert een training met het specifieke id.
 
-![Screenshot 2022-12-17 at 15 55 17](https://user-images.githubusercontent.com/83095711/208248021-468e634b-2267-4e83-a5ef-282325d0e3e2.png)
 <img src=https://user-images.githubusercontent.com/83095711/208248021-468e634b-2267-4e83-a5ef-282325d0e3e2.png>
 
 Appointments:
@@ -187,7 +186,6 @@ Appointments:
 - GET 'api/appointments/:id' : geeft de afspraak terug met het specifieke id.
 - DELETE 'api/appointments/:id' : verwijdert een afspraak met het specifieke id.
 
-![Screenshot 2022-12-17 at 15 57 19](https://user-images.githubusercontent.com/83095711/208247997-7a3bb46a-5fb5-4b0f-b2ef-ca19657b5cc5.png)
 <img src=https://user-images.githubusercontent.com/83095711/208247997-7a3bb46a-5fb5-4b0f-b2ef-ca19657b5cc5.png>
 
 Er werden geen testen geschreven om errors/exceptions te triggeren.
