@@ -1,4 +1,4 @@
-# Voornaam Familienaam (Studentennummer)
+# Lorenz De Bie (702547ld)
 
 - [x] Front-end Web Development:
   - [GitHub repository](https://github.com/Web-IV/2223-frontendweb-Lorenzdebie)
@@ -24,6 +24,7 @@ Een applicatie om een afspraak te maken bij een Personal trainer waar bepaalde g
 
 Bij het registreren bij Auth0 (allereerste nieuwe login) wordt er automatische een srcipt gerund die de nieuwe gebruiker de rol van user toekent.
 Dit gebeurd achter de schermen bij https://manage.auth0.com
+Na het boeken van een afspraak wordt er automatische een bevestigingsemail verstuurd.
 
 <img width="1550" alt="Screenshot 2022-12-17 at 17 10 36" src="https://user-images.githubusercontent.com/83095711/208251062-97d5e1ab-99d8-4e33-aed1-a63790f2b579.png">
 
@@ -38,6 +39,8 @@ Dit gebeurd achter de schermen bij https://manage.auth0.com
 <img width="682" alt="Screenshot 2022-12-07 at 20 33 13" src="https://user-images.githubusercontent.com/83095711/206278144-47f45073-b39d-4b1c-91be-82a44fdcee19.png">
 <img width="684" alt="Screenshot 2022-12-07 at 20 34 37" src="https://user-images.githubusercontent.com/83095711/206278391-60da3e1d-1106-455b-969c-945e51172a1b.png">
 <img src=https://user-images.githubusercontent.com/83095711/208253194-21213a8e-7ada-48fb-b538-7e694725690d.png>
+<img width="577" alt="Screenshot 2022-12-18 at 10 23 39" src="https://user-images.githubusercontent.com/83095711/208290743-8ea52967-8d7f-463f-a4b4-498065498b4f.png">
+
 
 
 
