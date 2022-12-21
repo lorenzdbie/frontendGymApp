@@ -11,7 +11,6 @@ import { substractHourForDST } from "./AfspraakOverviewList";
 
 //renders an appointmentform and a list of appointments for a specific user
 export default function AfsprakenList() {
-  
   const { theme, oppositeTheme } = useThemeColors();
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
@@ -44,7 +43,7 @@ export default function AfsprakenList() {
         setUserId(id);
       } catch (error) {
         setError(error);
-      }finally{
+      } finally {
         setLoading(false);
       }
     };
@@ -56,7 +55,7 @@ export default function AfsprakenList() {
     try {
       setError(null);
       await appointmentsApi.deleteById(idToDelete);
-      console.log("onDeleteConfirm", idToDelete);
+      
       setAppointments((appointments) =>
         appointments.filter(({ id }) => id !== idToDelete)
       );
@@ -68,7 +67,7 @@ export default function AfsprakenList() {
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
-      {!loading && !error && !userId ? (
+      {!loading && !userId ? (
         <div className="d-flex mt-5 justify-content-center">
           <Link
             type="button"

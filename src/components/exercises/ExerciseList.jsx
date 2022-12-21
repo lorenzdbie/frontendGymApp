@@ -63,39 +63,7 @@ export default function ExerciseList() {
     }
   }, []);
 
-  const createExercise = useCallback(
-    async (exercise) => {
-      try {
-        setError(null);
-        await exercisesApi.save({ ...exercise });
-        await refreshExercises();
-      } catch (error) {
-        console.error(error);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [refreshExercises]
-  );
-
-  // const createExercise = useCallback(
-  //   (name, muscleGroup) => {
-  //     const newExercises = [
-  //       ...exercises,
-  //       {
-  //         id: Number(Math.max(...exercises.map((e) => e.id)) + 1),
-  //         name,
-  //         muscleGroup,
-  //       },
-  //     ];
-  //     setExercises(newExercises);
-  //     console.log("newExercises", JSON.stringify(newExercises));
-  //   },
-  //   [exercises]
-  // );
-
-  function CreateExerciseList({ exercises, onDelete }) {
+   function CreateExerciseList({ exercises, onDelete }) {
     if (exercises.length === 0) {
       return <div className="exbox">"there are no exercises"</div>;
     }
@@ -122,7 +90,7 @@ export default function ExerciseList() {
         </div>
       </>
     );
-  }
+  };
 
   return (
     <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>

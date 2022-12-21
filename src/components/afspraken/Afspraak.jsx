@@ -6,8 +6,7 @@ import { IoTrashOutline, IoPencilOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-export default function Afspraak({
+export default memo(function Afspraak({
   id,
   user,
   date,
@@ -39,7 +38,10 @@ export default function Afspraak({
         <div>
           <span data-cy="appointment_id">Appointment # {id}</span>
         </div>
-        <div className="btn-group float-end" style={{maxWidth: "90px", maxHeight:"40px" }}>
+        <div
+          className="btn-group float-end"
+          style={{ maxWidth: "90px", maxHeight: "40px" }}
+        >
           <Link
             type="button"
             className={`btn btn-${theme}`}
@@ -118,4 +120,4 @@ export default function Afspraak({
       </div>
     </div>
   );
-}
+});

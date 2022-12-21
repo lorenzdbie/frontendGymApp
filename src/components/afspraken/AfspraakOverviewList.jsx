@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, memo } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Afspraak from "/src/components/afspraken/Afspraak.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 import useAppointments from "/src/api/appointments.jsx";
@@ -147,4 +147,4 @@ export default function AfsprakenOverviewList() {
       </div>
     </>
   );
-}
+};

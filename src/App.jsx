@@ -1,15 +1,9 @@
 import "/src/App.css";
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-// import { useState, useCallback, useEffect } from "react";
 import Navbar from "/src/components/Navbar.jsx";
 import Login from "/src/components/users/Login.jsx";
 import Register from "/src/components/users/Register.jsx";
-// import AppointmentList from "/src/components/appointments/AppointmentList.jsx";
-// import AppointmentOverviewList from "/src/components/appointments/AppointmentOverviewList.jsx";
-// import Appointment from "/src/components/appointments/Appointment.jsx";
-// import Afspraak from "/src/components/afspraken/Afspraak.jsx";
-// import AfspraakForm from "/src/components/afspraken/AfspraakForm.jsx";
 import AfsprakenList from "/src/components/afspraken/AfsprakenList.jsx";
 import AfspraakOverviewList from "/src/components/afspraken/AfspraakOverviewList.jsx";
 import ExerciseList from "/src/components/exercises/ExerciseList.jsx";
@@ -22,7 +16,6 @@ function App() {
 
   return (
     <div className={`bg-${theme} text-${oppositeTheme}`}>
-      {/* <Afspraak /> */}
       <Navbar />
       <Routes>
         <Route path="/" element={<Navigate replace to="/Login" />} />
@@ -72,17 +65,7 @@ function App() {
             }
           />
         </Route>
-        {/* <Route path="/overview">
-          <Route
-            index
-            element={
-              <RequireAuth>
-                <AppointmentOverviewList />
-              </RequireAuth>
-            }
-          />
-        </Route> */}
-
+    
         <Route path="/exercises">
           <Route
             index

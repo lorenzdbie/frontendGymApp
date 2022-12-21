@@ -5,8 +5,7 @@ import useAppointments from "/src/api/appointments.jsx";
 import Error from "/src/components/Error.jsx";
 import Loader from "/src/components/Loader.jsx";
 
-
-export default function AppointmentOverviewList() {
+export default memo(function AppointmentOverviewList() {
   const { theme, oppositeTheme } = useThemeColors();
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
@@ -51,7 +50,6 @@ export default function AppointmentOverviewList() {
         <h1 className="py-2 text-center">Appointments</h1>
         <Loader loading={loading} />
         <Error error={error} />
-      
       </div>
       <div className={`fullscreen bg-${theme} text-${oppositeTheme}`}>
         {/* <h1 className="pt-5 text-center">Appointments</h1> */}
@@ -82,7 +80,7 @@ export default function AppointmentOverviewList() {
       </div>
     </>
   );
- };
+});
 
 //  import { useCallback, useState, useEffect, memo } from "react";
 // import Appointment from "./Appointment";

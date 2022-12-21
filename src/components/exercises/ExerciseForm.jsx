@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { memo } from "react";
 import { useForm, useFormContext, FormProvider } from "react-hook-form";
 import { validationRules } from "/src/components/ValidationRules.jsx";
 import useExercises from "/src/api/exercises.jsx";
@@ -85,7 +84,7 @@ function LabelTextArea({ label, name, type, placeholder, ...rest }) {
   );
 }
 
-export default memo(function ExerciseForm({ refreshExercises }) {
+export default function ExerciseForm({ refreshExercises }) {
   const [error, setError] = useState(null);
   const {
     setValue,
@@ -184,4 +183,4 @@ export default memo(function ExerciseForm({ refreshExercises }) {
       </FormProvider>
     </div>
   );
-});
+};

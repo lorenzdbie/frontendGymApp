@@ -3,7 +3,6 @@ import { useState } from "react";
 import { validationRules } from "/src/components/ValidationRules.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 import useUsers from "/src/api/users.jsx";
-import { useNavigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -81,16 +80,12 @@ export default function RegistrationForm() {
   } = useForm();
 
   const usersApi = useUsers();
-  const navigate = useNavigate();
   const { user } = useAuth0();
 
-  let id;
 
   const onSubmit = async (data) => {
     const { firstName, lastName, birthdate, weight, height } = data;
     const { email } = user;
-
-    console.log(userId);
 
     try {
       setError(null);
@@ -103,7 +98,6 @@ export default function RegistrationForm() {
         weight,
         height,
       });
-      // refreshUsers();
       toast.success("Registration successful!", {
         position: toast.POSITION.BOTTOM_LEFT,
       });
@@ -120,8 +114,6 @@ export default function RegistrationForm() {
         const user = await usersApi.getUserByAuthId();
         const id = user.id;
         setUserId(id);
-        // console.log(`id: ${id}`);
-        // console.log(`userid: ${userId}`);
         if (id) {
           setValue("firstName", user.firstName);
           setValue("lastName", user.lastName);

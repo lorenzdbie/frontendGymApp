@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DumbbellIntensity from "/src/components/afspraken/DumbbellIntensity.jsx";
 import {
   useForm,
@@ -208,7 +208,7 @@ function ExerciseSelect(props) {
   );
 }
 
-export default memo(function AfspraakForm({ refreshAppointments }) {
+export default function AfspraakForm({ refreshAppointments }) {
   const [error, setError] = useState(null);
   const {
     setValue,
@@ -363,4 +363,4 @@ export default memo(function AfspraakForm({ refreshAppointments }) {
       </FormProvider>
     </div>
   );
-});
+};

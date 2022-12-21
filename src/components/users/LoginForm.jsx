@@ -1,81 +1,79 @@
-import { useState } from "react";
-import { validationRules } from "/src/components/ValidationRules.jsx";
+// import { useState } from "react";
+// import { validationRules } from "/src/components/ValidationRules.jsx";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import { themes, useThemeColors } from "/src/contexts/Theme.context";
-import { BiShowAlt, BiHide } from "react-icons/bi";
-// import Register from "/src/components/users/Register.jsx";
-// import { Link } from "react-router-dom";
+// import { BiShowAlt, BiHide } from "react-icons/bi";
 import LoginButton from "/src/components/authentication/LoginButton.jsx";
 import LogoutButton from "/src/components/authentication/LogoutButton.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const labels = {
-  email: "E-mail",
-  password: "Password",
-};
+// const labels = {
+//   email: "E-mail",
+//   password: "Password",
+// };
 
-function LabelInput({ label, name, type, placeholder, ...rest }) {
-  const { register, errors } = useFormContext();
+// function LabelInput({ label, name, type, placeholder, ...rest }) {
+//   const { register, errors } = useFormContext();
 
-  const hasError = name in errors;
+//   const hasError = name in errors;
 
-  if (name === "password") {
-    const [showPassword, setShowPassword] = useState(false);
+//   if (name === "password") {
+//     const [showPassword, setShowPassword] = useState(false);
 
-    const togglePassword = () => {
-      setShowPassword(!showPassword);
-    };
+//     const togglePassword = () => {
+//       setShowPassword(!showPassword);
+//     };
 
-    return (
-      <div className="d-flex flex-col mb-4">
-        {/* <label htmlFor={name} className="form-label col-5 my-auto hide">
-          {labels[name]}:
-        </label> */}
-        <div className="password my-auto d-flex">
-          <input
-            {...register(name, validationRules[name])}
-            id={name}
-            type={showPassword ? "text" : "password"}
-            className="form-control col-2 rounded-5"
-            placeholder={placeholder}
-          />
-          <button
-            className={`passwordButton bg-light text-dark`}
-            type="button"
-            onClick={togglePassword}
-          >
-            {showPassword ? <BiShowAlt /> : <BiHide />}
-          </button>
-        </div>
-      </div>
-    );
-  }
+//     return (
+//       <div className="d-flex flex-col mb-4">
+//         {/* <label htmlFor={name} className="form-label col-5 my-auto hide">
+//           {labels[name]}:
+//         </label> */}
+//         <div className="password my-auto d-flex">
+//           <input
+//             {...register(name, validationRules[name])}
+//             id={name}
+//             type={showPassword ? "text" : "password"}
+//             className="form-control col-2 rounded-5"
+//             placeholder={placeholder}
+//           />
+//           <button
+//             className={`passwordButton bg-light text-dark`}
+//             type="button"
+//             onClick={togglePassword}
+//           >
+//             {showPassword ? <BiShowAlt /> : <BiHide />}
+//           </button>
+//         </div>
+//       </div>
+//     );
+//   }
 
-  return (
-    <div className="d-flex flex-col my-3">
-      {/* <label htmlFor={name} className="form-label col-5 my-auto ">
-        {labels[name]}:
-      </label> */}
-      <input
-        {...register(name, validationRules[name])}
-        id={name}
-        type={type}
-        className="form-control col rounded-5 my-auto"
-        placeholder={placeholder ? placeholder : null}
-        {...rest}
-      />
-      {name === "weight" ? (
-        <span className="my-auto form-label">&nbsp;kg</span>
-      ) : null}
-      {name === "height" ? (
-        <span className="my-auto form-label">&nbsp;cm</span>
-      ) : null}
-      {hasError ? (
-        <div className="form-text text-danger">{errors[name].message}</div>
-      ) : null}
-    </div>
-  );
-}
+//   return (
+//     <div className="d-flex flex-col my-3">
+//       {/* <label htmlFor={name} className="form-label col-5 my-auto ">
+//         {labels[name]}:
+//       </label> */}
+//       <input
+//         {...register(name, validationRules[name])}
+//         id={name}
+//         type={type}
+//         className="form-control col rounded-5 my-auto"
+//         placeholder={placeholder ? placeholder : null}
+//         {...rest}
+//       />
+//       {name === "weight" ? (
+//         <span className="my-auto form-label">&nbsp;kg</span>
+//       ) : null}
+//       {name === "height" ? (
+//         <span className="my-auto form-label">&nbsp;cm</span>
+//       ) : null}
+//       {hasError ? (
+//         <div className="form-text text-danger">{errors[name].message}</div>
+//       ) : null}
+//     </div>
+//   );
+// }
 
 function LoginLogoutButton(){
 const { isAuthenticated} = useAuth0();
@@ -88,13 +86,13 @@ return <LoginButton />;
 
 
 export default function LoginForm({ onSaveLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const { theme } = useThemeColors();
 
   const {
-    register,
-    handleSubmit,
+    // register,
+    // handleSubmit,
     reset,
     formState: { errors },
   } = useForm();

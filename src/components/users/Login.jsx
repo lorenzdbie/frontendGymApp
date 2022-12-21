@@ -1,4 +1,4 @@
-import { useState, useHistory } from "react";
+import { useState } from "react";
 import LoginForm from "/src/components/users/LoginForm.jsx";
 import { useThemeColors } from "/src/contexts/Theme.context.jsx";
 

@@ -18,7 +18,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 //   });
 // };
 
-export default function AppointmentList() {
+export default memo( function AppointmentList() {
   const { theme, oppositeTheme } = useThemeColors();
   const [appointments, setAppointments] = useState([]);
   const [users, setUsers] = useState([]);
@@ -124,4 +124,4 @@ export default function AppointmentList() {
         </>
     </div>
   );
-}
+});

@@ -1,4 +1,6 @@
-export default function User({
+import { memo } from "react";
+
+export default memo(function User({
   id,
   firstName,
   lastName,
@@ -26,4 +28,4 @@ export default function User({
       <td className="text-center">{height} cm</td>
     </tr>
   );
-}
+});
