@@ -14,6 +14,7 @@ import RequireAuth from "/src/components/authentication/RequireAuth.jsx";
 function App() {
   const { theme, oppositeTheme } = useThemeColors();
 
+  
   return (
     <div className={`bg-${theme} text-${oppositeTheme}`}>
       <Navbar />
