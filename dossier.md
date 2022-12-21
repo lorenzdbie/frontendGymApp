@@ -16,20 +16,22 @@
 
 Een applicatie om een afspraak te maken bij een Personal trainer waar bepaalde gebruikersgegevens voor nodig zijn, waar de verschillende excercises/trainings kunnen geraadpleegd en gekozen worden. Ook is er een calender waar all gemaakte en niet verlopen afspraken in komen.
 
-- In het tabblad appointments kan je een afspraak maken fo bewerken.
+- In het tabblad appointments kan je een afspraak maken, bewerken of verwijderen.
 - In het tabblad overview kan je alle gemaakte en nog niet verlopen afspraken raadplegen.
-- In het tabblad exercises kan je de trainingen bewerken of een nieuwe aanmaken.
+- In het tabblad exercises kan je de trainingen bewerken, verwijderen of een nieuwe aanmaken.
 - In het tabblad users kan je alle users bekijken die zich hebben geregistreerd hebben op de applicatie.
 - In het tabblad register kan je gebruikersinformatie toevoegen of bewerken.
 
-Bij het registreren bij Auth0 (allereerste nieuwe login) wordt er automatische een srcipt gerund die de nieuwe gebruiker de rol van user toekent.
+Bij het registreren bij Auth0 (allereerste nieuwe login) wordt er automatische een script gerund die de nieuwe gebruiker de rol van user toekent.
 Dit gebeurd achter de schermen bij https://manage.auth0.com.
 Na het boeken van een afspraak wordt er automatische een bevestigingsemail verstuurd.
+Indien een gebruiker al aangemeld is via auth0 maar nog geen extra gebruikers informatie heeft toegevoegd kan hij geen afspraken boeken enkrijgt hij een kader te dien met een melding dat hij extra gebruikersinformatie moet toevoegen. Klikken op dit kader stuurt je naar de register-tab.
 
 <img width="1550" alt="Screenshot 2022-12-17 at 17 10 36" src="https://user-images.githubusercontent.com/83095711/208251062-97d5e1ab-99d8-4e33-aed1-a63790f2b579.png">
 
 <img width="1380" alt="Screenshot 2022-12-18 at 10 27 22" src="https://user-images.githubusercontent.com/83095711/208290847-444b923d-4cd2-406f-8cea-5b3bfafc402e.png">
 
+<img width="1020" alt="Screenshot 2022-12-21 at 17 40 14" src="https://user-images.githubusercontent.com/83095711/208958119-69bf862d-08cc-48b3-8661-579e7b27a0f4.png">
 
 ## Screenshots
 
@@ -40,6 +42,7 @@ Na het boeken van een afspraak wordt er automatische een bevestigingsemail verst
 <img width="682" alt="Screenshot 2022-12-07 at 20 33 13" src="https://user-images.githubusercontent.com/83095711/206278144-47f45073-b39d-4b1c-91be-82a44fdcee19.png">
 <img width="684" alt="Screenshot 2022-12-07 at 20 34 37" src="https://user-images.githubusercontent.com/83095711/206278391-60da3e1d-1106-455b-969c-945e51172a1b.png">
 <img src=https://user-images.githubusercontent.com/83095711/208253194-21213a8e-7ada-48fb-b538-7e694725690d.png>
+
 
 
 
@@ -197,7 +200,8 @@ Er werden geen testen geschreven om errors/exceptions te triggeren.
 
 ### Front-end Web Development
 
-een Bug in de package Big-Calendar-React. Dit is aan de zijde van npm
+- een Bug in de package Big-Calendar-React. Dit is aan de zijde van npm.
+- Tijdens de eerste deployment vond render.com de appointment files niet(src/components/appointmnets). Ik heb deze allemaal herschreven ondert de map afspraken(src/components/afspraken), maar ik heb de originele bestanden laten staan. 
 
 ### Web Services
 
