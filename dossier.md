@@ -21,11 +21,10 @@ Een applicatie om een afspraak te maken bij een Personal trainer waar bepaalde g
 - In het tabblad exercises kan je de trainingen bewerken, verwijderen of een nieuwe aanmaken.
 - In het tabblad users kan je alle users bekijken die zich hebben geregistreerd hebben op de applicatie.
 - In het tabblad register kan je gebruikersinformatie toevoegen of bewerken.
-
-Bij het registreren bij Auth0 (allereerste nieuwe login) wordt er automatische een script gerund die de nieuwe gebruiker de rol van user toekent.
-Dit gebeurd achter de schermen bij https://manage.auth0.com.
-Na het boeken van een afspraak wordt er automatische een bevestigingsemail verstuurd.
-Indien een gebruiker al aangemeld is via auth0 maar nog geen extra gebruikers informatie heeft toegevoegd kan hij geen afspraken boeken enkrijgt hij een kader te dien met een melding dat hij extra gebruikersinformatie moet toevoegen. Klikken op dit kader stuurt je naar de register-tab.
+- Bij het registreren bij Auth0 (allereerste nieuwe login) wordt er automatische een script gerund die de nieuwe gebruiker de rol van user toekent. Dit gebeurd achter de schermen bij https://manage.auth0.com.
+- Na het boeken van een afspraak wordt er automatisch een bevestigingsemail verstuurd.
+- Indien een gebruiker al aangemeld is via auth0 maar nog geen extra gebruikers informatie heeft toegevoegd kan hij geen afspraken boeken en krijgt hij een kader te zien met een melding dat je extra gebruikersinformatie moet toevoegen. Klikken op dit kader stuurt je naar de register-tab.
+- Na het toevoegen, aanpassen of verwijderen van een appointment, exercise en het toevoegen of aanpassen van user informatie krijgt de gebruiker een bevestiging te zien aan de hand van een banner(toast) in de linker onderhoek van het scherm.
 
 <img width="1550" alt="Screenshot 2022-12-17 at 17 10 36" src="https://user-images.githubusercontent.com/83095711/208251062-97d5e1ab-99d8-4e33-aed1-a63790f2b579.png">
 
@@ -128,7 +127,7 @@ Indien een gebruiker al aangemeld is via auth0 maar nog geen extra gebruikers in
 
 ### Front-end Web Development
 
-De mappen in src staan gestructureerd volgens functie, api voor alle api-Calls voor de verschillende soorten components, in compinents staan alle verschillende componints files, in de map context staan de context gevoellige files. In de map public staan alle images.
+De mappen in src staan gestructureerd volgens functie, api voor alle api-Calls voor de verschillende soorten components, in components staan alle verschillende component files, in de map context staan de context gevoellige files. In de map public staan alle images.
 
 ### Web Services
 
@@ -139,7 +138,7 @@ Elke laag(repository, service, rest, core, data...) hebben elk hun eigen map bin
 ### Front-end Web Development
 
 Big Calendar React: https://www.npmjs.com/package/react-big-calendar
-Dit geeft alle gemaakte afspraken terug in calender vorm (Overview-tab)
+Dit geeft alle gemaakte afspraken van alle gebruikers terug in calender vorm (Overview-tab)
 
 React toastify https://www.npmjs.com/package/react-toastify
 dit laat banners(toasts) verschijnen op het scherm bij het aanmaken, aanpassen of verwijderen van appointments, exercises en users.
@@ -147,7 +146,7 @@ dit laat banners(toasts) verschijnen op het scherm bij het aanmaken, aanpassen o
 ### Web Services
 
 Nodemailer: https://www.npmjs.com/package/nodemailer
-Na het maken van een appointment stuurt de server automaitisch een email met de gegevens vn de gemaakte afspraak. Doordat connectie met gmail sinds kort Oauth2 verificatie nodig heeft heb er ervoor gekozen op alle email op te vangen met mailtrap.
+Na het maken van een appointment stuurt de server automatisch een email met de gegevens van de gemaakte afspraak. Doordat connectie met gmail sinds kort Oauth2 verificatie nodig heeft heb ik ervoor gekozen op alle emails op te vangen met mailtrap.
 
 login gegevens voor mailtrap.io:
 - email: lorenz.debie@student.hogent.be
@@ -159,13 +158,13 @@ login gegevens voor mailtrap.io:
 
 ### Front-end Web Development
 
-testen on connectie, appointment, exercise, addAppointment, addExercise
+Verschillende testen om connectie, appointment, exercise, addAppointment en  addExercise te testen.
 
 ### Web Services
 
 Alle routes voor users en trainings werden gestest met bijna perfecte coverage: getAll, getById, add, update en delete.
 Voor appointments werden de routes voor getAll, getById en delete getest.
-De testen voor users en trainings werden samen uitgevoerd, de testen voor appointments word apart uitgevoers wegens user insert conflicten.
+De testen voor users en trainings werden samen uitgevoerd, de testen voor appointments word apart uitgevoerd wegens user insert conflicten.
 
 
 
@@ -201,7 +200,7 @@ Er werden geen testen geschreven om errors/exceptions te triggeren.
 ### Front-end Web Development
 
 - een Bug in de package Big-Calendar-React. Dit is aan de zijde van npm.
-- Tijdens de eerste deployment vond render.com de appointment files niet(src/components/appointmnets). Ik heb deze allemaal herschreven ondert de map afspraken(src/components/afspraken), maar ik heb de originele bestanden laten staan. 
+- Tijdens de eerste deployment vond render.com de appointment files niet(src/components/appointments). Ik heb deze allemaal herschreven ondert de map afspraken(src/components/afspraken), maar ik heb de originele bestanden laten staan. 
 
 ### Web Services
 
